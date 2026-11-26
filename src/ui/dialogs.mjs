@@ -98,7 +98,7 @@ export function createDialogs(root, context) {
   function file(mode) {
     const { state, studio, copyText } = context(), saving = mode === 'save';
     sheet(mode, (view) => {
-      const name = node('input', { value: state.project.name, type: 'text', maxlength: 80 });
+      const name = node('input', { value: state.live?.outputOriginal ?? state.project.name, type: 'text', maxlength: 80 });
       view.attr(name, 'aria-label', 'saveName');
       const choices = node('select', {}, ['both', 'light', 'dark'].map((v) => view.text('option', v, null, { value: v })));
       choices.value = saving ? 'both' : state.variant;
@@ -150,6 +150,7 @@ export function createDialogs(root, context) {
       });
       return { focus: saving ? name : choices, body: node('div', { class: 'dialog-stack' },
         view.text('p', saving ? 'saveHint' : 'exportHint', null, { class: 'u-muted' }),
+        state.live?.outputOriginal && view.text('p', 'savedOutputHint', null, { class: 'u-muted' }),
         saving && node('label', { class: 'u-field' }, view.text('span', 'saveName'), name),
         node('label', { class: 'u-field' }, view.text('span', 'variants'), choices),
         !saving && view.text('p', 'exportManual', null, { class: 'u-muted' }),

@@ -15,7 +15,7 @@ Design and preview native **OpenChamber** themes from the right sidebar. Pick a 
 - **17 composable style recipes** with adjustable strength, layered on whichever palette you picked (see [Style recipes](#style-recipes)).
 - **Five tabs.** **Theme** picks a starting point. **Style** layers a recipe. **Color** tunes seed colors, hue, chroma, lightness, contrast and temperature, globally or per group, and includes a readability check with one-click repair. **Details** edits every visible theme field, with an inline picker and contrast against the related background. **Pairings** tries local fonts and suggests sizes and spacing to copy into OpenChamber's settings.
 - **Colors from an image**, **Random inspiration**, or import an existing OpenChamber theme JSON.
-- **Your themes stay yours.** Save writes a pair of native theme files that appear under **My themes** and in **Settings → Appearance**. Theme Studio never rewrites a theme you named.
+- **Your themes stay yours.** Save writes native theme files that appear under **My themes** and in **Settings → Appearance**. Preview can temporarily recolor the saved theme you are using; **Restore** writes back its original contents.
 - **Reversible.** One **Restore** returns both the light and the dark edition to how they were before you started previewing. Since 0.3.1 this also works after an accidental uninstall and reinstall.
 - **Follows OpenChamber's language.** The panel is in English or Chinese, and switches with the host's interface language.
 - **Fits any sidebar width.** At 320 px the cards sit in two columns. On wide panels each card is at most 240 px, the column count grows with the width, and the Theme and Style tabs line up.
@@ -97,22 +97,23 @@ An existing file with the same name but without Theme Studio's marker is never r
 
 ### Preview, Save, Restore
 
-- **Preview.** Clicking a card or editing in any tab previews it across the window. This works while the window uses a recognizable built-in theme or Theme Studio's own live theme. If you use a theme of your own, or the theme cannot be identified, the mini preview still works. Turn **Live window preview** off or on in the **⋯** menu in the top-right corner. Opening the panel, switching tabs or languages, or rechecking files never starts a preview.
-- **A dark edition in a light window, or the other way round.** Theme Studio writes the edition you picked into **its own preview file**, and the window reads it in its current mode. Your window mode and your named themes stay as they are. Input borders, shadows and a few native controls are still drawn for the window's mode. To see the final result, switch the mode in **Settings → Appearance**. **Save, export and copy always use the theme's real light and dark editions.**
+- **Preview.** When the selected theme can be identified, clicking a card, adding a style, tuning or refining previews it across the window. This includes built-ins, Theme Studio's live theme, and themes you saved in Theme Studio. Other custom themes still use the mini preview. Turn **Live window preview** off or on in the **⋯** menu. Opening the panel, switching language or checking files never starts a preview.
+- **Previewing over a saved theme.** “Preview temporarily rewrites this saved theme; Restore writes back the exact original contents and updates the file’s modification time.” Only the selected theme file for the window's current light or dark mode is rewritten; its ID and the Appearance selection stay the same. Other windows on the same server using the same saved theme show the preview too.
+- **A dark edition in a light window, or the other way round.** The window reads the colors of the edition you picked in its current mode. Input borders, shadows and a few native controls still follow the window's mode. Switch modes in **Settings → Appearance** to see the final result. **Save, export and copy always use the theme's real light and dark editions.**
 - **Default is not Restore.** The first card on **Theme**, **Default**, gives you OpenChamber's factory colors and clears styles, tuning and refinements. **Restore**, in the footer, returns to the theme and window you had before you started previewing. It handles both editions at once. If you started from Flexoki, Default gives you OpenChamber's own colors and Restore gives you Flexoki back.
-- **Save to file.** Name the theme and choose light, dark or both. Each edition becomes a standalone native theme file. Keep experimenting afterwards; the saved copy is never rewritten. To use it every day, choose it once in **Settings → Appearance**.
+- **Save to file.** Name the theme and choose light, dark or both. Each edition becomes a separate native theme file. Saving never changes the window selection. To use the saved copy, choose it in **Settings → Appearance**.
 
 A preview lasts until you restore it. Closing the panel, restarting or saving does not end it. While a preview borrows a built-in theme, other windows on the same server that use the same built-in also see it. Turn off **Live window preview** first if you do not want that. Theme Studio never changes which theme the host has selected.
 
 ### What a saved theme contains
 
-A saved theme is an ordinary OpenChamber theme file with the final colors. It is the result of the whole pipeline: **palette × style × tuning × refinements**. It also carries an extra `themeStudio` field recording how it was made. OpenChamber ignores that field, but Theme Studio uses it, so opening the theme from **My themes** or importing the file lets you keep editing the style, tuning and details.
+A saved theme is an ordinary OpenChamber theme file with the final colors. It is the result of the whole pipeline: **palette × style × tuning × refinements**. Its `themeStudio` field records how it was made. During a preview over a saved theme, **My themes** and **Start from current theme** open the original. **Save to file**, **Export to Downloads** and **Copy JSON** use the original saved colors, even while the window shows other colors. If you want to save an experimental draft instead, turn off **Live window preview** before trying your changes.
 
 | To | Do this |
 | --- | --- |
 | Keep a theme | **Save to file**, then choose light, dark or both. The copy appears under **My themes** and in **Settings → Appearance**; a clashing name gets a number. |
 | Tidy the list only | Click the bin on a theme and choose **Remove from My themes only**. The file stays usable in Appearance, and you can put it back from **Removed**. |
-| Delete the file | The same bin lists the theme's name, editions and exact paths. Delete it in **Settings → Appearance**; OpenChamber 2.8 gives extensions no delete API. Theme Studio can then check what is left. |
+| Delete the file | The same bin lists the original theme's name, editions and exact paths. Use **Restore** first if a preview is active, then delete the theme in **Settings → Appearance**. Theme Studio can then check what is left. |
 | Take a file elsewhere | **⋯ → Export to Downloads** writes native JSON to `~/Downloads` or `~/下载` on the server. You can also **Copy JSON**. |
 | Edit a file again | **⋯ → Import a theme**: pick, drop or paste JSON, up to 512 KiB. Unsupported fields are listed and ignored. |
 | Install a theme without the extension | Put the exported JSON in `themes/` in the server's data folder (`~/.config/openchamber/themes/` by default) and choose it in **Settings → Appearance**. |
@@ -135,7 +136,7 @@ The [field catalog](data/fields.json) classifies all 147 theme fields: 54 take e
 2. If you chose a saved theme in **Settings → Appearance** yourself, switching away is up to you.
 3. Then remove it in **Settings → Extensions → Theme Studio → Remove**. **⋯ → Clean up before uninstalling** walks you through the same steps. Your saved themes and exported files stay.
 
-**Uninstalled during a preview? (0.3.1 and later)** Reinstall, open Theme Studio and click **Restore** once. Both editions come back: a Theme Studio live theme you had before is restored byte for byte, and a built-in theme gets its own colors back. You can also just keep previewing. Unsaved drafts that existed only in extension storage cannot be recovered, and named themes are never touched.
+**Uninstalled during a preview?** Reinstall, open Theme Studio and click **Restore** once. It handles both editions: since 0.3.1 this restores an earlier live theme byte for byte or brings back the built-in colors; since 0.4.0 it also restores the exact contents of saved themes used for preview. Rewriting the original contents updates the file's modification time. Unsaved drafts held only in extension storage cannot be recovered.
 
 **A leftover preview from 0.3.0 or earlier** has no recorded starting point:
 
@@ -159,7 +160,8 @@ The palette name varies. Never delete a theme you named yourself, and do not del
 - **"Could not read theme files":** your draft and the mini preview are kept. **Check files again** only reads. Afterwards, pick a card or keep editing to preview again.
 - **"Default theme folder not found":** the panel still previews and copies. If the server uses a custom data folder, place JSON in its `themes/` by hand.
 - **"Written · waiting for the app…":** give the host a moment. If no update is detected, check the current mode and the theme chosen in Appearance. **Retry** repeats only the last write.
-- **"Window preview paused":** the theme you are using matches a built-in exactly, so Theme Studio tried its own file once. Your theme was not rewritten. **Paused is not undone:** the built-in in Appearance may still be marked `(trying on)`. Click **Restore** first, then pick a different theme in **Settings → Appearance**.
+- **"Window preview paused":** Theme Studio cannot identify the selected theme. When saved themes and other themes share the same colors, it leaves the files alone. Choose a theme with different colors in **Settings → Appearance**; if some host theme files cannot be verified, the mini preview remains available.
+- **"Could not verify the saved theme file":** use **Check files again** before editing or restoring. Theme Studio does not overwrite an unverified original.
 
 ---
 

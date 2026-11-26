@@ -58,6 +58,11 @@ UI 字典放 `src/i18n/ui.zh.mjs` 和 `ui.en.mjs`，不占用 I1 的 `core.*`。
 | 写入失败 | 没能写入主题 | Could not write the theme | 保留草稿；检查权限或服务端、重试 |
 | 写入前准备失败 | 无法准备写入主题 | Could not prepare the theme | 查清原因后再次应用 |
 | 写入未确认 | 尚无法确认主题是否写入 | Theme write not verified | 重试先核对原文件，不会把后来改的草稿当作原操作 |
+| 作品首次预览 | 预览会临时改写这份作品，点「还原」逐字节写回原内容，文件修改时间会更新。 | Preview temporarily rewrites this saved theme; Restore writes back the exact original contents and updates the file’s modification time. | 320 px 下说明在编辑区上方随布局换行；帮助补充同服同主题也会变色 |
+| 作品预览帮助 | 同一服务器上选用这份作品的其他窗口也会看到预览。 | Other windows on the same server using the same saved theme show the preview too. | 点击预览状态旁的信息按钮 |
+| 作品预览时另存或导出 | 这里取原作的配色。 | This uses the original saved theme’s colors. | 对话框提示输出取原配色 |
+| 无法辨认整窗选中项 | 整窗预览已暂停 | Window preview paused | 说明是同色，还是文件无法核对；仍可在面板试色 |
+| 作品文件无法核对 | 无法核对作品文件 | Could not verify the saved theme file | 重新检查文件，再编辑或还原 |
 | 恢复 | 上次的试穿还没应用，暂借主题仍保留／上次的预览还未应用 | Your last preview wasn’t applied; the temporary theme is still saved / You have an unapplied preview | 还原原主题／保留预览或还原 |
 
 ## 键盘、屏幕阅读和动作

@@ -7,6 +7,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { serveUi } from './ui-serve.mjs';
 import defaults from '../src/data/builtin-defaults.json' with { type: 'json' };
 import { themesDir, slotPath } from '../src/host/library.mjs';
+import en from '../src/i18n/ui.en.mjs';
+import zh from '../src/i18n/ui.zh.mjs';
 import { STYLE_RECIPES } from '../shared/style-recipes.mjs';
 import presetIndex from '../presets/index.json' with { type: 'json' };
 
@@ -711,7 +713,8 @@ async function previewAndLibrary() {
   const afterSave = await snapshot(page), card = afterSave.library.saved[0];
   assert.equal(card.name, name);
   assert.deepEqual(afterSave.host.tokens, beforeSave.host.tokens);
-  for (const key of ['id', 'kind', 'key', 'name']) assert.equal(afterSave.host.active.dark[key], beforeSave.host.active.dark[key]);
+  assert.equal(afterSave.host.active.dark.reason, 'ambiguous', 'the new named copy and the painted slot now match');
+  assert.equal(afterSave.live.dark.selectionBlocked, true);
   assert.deepEqual(afterSave.project, beforeSave.project);
   const savedOnly = modes.map((v) => card.variants[v].path);
   assert.deepEqual(await hostWrites(page), [...beforeSaveWrites, ...savedOnly]);
@@ -777,6 +780,61 @@ async function previewAndLibrary() {
   assert.deepEqual(await hostWrites(page), beforeDelete);
   await page.close();
   mark('PASS 320 px real core + mock host: legacy switch and locale, repick/style/tune, exact default/Undo, safe inactive mode, file save, restore across remount, checked native deletion, persistent list-only removal/undo');
+}
+
+async function namedPreviewNotice(locale) {
+  const words = locale === 'zh' ? zh : en;
+  const page = await chromium.newPage({ viewport: { width: 320, height: 824 }, reducedMotion: 'reduce' });
+  track(page);
+  await open(page, { locale, core: 'real', scenario: 'known' });
+  const file = await page.evaluate(async () => {
+    const { studio, control } = window.__uiDev;
+    await studio.start();
+    studio.setLive(false);
+    studio.loadPreset('blue-etch');
+    const { files: [work] } = await studio.saveAs({ name: 'Original A', variants: ['light'] });
+    control.workspace.refresh();
+    control.select(work.id);
+    studio.setLive(true);
+    return { ...work, original: control.workspace.files.get(work.path).content };
+  });
+  const notice = page.locator('[data-note="saved-preview"]');
+  assert.equal(await notice.count(), 0);
+  await page.locator('[data-act=load-preset][data-id=tidemark]').click();
+  await notice.getByText(words.savedPreviewFirst, { exact: true }).waitFor();
+  const fit = await notice.evaluate((el) => {
+    const page = el.ownerDocument.documentElement, box = el.getBoundingClientRect();
+    const body = page.querySelector('.studio-main').getBoundingClientRect();
+    return page.clientWidth === 320 && page.scrollWidth === 320 && el.scrollWidth <= el.clientWidth &&
+      box.left >= 0 && box.right <= 320 && box.bottom <= body.top;
+  });
+  assert.ok(fit, `${locale}: first notice sits above the editor without clipping or covering it`);
+  await act(page, 'show-status-help').click();
+  await page.locator('.studio-banners').getByText(words.savedPreviewEffect, { exact: true }).waitFor();
+  await act(page, 'show-status-help').click();
+  await page.waitForFunction((path) => {
+    const { studio, control } = window.__uiDev;
+    const envelope = JSON.parse(control.workspace.files.get(path).content).themeStudio;
+    return envelope.origin && studio.getState().live.light.sync === 'applied';
+  }, file.path);
+  await act(page, 'save').click();
+  const dialog = page.getByRole('dialog');
+  await dialog.getByText(words.savedOutputHint, { exact: true }).waitFor();
+  assert.equal(await dialog.getByRole('textbox').inputValue(), 'Original A');
+  await dialog.getByRole('button', { name: words.cancel, exact: true }).click();
+  await act(page, 'restore').click();
+  await notice.waitFor({ state: 'hidden' });
+  assert.equal(await page.evaluate((path) => window.__uiDev.control.workspace.files.get(path).content, file.path), file.original);
+  await page.locator('[data-act=load-preset][data-id=tidemark]').click();
+  await page.waitForFunction((path) => {
+    const { studio, control } = window.__uiDev;
+    return JSON.parse(control.workspace.files.get(path).content).themeStudio.origin &&
+      studio.getState().live.light.sync === 'applied';
+  }, file.path);
+  assert.equal(await notice.count(), 0);
+  assert.deepEqual(await hostWrites(page), Array(4).fill(file.path));
+  await page.close();
+  mark(`PASS 320 px ${locale} named preview: translated inline first notice, help, one-time display, original bytes restored`);
 }
 
 async function passiveBoundaries() {
@@ -981,7 +1039,12 @@ try {
   if (shots) await mkdir(evidence, { recursive: true });
   if (!guttersOnly) {
     if (!interactionsOnly && !sandboxOnly) { await layouts(); await wideGrid(); await states(); await signatures(); }
-    if (!sandboxOnly) { await previewAndLibrary(); for (const locale of locales) await reinstallRecovery(locale); await passiveBoundaries(); await interactions(); }
+    if (!sandboxOnly) {
+      await previewAndLibrary();
+      for (const locale of locales) { await namedPreviewNotice(locale); await reinstallRecovery(locale); }
+      await passiveBoundaries();
+      await interactions();
+    }
     await sandboxForms();
   }
   if (guttersOnly && !process.env.UI_OC_SOURCE) throw new Error('Set UI_OC_SOURCE to an OpenChamber source checkout.');

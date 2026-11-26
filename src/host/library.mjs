@@ -11,6 +11,7 @@ export const slotPath = (v) => `${themesDir}/${slotId(v)}.json`;
 export const isPreviewWriter = (id) => typeof id === 'string' && /^preview-[\w-]{1,120}$/u.test(id);
 const isRestoredWriter = (id) => typeof id === 'string' && /^restored-[\w-]{1,119}$/u.test(id);
 const validOwnedFile = /^theme-studio-[a-z0-9][a-z0-9-]{0,70}-(?:light|dark)\.json$/u;
+const listLimit = 2000; // SDK 2.8 GUEST_FILE_LIST_MAX; a full listing may be truncated.
 const maxImport = 512 * 1024;
 // Only live previews can include a second file. Quoting valid JSON can at
 // most double its byte count; leave the normal theme/import limit unchanged.
@@ -87,9 +88,16 @@ export function decodeOwned(raw, variant, { allowPreviewSize = false } = {}) {
 }
 
 export function inspectImportText(text, filename = '') {
-  if (typeof text !== 'string' || byteLength(text) > maxImport) return { ok: false, code: 'FILE_TOO_LARGE', filename };
+  if (typeof text !== 'string' || byteLength(text) > maxPreview) return { ok: false, code: 'FILE_TOO_LARGE', filename };
   try {
     const input = JSON.parse(text.replace(/^\uFEFF/u, ''));
+    const { id, variant: fileVariant } = input?.metadata ?? {};
+    if (variants.includes(fileVariant) && typeof id === 'string' && id.endsWith(`-${fileVariant}`) &&
+        savedStem(stemOf(id)) && isPreviewWriter(input.themeStudio?.writer)) {
+      const original = namedOriginal(decodeOwned(text, fileVariant, { allowPreviewSize: true }));
+      return original ? inspectImportText(original.raw, filename) : { ok: false, code: 'INVALID_THEME', filename };
+    }
+    if (byteLength(text) > maxImport) return { ok: false, code: 'FILE_TOO_LARGE', filename };
     if (object(input) && !input.metadata && (Array.isArray(input.tokenColors) || typeof input.colors?.['editor.background'] === 'string')) {
       return { ok: false, code: 'VSCODE_THEME', filename };
     }
@@ -149,10 +157,26 @@ const variantOfFile = (filename) => filename.endsWith('-dark.json') ? 'dark' : '
 const stemOf = (id) => id.replace(/-(?:light|dark)$/u, '');
 const savedStem = (stem) => typeof stem === 'string' && stem !== 'theme-studio-live' &&
   validOwnedFile.test(`${stem}-light.json`);
+const savedName = (name) => validOwnedFile.test(name) && savedStem(stemOf(name.slice(0, -5)));
 const removedKey = (stem) => `studio:removed:${stem}`;
-// A preference identifies this edition of a work, not everything ever saved
-// under its filename. Keep the native file in theme identification candidates.
-const edition = (record, stat) => JSON.stringify([record.project.id, record.writer, record.rev, stat.mtime, stat.size]);
+const legacyEdition = (record, stat) => JSON.stringify([record.project.id, record.writer, record.rev, stat.mtime, stat.size]);
+// List-only preferences follow the original text even when the filesystem
+// gives it a new mtime. Never use this checksum to authorize a disk write:
+// comparisons before a write always use the complete SDK text.
+function edition(record, raw) {
+  let checksum = 2166136261;
+  for (let i = 0; i < raw.length; i++) checksum = Math.imul(checksum ^ raw.charCodeAt(i), 16777619);
+  return JSON.stringify([record.project.id, record.writer, record.rev, raw.length, checksum >>> 0, 'content']);
+}
+
+function namedOriginal(painted) {
+  const origin = painted?.origin;
+  if (!isPreviewWriter(painted?.writer) || origin?.writer !== painted.writer ||
+      typeof origin.raw !== 'string') return null;
+  const original = decodeOwned(origin.raw, painted.variant);
+  return original?.id === painted.id && !isPreviewWriter(original.writer) &&
+    !original.previewVariant && original.origin === undefined ? { ...original, raw: origin.raw } : null;
+}
 
 function cardFiles(card) {
   if (!savedStem(card?.id)) throw problem('BAD_PATH', 'Not a saved work');
@@ -172,46 +196,93 @@ export function createLibrary({ host, writer, now, timers, settle }) {
     queue = op.catch(() => {});
     return op;
   };
+  async function readSaved(path) {
+    const name = path.slice(themesDir.length + 1);
+    if (!path.startsWith(`${themesDir}/`) || !savedName(name)) throw problem('BAD_PATH', 'Not a saved work');
+    const status = await host.stat(path);
+    const disk = await readPath(host, path, status);
+    if (disk === null) return null;
+    const variant = variantOfFile(name);
+    const painted = decodeOwned(disk, variant, { allowPreviewSize: true });
+    if (painted?.id !== name.slice(0, -5)) return null;
+    const preview = isPreviewWriter(painted.writer);
+    const original = preview ? namedOriginal(painted) :
+      !painted.previewVariant && painted.origin === undefined ? { ...painted, raw: disk } : null;
+    if (!original) {
+      if (preview) throw problem('PREVIEW_BACKUP_MISSING', 'The saved work has no verified original');
+      return null;
+    }
+    // A nominally UTF-8 read is only safe to use as a byte journal if it
+    // round-trips. U+FFFD may be an SDK replacement for invalid input bytes.
+    const lossless = !disk.includes('\uFFFD') && byteLength(disk) === status.size;
+    return { ...original, path, disk, lossless, edition: edition(original, original.raw),
+      legacyEdition: preview ? null : legacyEdition(original, status),
+      preview: preview ? { key: painted.key, definition: painted.definition, writer: painted.writer,
+        rev: painted.rev, variant: painted.previewVariant ?? variant } : null };
+  }
   async function scan() {
     const { entries } = await host.listDir(themesDir);
-    const names = entries.filter(({ name, kind }) => kind === 'file' && validOwnedFile.test(name) &&
-      !variants.some((v) => name === `${slotId(v)}.json`)).map(({ name }) => name);
-    const records = [];
+    const themeEntries = entries.filter(({ name, kind }) => kind !== 'directory' && name.toLowerCase().endsWith('.json') &&
+      !variants.some((v) => name === `${slotId(v)}.json` && kind === 'file'));
+    const names = themeEntries.filter(({ name, kind }) => kind === 'file' && savedName(name)).map(({ name }) => name);
+    let unverified = entries.length >= listLimit || names.length !== themeEntries.length;
+    const records = [], failures = [];
     for (let i = 0; i < names.length; i += 6) {
-      const batch = await Promise.allSettled(names.slice(i, i + 6).map(async (name) => {
-        const path = `${themesDir}/${name}`, status = await host.stat(path);
-        const raw = await readPath(host, path, status);
-        const record = decodeOwned(raw, variantOfFile(name));
-        return record?.id === name.slice(0, -5) && !record.previewVariant && !isPreviewWriter(record.writer)
-          ? { ...record, path, edition: edition(record, status) } : null;
-      }));
-      records.push(...batch.flatMap((item) => item.status === 'fulfilled' && item.value ? [item.value] : []));
+      const paths = names.slice(i, i + 6).map((name) => `${themesDir}/${name}`);
+      const batch = await Promise.allSettled(paths.map(readSaved));
+      batch.forEach((item, index) => {
+        if (item.status === 'fulfilled' && item.value) records.push(item.value);
+        else {
+          unverified = true;
+          if (item.status === 'rejected') failures.push({ path: paths[index], code: errorCode(item.reason) });
+        }
+      });
     }
-    if (!records.length) return records;
+    if (!records.length) return { records, unverified, failures };
     const keys = new Set(await host.storage.keys());
     const stems = [...new Set(records.map(({ id }) => stemOf(id)))].filter((stem) => keys.has(removedKey(stem)));
     const markers = new Map(await Promise.all(stems.map(async (stem) => [stem, await host.storage.get(removedKey(stem))])));
-    return records.map((record) => ({ ...record, removed: markers.get(stemOf(record.id))?.[record.variant] === record.edition }));
+    return { unverified, failures, records: records.map((record) => {
+      const marker = markers.get(stemOf(record.id))?.[record.variant];
+      const legacyRemoved = marker != null && marker === record.legacyEdition;
+      return { ...record, legacyRemoved, removed: legacyRemoved || marker === record.edition };
+    }) };
   }
+  const libraryLease = () => acquireLease(host.storage, 'studio:lease:library', { writer, now, timers, settle });
   async function setRemoved(stem, records, removed) {
     if (!savedStem(stem)) return { ok: false, code: 'BAD_PATH' };
+    let lease;
     try {
       const key = removedKey(stem);
+      lease = await libraryLease();
       if (removed) {
         const group = records.filter((r) => stemOf(r.id) === stem);
         if (!group.length) return { ok: false, code: 'NOT_FOUND' };
         const marker = {};
         for (const r of group) {
-          const status = await host.stat(r.path);
-          if (status.kind !== 'file' || edition(r, status) !== r.edition) return { ok: false, code: 'CONFLICT' };
+          if ((await readSaved(r.path))?.raw !== r.raw) return { ok: false, code: 'CONFLICT' };
           marker[r.variant] = r.edition;
         }
+        await lease.verify();
         await host.storage.set(key, marker);
       } else {
+        await lease.verify();
         await host.storage.delete(key);
       }
       return { ok: true, id: stem };
     } catch (error) { return { ok: false, code: errorCode(error) }; }
+    finally { await lease?.release().catch(() => {}); }
+  }
+  async function preserveRemovedEdition(record) {
+    if (!record.legacyRemoved) return;
+    const lease = await libraryLease();
+    try {
+      const key = removedKey(stemOf(record.id)), marker = await host.storage.get(key);
+      if (marker?.[record.variant] === record.legacyEdition) {
+        await lease.verify();
+        await host.storage.set(key, { ...marker, [record.variant]: record.edition });
+      }
+    } finally { await lease.release().catch(() => {}); }
   }
   async function checkSavedFiles(card) {
     const remaining = [], missing = [];
@@ -253,7 +324,7 @@ export function createLibrary({ host, writer, now, timers, settle }) {
       } else if ((await host.stat(directory)).kind !== 'directory') {
         return bad('NO_THEME_DIRECTORY', 'Default host theme directory is not available');
       }
-      lease = await acquireLease(host.storage, 'studio:lease:library', { writer, now, timers, settle });
+      lease = await libraryLease();
       const entries = await uniquePlan({ directory, prefix: kind === 'export' ? 'openchamber-theme-studio' : 'theme-studio', name: label, selected });
       for (const entry of entries) {
         try {
@@ -272,7 +343,7 @@ export function createLibrary({ host, writer, now, timers, settle }) {
     return resultFor(files, errors);
   }
   return {
-    scan,
+    scan, readSaved, preserveRemovedEdition,
     removeSaved: (stem, records) => serial(() => setRemoved(stem, records, true)),
     undoRemoveSaved: (stem) => serial(() => setRemoved(stem, [], false)),
     checkSavedFiles,

@@ -152,7 +152,7 @@ export function statusOf(state, t, variant = state.host?.mode ?? state.variant) 
   const live = state.live?.[variant] ?? {};
   const connection = live.connection ?? (phase === 'degraded' ? 'unavailable' : 'off');
   const sync = live.sync ?? 'idle';
-  const borrowed = live.borrowed ?? null;
+  const borrowed = active?.kind === 'saved' ? null : live.borrowed ?? null;
   const canBorrow = phase === 'ready' && ['off', 'idle'].includes(connection) && live.canTryOn === true;
   const selectionPaused = state.live?.enabled !== false && live.selectionBlocked === true &&
     ['off', 'idle', 'tryon', 'active'].includes(connection);
@@ -172,7 +172,8 @@ export function statusOf(state, t, variant = state.host?.mode ?? state.variant) 
     unavailable: [fileUnavailableKey(live.readError?.code), 'warning'],
     'read-error': ['stateReadError', 'warning'], 'prepare-error': [
       recovery === 'builtin' ? 'stateLegacyPreview' : recovery ? 'stateBackupMissing' : 'statePrepareError', 'warning'],
-    'verify-error': ['stateVerifyError', 'warning'], off: ['statePreview', 'neutral'], idle: ['statePreview', 'neutral'],
+    'verify-error': ['stateVerifyError', 'warning'], 'saved-error': ['stateSavedError', 'warning'],
+    off: ['statePreview', 'neutral'], idle: ['statePreview', 'neutral'],
     tryon: ['stateTryon', 'success'], active: ['stateActive', 'success'], hidden: ['stateHidden', 'info'],
     conflict: ['stateConflict', 'warning'], error: ['stateError', 'error'],
   };
@@ -185,6 +186,9 @@ export function statusOf(state, t, variant = state.host?.mode ?? state.variant) 
     else if (sync === 'timeout') [key, tone] = ['syncTimeout', 'warning'];
     else if (sync === 'writing') [key, tone] = ['syncWriting', 'info'];
     else if (sync === 'waiting') [key, tone] = ['syncWaiting', 'info'];
+    else if (active?.kind === 'saved' && live.canPreview) {
+      [key, tone] = live.previewVariant ? table.tryon : ['statePreviewReady', 'info'];
+    }
     else if (borrowed && borrowed.inUse !== true) [key, tone] = ['stateBorrowUnknown', 'info'];
     else if (borrowed) [key, tone] = table.tryon;
     else if (canBorrow || active?.reason === 'ambiguous' && live.canPreview) [key, tone] = ['statePreviewReady', 'info'];
@@ -204,7 +208,7 @@ export function fileUnavailableNote(code) {
   return code && code !== 'NOT_GRANTED' ? 'hostUnavailableNote' : 'offlineNote';
 }
 export const filesUnchecked = (status) => ['checking', 'read-error', 'unavailable'].includes(status.connection);
-export const writeNeedsRetry = (status) => ['error', 'prepare-error', 'verify-error'].includes(status.connection);
+export const writeNeedsRetry = (status) => ['error', 'prepare-error', 'verify-error', 'saved-error'].includes(status.connection);
 
 export function selectedCard(project, card) {
   const key = card.slug ?? card.id;

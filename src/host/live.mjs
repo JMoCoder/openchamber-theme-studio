@@ -42,6 +42,7 @@ async function readOnceMoreOnTimeout(read) {
 
 export function createLive({
   host, writer, builtins, getDraft, getSaved, notify, persistence, ensureOrigin, getBuiltin, getNeutral,
+  library, refreshSaved, updateSaved, filesUnverified, onNamedPreview,
   timers = { setTimeout: (...args) => globalThis.setTimeout(...args), clearTimeout: (id) => globalThis.clearTimeout(id) },
   now = Date.now, debounce = 250, timeout = THEME_CONFIRMATION_TIMEOUT_MS, settle = 35,
 }) {
@@ -49,7 +50,7 @@ export function createLive({
     raw: null, record: null, known: false, readState: 'checking', readError: null, probe: null,
     sync: 'idle', preflight: false, conflict: false, seenRecovery: false, attempt: null,
     active: null, delay: null, request: null, inFlight: null, timeout: null, receipt: null, error: null,
-    generation: 0, backup: null, backupRead: false, legacyRestored: false, blockedProbe: null, fallback: null,
+    generation: 0, backup: null, backupRead: false, legacyRestored: false, blockedProbe: null, fallback: null, namedError: null,
   }]));
   let queue = Promise.resolve(), ready = null, observed = 0, selection = 0, sourceEpoch = 0, stopped = false, enabled = true;
   const readHost = {
@@ -89,20 +90,23 @@ export function createLive({
   const current = (v) => ready?.mode === v;
   const displayed = (v) => current(v) ? tokenKey(ready.tokens) : null;
   const checkingSelection = (lane) => lane.receipt?.selectionProbe && ['writing', 'waiting', 'timeout'].includes(lane.sync);
-  const writable = (active) => ['builtin', 'slot', 'tryon'].includes(active?.kind);
+  const writable = (active) => ['builtin', 'slot', 'tryon', 'saved'].includes(active?.kind);
   function identify() {
     if (!ready) return;
     const v = ready.mode;
     const lane = lanes[v];
     if (!lane) return;
-    const candidates = [...builtins, ...getSaved().map(({ project, id, name, variant, key }) =>
-      ({ id, name, variant, key, projectId: project.id, kind: 'saved' }))];
+    const candidates = [...builtins, ...getSaved().map(({ project, id, name, variant, key, preview }) =>
+      ({ id, name, variant, key: preview?.key ?? key, projectId: project.id, kind: 'saved' }))];
     if (lane.record) {
       const target = trial(lane.record, v);
       const { id, name, key, project } = lane.record;
       candidates.push({ id, name, key, variant: v, kind: target ? 'tryon' : 'slot', projectId: project.id });
     }
-    lane.active = identifyTheme(ready, candidates);
+    const matched = identifyTheme(ready, candidates);
+    const incomplete = filesUnverified() || Object.values(lanes).some(({ raw, record }) => raw !== null && !record);
+    lane.active = incomplete && matched.reason !== 'unmatched'
+      ? { kind: 'unknown', variant: v, reason: 'unverified-files' } : matched;
   }
   function armTimeout(v, lane) {
     if (lane.timeout !== null || !lane.receipt) return;
@@ -254,7 +258,11 @@ export function createLive({
   }
   function previewStart(v) {
     const { record, backup, active } = lanes[v];
-    if (!record || record.writer !== backup?.id || active?.id !== record.id || active.sameSavedColors) return null;
+    if (active?.kind === 'saved') {
+      const saved = getSaved().find(({ id }) => id === active.id);
+      return saved?.preview ? { project: { ...saved.project, origin: { kind: 'saved', ref: saved.id } } } : null;
+    }
+    if (!record || record.writer !== backup?.id || active?.id !== record.id) return null;
     const original = originalRecord(backup.raw, v);
     return original?.id === record.id ? { project: original.project } : { builtin: trial(record, v)?.id };
   }
@@ -348,18 +356,19 @@ export function createLive({
   }
   function previewTarget(v) {
     const lane = lanes[v], active = lane.active;
-    if (!current(v) || lane.readState !== 'ready' || lane.conflict || lane.error ||
+    if (!current(v) || lane.readState !== 'ready' || lane.conflict || lane.error || lane.namedError ||
+        active?.namedTie || active?.reason === 'unverified-files' ||
         recoveryKind(lane.record, lane.backup, v, lane.seenRecovery)) return null;
     const key = displayed(v), receipt = lane.receipt;
     if (key && key === lane.blockedProbe) return null;
     if (key && key === lane.fallback?.before) return { ...lane.fallback.target, probe: true };
     if (key && receipt?.interactive && receipt.staleKeys.includes(key) && ['writing', 'waiting', 'timeout'].includes(lane.sync)) {
-      // Old colors are expected before a watcher catches up. Keep the
-      // verified destination across ordinary timeouts, but not across known
-      // ambiguity with an independent saved file displaying the same colors.
-      if (lane.sync === 'timeout' && receipt.selectionProbe &&
-          (active?.kind === 'saved' || active?.savedCopies || active?.reason === 'ambiguous')) return null;
-      if (!(lane.sync === 'timeout' && receipt.pick && receipt.selectionProbe)) {
+      // Old colors can appear until the watcher catches up. A named work
+      // can keep a queued edit while waiting, but needs a unique live match
+      // before sending that edit; a past receipt cannot disambiguate an ID.
+      if (receipt.named) {
+        if (lane.sync !== 'timeout' && active?.reason === 'unmatched') return { id: receipt.target, kind: 'saved' };
+      } else if (active?.kind !== 'saved' && !(lane.sync === 'timeout' && receipt.pick && receipt.selectionProbe)) {
         return { id: receipt.target, kind: receipt.target === slotId(v) ? 'slot' : 'tryon',
           probe: Boolean(receipt.selectionProbe), fallback: receipt.fallback };
       }
@@ -372,7 +381,7 @@ export function createLive({
       // that identity across the tie; the next change must prove it again.
       return { ...lane.record, kind: trial(lane.record, v) ? 'tryon' : 'slot' };
     }
-    if (writable(active)) return active.sameSavedColors ? { ...active, probe: true } : active;
+    if (writable(active)) return active;
     if (active?.offers) return { ...active.offers[0], probe: true, fallback: active.offers[1] };
     if (!lane.record || lane.record.writer !== lane.backup?.id) return null;
     // For detail-only edits, factory and file may have identical fingerprints
@@ -392,6 +401,12 @@ export function createLive({
     return id ? `${sourceEpoch}/${id}` : null;
   }
   function hasPreview() {
+    const active = ready && lanes[ready.mode].active;
+    if (active?.kind === 'saved') {
+      const { request, inFlight, generation } = lanes[ready.mode];
+      return enabled && (request?.id === active.id || inFlight?.id === active.id && inFlight.generation === generation ||
+        getSaved().some(({ id, preview }) => id === active.id && preview));
+    }
     return enabled && variants.some((v) => {
       const lane = lanes[v];
       return lane.request || (lane.inFlight && lane.inFlight.generation === lane.generation) || lane.attempt?.intent === 'preview' ||
@@ -402,6 +417,10 @@ export function createLive({
     const lane = lanes[v], record = lane.record;
     const key = current(v) && tokenKey(ready.tokens);
     if (!key) return null;
+    if (lane.active?.kind === 'saved') {
+      const preview = getSaved().find(({ id }) => id === lane.active.id)?.preview;
+      if (preview?.key === key) return { key, variant: preview.variant };
+    }
     if (record?.key === key && (lane.active?.id === record.id || !selected?.probe && selected?.id === record.id) &&
         (isPreviewWriter(record.writer) || trial(record, v) && !record.borrowedApplied)) {
       return { key, variant: record.previewVariant ?? v };
@@ -510,6 +529,8 @@ export function createLive({
           }
         }
         if (preview) {
+          const scan = await refreshSaved(true);
+          if (!scan || scan.unverified) throw problem('MODE_CHANGED', 'The window theme cannot be verified');
           if (!checkPreview(v, preview)) throw problem('MODE_CHANGED', 'The current theme changed before the write');
           target = builtin(preview.id, v) ?? null;
         }
@@ -606,8 +627,7 @@ export function createLive({
         const key = undoing ? expectedRestoration(v, previous, own(raw, v)) : preview ? themeKey(theme)
           : options.resignal ?? (leavingTrial ? isSelected ? oldTrial.key : null
           : intent === 'tryon' || continuing || lane.active?.kind === 'slot' || isSelected ? themeKey(theme) : null);
-        const probing = selection?.probe || !leavingTrial && continuing && lane.active?.sameSavedColors;
-        const selectionProbe = options.resignal ? lane.receipt?.selectionProbe : probing ? before : null;
+        const selectionProbe = options.resignal ? lane.receipt?.selectionProbe : selection?.probe ? before : null;
         const shown = current(v) && shownPaint(v);
         const prior = preview && lane.receipt?.interactive && lane.receipt.target === id && lane.sync !== 'applied' ? lane.receipt : null;
         resetReceipt(lane);
@@ -661,6 +681,133 @@ export function createLive({
         (trial(lane.record, v) && (lane.active?.id === lane.record.id || lane.sync === 'waiting')) ||
         (lane.active?.kind === 'unknown' && lane.sync === 'waiting' && lane.receipt?.continuing));
   }
+  function savedFailure(v, error, stage) {
+    const report = { ok: false, code: errorCode(error), stage };
+    if (!['MODE_CHANGED', 'CLOSED'].includes(report.code)) lanes[v].namedError = report;
+    publish();
+    return report;
+  }
+  const readSaved = (path) => readOnceMoreOnTimeout(() => library.readSaved(path));
+  async function writeSaved(record, raw, expected) {
+    const v = record.variant, lane = lanes[v], before = displayed(v);
+    const selected = lane.active?.kind === 'saved' && lane.active.id === record.id;
+    const observable = Boolean(selected && before && before !== expected);
+    if (selected) {
+      const shown = shownPaint(v);
+      resetReceipt(lane);
+      if (observable) lane.receipt = { key: expected, before, target: record.id, named: true,
+        interactive: true, after: observed, written: false, shown, staleKeys: [before] };
+      lane.sync = 'writing';
+    }
+    let writeError;
+    try {
+      const writing = host.writeFile(record.path, raw);
+      publish();
+      await writing;
+    } catch (error) { writeError = error; }
+    try {
+      const readback = await readSaved(record.path);
+      if (readback?.disk !== raw || !readback.lossless) {
+        if (writeError && readback?.disk === record.disk) throw writeError;
+        throw problem('CONFLICT', 'The saved work was changed after the write');
+      }
+      lane.namedError = null;
+      updateSaved(readback);
+      if (selected) {
+        lane.sync = lane.receipt ? 'waiting' : 'idle';
+        if (lane.receipt) {
+          lane.receipt.written = true;
+          checkReceipt(v, lane);
+          if (lane.sync === 'waiting') armTimeout(v, lane);
+        }
+      }
+      return { ok: true, path: record.path, variant: v, changed: true, observable };
+    } catch (error) {
+      if (selected) { resetReceipt(lane); lane.sync = 'idle'; }
+      return { ...savedFailure(v, error, 'verify'), path: record.path, variant: v };
+    }
+  }
+  function previewSaved(v, request) {
+    return serial(async () => {
+      if (stopped || !checkPreview(v, request)) return { ok: false, code: 'MODE_CHANGED' };
+      const lane = lanes[v];
+      const known = getSaved().find(({ id }) => id === request.id);
+      let lock;
+      lane.preflight = true;
+      publish();
+      try {
+        lock = await lease(v);
+        const scan = await refreshSaved(true);
+        const record = scan?.records.find(({ id }) => id === request.id);
+        if (!record?.lossless || record.disk !== known?.disk || await readSlot(v) !== lane.raw) {
+          throw problem('CONFLICT', 'The saved work or its preview target changed before the write');
+        }
+        if (scan.unverified || stopped || !checkPreview(v, request) || lane.active?.id !== record.id) {
+          throw problem('MODE_CHANGED', 'The current theme changed before the write');
+        }
+        const { project, theme: source } = getDraft(request.variant);
+        const theme = previewDefinition(source, v);
+        if ((record.preview?.variant ?? v) === request.variant &&
+            samePaint(record.preview?.definition ?? record.definition, theme)) return { ok: true, changed: false };
+        await ensureOrigin();
+        await library.preserveRemovedEdition(record);
+        const previewBackup = { id: record.preview?.writer ?? `preview-${uid()}`, raw: record.raw };
+        const rev = Math.min((record.preview?.rev ?? record.rev) + 1, Number.MAX_SAFE_INTEGER);
+        const raw = encodeTheme(theme, project, { id: record.id, name: record.name, writer: previewBackup.id,
+          rev, previewVariant: request.variant, previewBackup }, { compact: request.variant === v }).replaceAll('\uFFFD', '\\ufffd');
+        const fresh = await readSaved(record.path);
+        if (!fresh?.lossless || fresh.disk !== record.disk) throw problem('CONFLICT', 'The saved work changed before the write');
+        await lock.verify();
+        if (stopped || !checkPreview(v, request) || lane.active?.id !== record.id) {
+          throw problem('MODE_CHANGED', 'The current theme changed before the write');
+        }
+        lane.preflight = false;
+        onNamedPreview();
+        return await writeSaved(record, raw, themeKey(theme));
+      } catch (error) { return savedFailure(v, error, 'prepare'); }
+      finally {
+        lane.preflight = false;
+        publish();
+        if (lock) await lock.release().catch(() => {});
+      }
+    });
+  }
+  function restoreSaved() {
+    return serial(async () => {
+      if (stopped) return [{ ok: false, code: 'CLOSED' }];
+      const known = getSaved().filter(({ preview }) => preview);
+      const scan = await refreshSaved(true);
+      if (!scan) return [{ ok: false, code: 'FILES_UNVERIFIED', stage: 'read' }];
+      const reports = scan.failures.map(({ path, code }) => ({ ok: false, path, code, stage: 'read' }));
+      for (const original of known) {
+        const found = scan.records.find(({ id }) => id === original.id);
+        if (!found || found.raw !== original.raw) {
+          reports.push({ ...savedFailure(original.variant, problem('CONFLICT', 'The saved work changed before Restore'), 'prepare'),
+            path: original.path, variant: original.variant });
+        }
+      }
+      for (const record of scan.records.filter(({ preview }) => preview)) {
+        if (reports.some(({ path }) => path === record.path)) continue;
+        const { variant: v, path } = record;
+        let lock;
+        try {
+          lock = await lease(v);
+          const fresh = await readSaved(path);
+          if (fresh?.lossless && fresh.disk === record.raw) {
+            updateSaved(fresh); // another panel already restored these exact bytes
+            continue;
+          }
+          if (!fresh?.lossless || fresh.disk !== record.disk) throw problem('CONFLICT', 'The saved work changed before Restore');
+          await lock.verify();
+          if (stopped) throw problem('CLOSED', 'Theme Studio was closed');
+          reports.push(await writeSaved(record, record.raw, record.key));
+        } catch (error) {
+          reports.push({ ...savedFailure(v, error, 'prepare'), path, variant: v });
+        } finally { await lock?.release().catch(() => {}); }
+      }
+      return reports;
+    });
+  }
   function dispatchPreview(v) {
     const lane = lanes[v];
     const request = lane.request;
@@ -670,7 +817,9 @@ export function createLive({
     lane.request = null;
     if (!checkPreview(v, request)) return;
     lane.inFlight = request;
-    void enqueue(v, 'preview', { preview: request, locale: request.locale, mode: request.mode }).finally(() => {
+    const work = request.mode === 'saved' ? previewSaved(v, request) :
+      enqueue(v, 'preview', { preview: request, locale: request.locale, mode: request.mode });
+    void work.finally(() => {
       if (lane.inFlight === request) lane.inFlight = null;
     });
   }
@@ -681,7 +830,7 @@ export function createLive({
     cancel(lane);
     if (!selected) return;
     lane.request = { id: selected.id, variant, generation: lane.generation, locale,
-      mode: selected.kind === 'slot' ? 'live' : 'borrow' };
+      mode: selected.kind === 'saved' ? 'saved' : selected.kind === 'slot' ? 'live' : 'borrow' };
     lane.delay = timers.setTimeout(() => {
       lane.delay = null;
       dispatchPreview(v);
@@ -697,14 +846,14 @@ export function createLive({
     const observedActive = lane.active?.kind === 'unknown' && !selected?.probe && selected?.id === lane.record?.id &&
       present && present === lane.record?.key ? selected : lane.active;
     const confirmed = current(v) && observedActive?.kind === 'tryon' && observedActive.id === target?.id && present === lane.record?.key;
-    const onlySavedAfterTimeout = lane.sync === 'timeout' && lane.receipt?.selectionProbe &&
-      (lane.active?.kind === 'saved' || lane.active?.savedCopies);
+    const onlySavedAfterTimeout = lane.sync === 'timeout' && lane.receipt?.selectionProbe && lane.active?.namedTie;
     const inUse = confirmed ? true : (!awaiting || onlySavedAfterTimeout) && present && present !== lane.record?.key ? false : null;
     const borrowed = target ? { id: target.id, name: target.name, applied: lane.record.borrowedApplied, inUse,
     } : null;
     let connection;
     if (!ready) connection = 'unavailable';
     else if (lane.readState !== 'ready') connection = lane.readState;
+    else if (current(v) && lane.namedError) connection = 'saved-error';
     else if (lane.conflict) connection = 'conflict';
     else if (lane.error?.stage === 'write') connection = 'error';
     else if (lane.error?.stage === 'verify') connection = 'verify-error';
@@ -719,7 +868,9 @@ export function createLive({
       readError: lane.readError ?? (!ready ? { code: 'HOST_UNAVAILABLE' } : null),
       canRecheck: Boolean(ready), canTryOn: canTryOn(v), canPreview: Boolean(selected),
       doingTryOn: Boolean(target), borrowed, recovering: lane.seenRecovery,
-      previewVariant: shownPaint(v, selected)?.variant ?? null, selectionBlocked: Boolean(present && present === lane.blockedProbe),
+       previewVariant: shownPaint(v, selected)?.variant ?? null,
+       selectionBlocked: Boolean(present && !selected && (present === lane.blockedProbe ||
+         ['ambiguous', 'unverified-files'].includes(lane.active?.reason))),
     };
   }
   return {
@@ -727,12 +878,35 @@ export function createLive({
     selection: () => selection, sourceTarget, hasPreview, previewStart,
     cancelScheduled() { for (const lane of Object.values(lanes)) cancel(lane); },
     restore: (v, legacyDraft) => enqueue(v, 'restore', { legacyDraft }),
+    restoreSaved,
+    namedOutput(ref) {
+      const v = ready?.mode;
+      const lane = lanes[v], active = lane?.active, receipt = lane?.receipt;
+      const id = active?.kind === 'saved' ? active.id :
+        active?.kind === 'unknown' && receipt?.named && receipt.interactive ? receipt.target : null;
+      const stem = (value) => value?.replace(/-(?:light|dark)$/u, '');
+      const records = getSaved();
+      const source = ref && !records.some((record) => record.id === ref) ? ref : stem(ref ?? id);
+      if (!source) return null;
+      const pair = records.filter((record) => stem(record.id) === source);
+      const selected = pair.find((record) => record.id === id);
+      const queued = [lane?.inFlight, lane?.request].some((request) =>
+        request?.mode === 'saved' && request.id === selected?.id && request.generation === lane.generation);
+      // File output uses the original work even when its preview is in the
+      // other edition, or the editor opened it by name rather than from the window.
+      if (!queued && !pair.some((record) => record.preview)) return null;
+      return selected ?? pair.find((record) => record.variant === v) ?? pair[0];
+    },
+    async recheckSaved(v) {
+      if (await refreshSaved()) lanes[v].namedError = null;
+      publish();
+    },
     recoverBuiltin(v, recoveryId) {
       if (lanes[v]) cancel(lanes[v]);
       return enqueue(v, 'recover', { recoveryId });
     },
     needsRestore: (v) => Boolean(restoreNeeded(v)),
-    isPreviewRetry: (v) => Boolean(lanes[v]?.attempt?.interactive || lanes[v]?.receipt?.interactive),
+    isPreviewRetry: (v) => Boolean(lanes[v]?.namedError || lanes[v]?.attempt?.interactive || lanes[v]?.receipt?.interactive),
     refreshCandidates() { identify(); publish(); },
     setEnabled(on) {
       enabled = Boolean(on);

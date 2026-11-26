@@ -67,28 +67,16 @@ export function identifyTheme(snapshot, candidates) {
     const matches = candidates.filter((candidate) => candidate.variant === variant && candidate.key === key);
     if (matches.length === 1) return matches[0];
     if (matches.length > 1) {
-      const independent = matches.filter((candidate) => candidate.kind !== 'saved');
-      const [own] = independent;
-      // A saved file is never writable. If it shadows the sole writable
-      // candidate, keep our existing slot preference but require one receipt.
-      if (independent.length === 1 && (own.kind === 'slot' || own.kind === 'tryon')) {
-        return { ...own, sameSavedColors: true };
+      if (matches.some(({ kind }) => kind === 'saved')) return { kind: 'unknown', variant, reason: 'ambiguous', namedTie: true };
+      const stock = matches.filter(({ kind }) => kind === 'builtin');
+      const slot = matches.find(({ kind }) => kind === 'slot' || kind === 'tryon');
+      // Keep recovery for legacy slot/stock ties. Named files never
+      // participate in a write to find out which ID the host selected.
+      if (stock.length === 1 && slot) {
+        const offers = slot.id === stock[0].id ? [stock[0]] : [slot, stock[0]];
+        return { kind: 'unknown', variant, reason: 'ambiguous', offers };
       }
-      const stock = independent.filter(({ kind }) => kind === 'builtin');
-      const slot = independent.find(({ kind }) => kind === 'slot' || kind === 'tryon');
-      const sameSaved = independent.length !== matches.length;
-      // Offers are not identifications. With a saved twin, try the one
-      // stock ID only. Otherwise probe the incumbent file first; preserve
-      // its ID in case the user really selected that slot (including 0.2
-      // neutral slots). One bounded fallback to the stock ID is possible.
-      let offers = [];
-      if (stock.length === 1) {
-        const factory = stock[0];
-        if (sameSaved || slot?.id === factory.id) offers = [factory];
-        else if (slot) offers = [slot, factory];
-      }
-      return { kind: 'unknown', variant, reason: 'ambiguous',
-        ...(independent.length ? {} : { savedCopies: true }), ...(offers.length ? { offers } : {}) };
+      return { kind: 'unknown', variant, reason: 'ambiguous' };
     }
   }
   return { kind: 'unknown', variant, reason: 'unmatched' };

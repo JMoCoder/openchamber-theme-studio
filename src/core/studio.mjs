@@ -15,7 +15,7 @@ const reduceVariants = (fn) => Object.fromEntries(variants.map((v) => [v, fn(v)]
 const nextLocale = (value) => /^zh(?:[-_]|$)/iu.test(value ?? '') ? 'zh' : 'en';
 const validMode = (value) => variants.includes(value);
 const defaultProject = () => newProject({ base: defaults, name: 'OpenChamber', kind: 'default', ref: 'default' });
-const controls = new Set(['onboardingDismissed', 'previewCollapsed', 'borrowNoticeSeen']);
+const controls = new Set(['onboardingDismissed', 'previewCollapsed', 'borrowNoticeSeen', 'namedPreviewSeen']);
 function freeze(object) {
   if (!object || typeof object !== 'object' || Object.isFrozen(object)) return object;
   for (const value of Object.values(object)) freeze(value);
@@ -53,7 +53,8 @@ export function createStudio({
   const cache = {};
   let project = defaultProject(), baseline = reduceVariants(() => project);
   let editVariant = 'light', hostMode = 'light', locale = 'en', tokens = {}, phase = 'booting', context = null;
-  let records = [], notice = null, seq = 0, preferences = {}, enabled = true, dragging = false, touched = 0, draftId = null;
+  let records = [], filesUnverified = true, namedNotice = false;
+  let notice = null, seq = 0, preferences = {}, enabled = true, dragging = false, touched = 0, draftId = null;
   let stopped = false, initialized = false, starting, unsubscribe, bootTimer, finishBoot;
   let snapshot, selecting = null, restoring, modeEpoch = 0, dragEpoch = 0;
   let origin = { project, variant: editVariant }, originRead = false, originWrite;
@@ -69,6 +70,14 @@ export function createStudio({
     return entry;
   }
   const draft = (v) => ({ project, theme: resolveProject(project, v, { compact: false }) });
+  function outputProject() {
+    const ref = project.origin.kind === 'saved' ? project.origin.ref : undefined;
+    return live.namedOutput(ref)?.project ?? project;
+  }
+  function json(v) {
+    const source = outputProject();
+    return library.json(v, source, resolveProject(source, v, { compact: false }));
+  }
   const builtinCard = (id) => builtins.find((entry) => entry.id === id || entry.ids.includes(id));
   async function builtinProject(card) {
     const definitions = card.id === 'openchamber' ? null : await loadBuiltins();
@@ -77,7 +86,15 @@ export function createStudio({
   }
   const live = createLive({
     host, writer, now, timers, getDraft: draft, getSaved: () => records, builtins: builtinCandidates,
-    persistence, ensureOrigin, notify: emit, ...timing,
+    persistence, ensureOrigin, notify: emit, library, refreshSaved: refreshLibrary, updateSaved,
+    filesUnverified: () => filesUnverified,
+    onNamedPreview() {
+      if (preferences.namedPreviewSeen) return;
+      namedNotice = true;
+      preferences = { ...preferences, namedPreviewSeen: true };
+      persistDraft();
+    },
+    ...timing,
     async getBuiltin(id) {
       const fallback = variants.find((v) => defaults[v].metadata.id === id);
       if (fallback) return defaults[fallback];
@@ -99,6 +116,7 @@ export function createStudio({
     const info = reduceVariants((v) => live.lane(v));
     const matching = matchingOf({ uiFont: tokens.font, monoFont: tokens.mono, fontSize: tokens.fontSize });
     const data = reduceVariants(preview);
+    const output = outputProject();
     return freeze({
       phase, locale, variant: editVariant, project,
       host: { mode: hostMode, tokens, active: reduceVariants((v) => info[v].active),
@@ -107,7 +125,8 @@ export function createStudio({
       cssVars: reduceVariants((v) => data[v].cssVars), audit: reduceVariants((v) => data[v].audit),
       dirty: reduceVariants((v) => comparableVariant(project, v) !== comparableVariant(baseline[v], v)),
       history: history.state(),
-      live: { ...info, enabled, restoring: Boolean(restoring), banner: banner() },
+      live: { ...info, enabled, namedNotice, outputOriginal: output === project ? null : output.name,
+        restoring: Boolean(restoring), banner: banner() },
       library: { presets, builtins, saved: savedCards(records.filter((item) => !item.removed)),
         removed: savedCards(records.filter((item) => item.removed)) },
       notice, uiPreferences: preferences,
@@ -175,13 +194,28 @@ export function createStudio({
     return report?.ok && report.record ? { ...report, name: report.record.name } : report;
   };
   let libraryGeneration = 0;
-  async function refreshLibrary() {
+  function updateSaved(record) {
+    ++libraryGeneration;
+    records = records.map((previous) => previous.id === record.id
+      ? { ...record, legacyRemoved: false, removed: previous.removed } : previous);
+    live.refreshCandidates();
+  }
+  async function refreshLibrary(quiet = false) {
     const generation = ++libraryGeneration;
     try {
       const found = await library.scan();
-      if (!stopped && generation === libraryGeneration) { records = found; live.refreshCandidates(); }
+      if (!stopped && generation === libraryGeneration) {
+        ({ records, unverified: filesUnverified } = found);
+        live.refreshCandidates();
+      }
+      return found;
     } catch (e) {
-      if (!stopped && generation === libraryGeneration && !fsUnavailable(e) && e.code !== 'NOT_FOUND') inform('workspaceLibraryRead');
+      if (!stopped && generation === libraryGeneration) {
+        filesUnverified = true;
+        live.refreshCandidates();
+        if (!quiet && !fsUnavailable(e) && e.code !== 'NOT_FOUND') inform('workspaceLibraryRead');
+      }
+      return null;
     }
   }
   async function changeSavedVisibility(id, removed) {
@@ -203,10 +237,9 @@ export function createStudio({
     const read = (key) => persistence.get(key).catch(() => undefined);
     const [saved, light, dark, original] = await Promise.all([
       read('draft'), read('applied-light'), read('applied-dark'),
-      readEditorOrigin().catch(() => null), live.start(),
+      readEditorOrigin().catch(() => null), live.start(), refreshLibrary(),
     ]);
     if (stopped) return;
-    const scanned = refreshLibrary();
     const atomic = (v) => {
       const record = live.record(v);
       return record?.borrowedApplied && record.borrowBaseline === `${record.writer}/${record.rev}` ? record.project : null;
@@ -216,7 +249,6 @@ export function createStudio({
       try {
         if (saved?.project) initial = normalizeProject(saved.project);
         else {
-          if (live.lane(hostMode).active?.kind === 'unknown') await scanned;
           const selected = live.lane(hostMode).active;
           const selection = live.selection();
           const card = selected?.kind === 'builtin' && builtinCard(selected.id);
@@ -385,7 +417,7 @@ export function createStudio({
     if (request !== selecting || stopped) return false;
     selecting = null;
     if (!saved) return false;
-    replace({ ...saved.project, origin: { kind: 'saved', ref: id } }, { label: 'saved', repick: true,
+    replace({ ...saved.project, origin: { kind: 'saved', ref: saved.id } }, { label: 'saved', repick: true,
       previewOnly: !request.target || request.target !== live.sourceTarget() });
     return true;
   }
@@ -422,12 +454,14 @@ export function createStudio({
         ? { project: baseline[v], theme: resolveProject(baseline[v], v, { compact: false }) } : undefined;
       return live.restore(v, legacy);
     });
-    restoring = Promise.all(work).then(async (reports) => {
+    restoring = Promise.all([Promise.all(work), live.restoreSaved()]).then(async ([slots, works]) => {
+      if (!works.some((report) => !report.ok)) namedNotice = false;
       await flushDraft();
+      const reports = [...slots, ...works];
       const failure = reports.find((report) => !report.ok) ?? (!start ? { code: 'EDITOR_ORIGIN_UNVERIFIED' } : null);
       const result = { ok: !failure, changed: editorChanged || reports.some((report) => report.changed), editorChanged,
         observable: reports.some((report) => report.observable),
-        variants: Object.fromEntries(variants.map((v, index) => [v, reports[index]])) };
+        variants: Object.fromEntries(variants.map((v, index) => [v, slots[index]])), works };
       return failure ? recordNotice({ ...result, code: failure.code, stage: failure.stage }) : result;
     }).finally(() => { restoring = undefined; emit(); });
     if (start) {
@@ -437,7 +471,7 @@ export function createStudio({
     return restoring;
   }
   async function copyJson(v) {
-    try { return await library.copyText(library.json(v, project, draft(v).theme)); }
+    try { return await library.copyText(json(v)); }
     catch (error) { inform(errorNotices[error.code] ?? 'noClipboard'); return false; }
   }
   async function apply(v = editVariant) {
@@ -450,6 +484,7 @@ export function createStudio({
     if (!validMode(v)) return { ok: false, code: 'BAD_VARIANT' };
     const [result, recovered] = await Promise.all([live.recheck(v),
       !originRead && context ? readEditorOrigin().catch(() => null) : undefined]);
+    if (result.ok) await live.recheckSaved(v);
     if (recovered && !originRead && phase !== 'booting' && !stopped) acceptEditorOrigin(recovered);
     if (result.ok && phase === 'degraded' && context && !stopped) {
       phase = 'ready';
@@ -588,7 +623,8 @@ export function createStudio({
       return true;
     },
     async saveAs({ name, variants: requested } = {}) {
-      const report = await library.save({ name, requested, project, locale, themes: reduceVariants((v) => draft(v).theme) });
+      const source = outputProject();
+      const report = await library.save({ name, requested, project: source, locale, themes: reduceVariants((v) => resolveProject(source, v, { compact: false })) });
       if (report.files.length) await refreshLibrary();
       return recordNotice(report);
     },
@@ -600,10 +636,11 @@ export function createStudio({
       return report;
     },
     async exportFiles({ variants: requested } = {}) {
-      return recordNotice(await library.export({ requested, project, locale, themes: reduceVariants((v) => draft(v).theme) }));
+      const source = outputProject();
+      return recordNotice(await library.export({ requested, project: source, locale, themes: reduceVariants((v) => resolveProject(source, v, { compact: false })) }));
     },
     copyJson(v = editVariant) { return copyJson(v); },
-    getJson(v = editVariant) { return library.json(v, project, draft(v).theme); },
+    getJson(v = editVariant) { return json(v); },
     async copyText(text) {
       try { return await library.copyText(text); }
       catch (error) { inform(errorNotices[error.code] ?? 'noClipboard'); return false; }

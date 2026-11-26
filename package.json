@@ -1,6 +1,6 @@
 {
   "name": "theme-studio",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Edit and preview native themes from OpenChamber's right sidebar",
   "private": true,
   "type": "module",

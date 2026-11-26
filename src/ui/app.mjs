@@ -177,6 +177,7 @@ export function mountStudio(root, studio, { catalog = defaultCatalog, onFrame = 
       disabled: busy, ...props,
     });
     if (unavailable(status)) return status.live.canRecheck && at('recheckFiles', 'recheck-files');
+    if (status.connection === 'saved-error') return at('recheckFiles', 'recheck-files');
     if (status.connection === 'conflict') return null;
     if (status.backupMissing) return status.recovery !== 'builtin' && at('recoveryGuide', 'recovery-guide', 'info');
     if (writeNeedsRetry(status) || status.sync === 'timeout' && !status.selectionPaused) return at('retry', 'retry');
@@ -187,6 +188,8 @@ export function mountStudio(root, studio, { catalog = defaultCatalog, onFrame = 
     const name = status.borrowed?.name ?? (status.canBorrow ? status.active?.name : null);
     return view.statusHelp && node('div', { id: 'studio-connection-help', class: 'preview-help' },
       node('p', { text: t('previewLifecycle') }), node('p', { text: t('previewNativeMode') }),
+      status.active?.kind === 'saved' && node('p', { text: t('savedPreviewFirst') }),
+      status.active?.kind === 'saved' && node('p', { text: t('savedPreviewEffect') }),
       name && node('p', { text: t('borrowEffect', { name }) }));
   }
   function banner(tone, message, actions = []) {
@@ -196,6 +199,8 @@ export function mountStudio(root, studio, { catalog = defaultCatalog, onFrame = 
   }
   function statusBanners(status) {
     const displayed = [], { connection, sync } = status;
+    if (state.live?.namedNotice) displayed.push(node('div', { class: 'preview-help', role: 'status', 'data-note': 'saved-preview' },
+      node('p', { text: t('savedPreviewFirst') })));
     const busy = pending(status);
     const at = (label, act, glyph, props) => simpleControl(t(label), act, glyph, { disabled: busy, ...props });
     switch (connection) {
@@ -216,12 +221,15 @@ export function mountStudio(root, studio, { catalog = defaultCatalog, onFrame = 
         break;
       case 'verify-error':
         displayed.push(banner('warning', t('verifyNote'))); break;
+      case 'saved-error':
+        displayed.push(banner('warning', t('savedPreviewError'))); break;
       case 'off':
       case 'idle':
         if (status.active?.reason === 'ambiguous' && !status.live.canPreview && !status.selectionPaused) displayed.push(banner('info', t('ambiguousNote')));
         break;
     }
-    if (status.selectionPaused) displayed.push(banner('warning', t('selectionPausedNote')));
+    if (status.selectionPaused) displayed.push(banner('warning', t(status.active?.reason === 'unverified-files'
+      ? 'selectionPausedFiles' : 'selectionPausedNote')));
     else if (sync === 'timeout' && ['off', 'idle', 'tryon', 'active'].includes(connection)) {
       displayed.push(banner('warning', t('timeoutNote')));
     }
@@ -346,8 +354,9 @@ export function mountStudio(root, studio, { catalog = defaultCatalog, onFrame = 
     const key = JSON.stringify([status.text, status.sync, status.connection, status.recovery, status.live.canRecheck, pending(status),
       state.project?.name, state.variant, state.phase, view.statusHelp, state.live?.enabled]);
     if (key !== lastState.header || langChange) buildHeader(status);
-    const bannerKey = JSON.stringify([status.connection, status.sync, status.active?.reason, status.active?.name,
-      status.canBorrow, status.borrowed?.name, status.borrowed?.id, status.recovery, status.live.readError?.code, pending(status), view.statusHelp]);
+    const bannerKey = JSON.stringify([status.connection, status.sync, status.active?.kind, status.active?.reason, status.active?.name,
+      status.canBorrow, status.borrowed?.name, status.borrowed?.id, status.recovery, status.live.readError?.code,
+      status.selectionPaused, state.live?.namedNotice, pending(status), view.statusHelp]);
     if (bannerKey !== lastState.banner || langChange) replace(banners, previewHelp(status), statusBanners(status));
     if (lastState.collapsed !== view.collapsed || langChange || !preview) buildPreview(langChange);
     else sampleUpdate();

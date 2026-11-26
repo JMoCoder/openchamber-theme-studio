@@ -4,6 +4,15 @@
 
 All notable changes to `openchamber-theme-studio` will be documented in this file. Every version listed here was verified on OpenChamber 2.8.0, both the desktop app (Electron) and the web app.
 
+## [0.4.0] - 2026-11-26
+
+### Preview in the window you already use
+
+- Keep your saved Theme Studio theme selected in **Settings → Appearance**. Pick a palette, add a style, tune colors or refine a detail and see the result across the window. The first preview explains the temporary file change; other windows using the same theme on the same server show it too.
+- **Restore** writes the exact original contents back for each affected light or dark file, even after uninstalling and reinstalling Theme Studio. The theme stays selected. The file's modification time changes.
+- **My themes** and **Start from current theme** still open the original theme. **Save to file**, **Export to Downloads** and **Copy JSON** use its original colors. Other saved themes are unchanged.
+- If multiple themes share the same colors and the selected theme cannot be identified, **Window preview paused** leaves those files alone. Other custom themes still use the panel preview.
+
 ## [0.3.1] - 2026-11-26
 
 ### Added
@@ -53,4 +62,5 @@ All notable changes to `openchamber-theme-studio` will be documented in this fil
 - A reversible live theme through Theme Studio's own slot file. Opening the panel for the first time only reads.
 - Save as, export to Downloads, Copy JSON and import. English and Chinese follow the host language.
 
+[0.4.0]: https://github.com/JMoCoder/openchamber-theme-studio/releases/tag/v0.4.0
 [0.3.1]: https://github.com/JMoCoder/openchamber-theme-studio/releases/tag/v0.3.1

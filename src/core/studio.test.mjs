@@ -63,6 +63,259 @@ const expectTry = async (f) => {
   await f.time.advance(550);
 };
 
+async function savedPair(f, name, preset) {
+  f.studio.setLive(false);
+  f.studio.loadPreset(preset);
+  const result = await f.studio.saveAs({ name, variants: 'both' });
+  assert.ok(result.ok);
+  await f.time.advance(550);
+  f.studio.setLive(true);
+  return Object.fromEntries(result.files.map((file) => [file.variant, file]));
+}
+
+test('named light and dark use one byte journal each for palette, style, tune and fine edits; unselected work never changes', async (t) => {
+  const f = fixture(t), { studio: s, host, time, workspace } = f;
+  await s.start();
+  const a = await savedPair(f, '原作 · Original A', 'blue-etch');
+  const b = await savedPair(f, 'Protected B', 'kilnmark');
+  const original = {}, protectedFiles = Object.values(b).map(({ path }) => workspace.files.get(path));
+  const other = createMockHost({ workspace, mode: 'light', selected: { light: a.light.id } });
+  t.after(other.dispose);
+  for (const [v, work] of Object.entries(a)) {
+    const base = workspace.files.get(work.path).content;
+    host.control.editFile(work.path, `\t${JSON.stringify(JSON.parse(base), null, 2).replaceAll('\n', '\r\n')}\r\n`);
+    original[v] = workspace.files.get(work.path);
+  }
+  await s.recheck();
+  await time.advance(550);
+  for (const v of ['light', 'dark']) {
+    const work = a[v], sibling = a[v === 'light' ? 'dark' : 'light'];
+    host.control.setMode(v);
+    host.control.select(work.id);
+    s.setVariant(v);
+    await time.advance(700);
+    assert.equal(workspace.files.get(work.path), original[v], 'opening, selecting and changing the tab are read-only');
+    const inactive = workspace.files.get(sibling.path);
+    let before = themeKey(workspace.theme(work.id, v)), journal;
+    for (const edit of [
+      () => s.loadPreset('tidemark'),
+      () => s.setStyle({ id: 'brutalism', strength: 0.62 }),
+      () => s.setTune({ global: { hue: v === 'light' ? 23 : -26 } }),
+      () => s.setOverride(path, v === 'light' ? '#764156' : '#abcbee'),
+    ]) {
+      edit();
+      await time.advance(750);
+      const painted = JSON.parse(workspace.files.get(work.path).content);
+      assert.equal(painted.metadata.id, work.id);
+      assert.equal(painted.metadata.variant, v);
+      assert.equal(painted.themeStudio.previewVariant, v);
+      assert.equal(painted.themeStudio.origin.raw, original[v].content, 'the first raw bytes survive later paints');
+      journal ??= painted.themeStudio.origin;
+      assert.deepEqual(painted.themeStudio.origin, journal);
+      assert.notEqual(themeKey(painted), before, 'each action repaints the actual window');
+      before = themeKey(painted);
+      assert.equal(lane(s, v).sync, 'applied');
+      assert.equal(s.getState().host.active[v].id, work.id);
+      assert.equal(workspace.files.get(sibling.path), inactive);
+      assert.deepEqual(Object.values(b).map(({ path }) => workspace.files.get(path)), protectedFiles);
+    }
+    if (v === 'light') assert.equal(other.control.snapshot().theme.tokens.primary, accent(f), 'another window on the server sees A’s preview');
+  }
+  assert.equal(s.getState().live.namedNotice, true);
+  assert.equal(s.getState().uiPreferences.namedPreviewSeen, true);
+  const report = await s.restoreOriginal();
+  assert.ok(report.ok);
+  assert.deepEqual(report.works.map(({ variant }) => variant).sort(), ['dark', 'light']);
+  await time.advance(700);
+  for (const [v, work] of Object.entries(a)) {
+    host.control.setMode(v);
+    const restored = workspace.files.get(work.path);
+    assert.equal(restored.content, original[v].content);
+    assert.ok(restored.mtime > original[v].mtime, 'SDK restore rewrites bytes, and mtime advances');
+    assert.equal(s.getState().host.active[v].id, work.id);
+    assert.equal(accent(f), color(JSON.parse(original[v].content)));
+    assert.equal(raw(f, v), undefined, 'named preview never needs a live slot');
+  }
+  assert.deepEqual(Object.values(b).map(({ path }) => workspace.files.get(path)), protectedFiles);
+  assert.equal(s.getState().live.namedNotice, false);
+  s.loadPreset('hojicha');
+  await time.advance(750);
+  assert.equal(s.getState().live.namedNotice, false, 'the first-use explanation is not repeated');
+});
+
+test('a painted work still reads as the original in My works, current theme, import, Save, Export, Copy and deletion checks', async (t) => {
+  const f = fixture(t), { studio: s, host, time, workspace } = f;
+  await s.start();
+  const a = await savedPair(f, 'Original work', 'blue-etch');
+  const originals = Object.fromEntries(Object.entries(a).map(([v, { path }]) => [v, JSON.parse(workspace.files.get(path).content)]));
+  const card = s.getState().library.saved[0], original = originals.light;
+  host.control.setMode('dark');
+  host.control.select(a.dark.id);
+  host.control.setMode('light');
+  host.control.select(a.light.id);
+  s.loadPreset('tidemark');
+  await time.advance(710);
+  const painted = workspace.files.get(a.light.path);
+  assert.notEqual(accent(f), color(original));
+  assert.deepEqual(s.getState().library.saved, [card]);
+  assert.deepEqual(await s.checkSavedFiles(card), { ok: true, remaining: [a.dark.path, a.light.path], missing: [] });
+  assert.deepEqual(s.getState().library.saved, [card]);
+  const importResult = inspectImportText(painted.content, a.light.path);
+  assert.ok(importResult.ok);
+  assert.equal(themeKey(importResult.definition), themeKey(original));
+  assert.notEqual(field(s), color(original), 'the editor is still set to the temporary paint');
+  host.control.setMode('dark');
+  assert.equal(themeKey(JSON.parse(s.getJson('light'))), themeKey(original), 'the other edition may be selected while Light is still previewing');
+  assert.equal(themeKey(JSON.parse(s.getJson('dark'))), themeKey(originals.dark));
+  host.control.setMode('light');
+  const copy = await s.saveAs({ name: 'A fresh copy', variants: 'both' });
+  const exported = await s.exportFiles({ variants: ['light'] });
+  assert.ok(copy.ok && exported.ok);
+  for (const { variant: v, path } of [...copy.files, ...exported.files]) {
+    assert.equal(themeKey(JSON.parse(workspace.files.get(path).content)), themeKey(originals[v]));
+  }
+  assert.equal(await s.copyJson('light'), true);
+  assert.equal(themeKey(JSON.parse(host.control.clipboard())), themeKey(original));
+  assert.equal(themeKey(JSON.parse(s.getJson('light'))), themeKey(original));
+  assert.equal(await s.loadCurrent(), true);
+  assert.equal(field(s), color(original));
+  assert.equal(await s.loadSaved(card.id), true);
+  assert.equal(field(s), color(original));
+  assert.equal(workspace.files.get(a.light.path), painted, 'reading or copying A does not write its file');
+  assert.deepEqual(s.getState().library.saved.find(({ id }) => id === card.id), card);
+});
+
+test('one Restore after native uninstall semantics reads both named originals from disk even with empty extension storage', async (t) => {
+  const f = fixture(t), { studio: s, host, time, workspace } = f;
+  await s.start();
+  const a = await savedPair(f, 'Reinstall original', 'blue-etch');
+  const selection = {}, originals = {};
+  for (const [v, work] of Object.entries(a)) {
+    selection[v] = work.id;
+    originals[v] = workspace.files.get(work.path).content;
+    host.control.setMode(v);
+    host.control.select(work.id);
+    s.setVariant(v);
+    s.loadPreset('tidemark');
+    await time.advance(710);
+    assert.equal(JSON.parse(workspace.files.get(work.path).content).themeStudio.origin.raw, originals[v]);
+  }
+  await s.flushDraft();
+  s.dispose();
+  workspace.uninstall();
+  const b = fixture(t, { workspace, time, selected: selection });
+  await b.studio.start();
+  assert.deepEqual(b.host.control.writes, []);
+  assert.equal(field(b.studio), color(JSON.parse(originals.light)), 'a new editor opens the original work, not the painted host colors');
+  assert.equal(b.studio.getState().library.saved.length, 1);
+  assert.ok((await b.studio.restoreOriginal()).ok);
+  await time.advance(710);
+  for (const [v, work] of Object.entries(a)) {
+    assert.equal(workspace.files.get(work.path).content, originals[v]);
+  }
+  assert.deepEqual(b.host.control.writes.map(({ path }) => path), Object.values(a).map(({ path }) => path).sort());
+});
+
+test('same-colored named works and uninspectable external themes never cause a trial or named write', async (t) => {
+  const f = fixture(t), { studio: s, host, time, workspace } = f;
+  await s.start();
+  const a = await savedPair(f, 'Recognized A', 'blue-etch');
+  const b = await savedPair(f, 'Recognized B', 'kilnmark');
+  host.control.select(a.light.id);
+  s.loadPreset('kilnmark');
+  await time.advance(710);
+  assert.equal(lane(s).selectionBlocked, true, 'even a confirmed write cannot resolve a new same-color tie');
+  const before = [...workspace.files], writes = host.control.writes.length;
+  host.control.select(b.light.id);
+  s.setOverride(path, '#562854');
+  await time.advance(710);
+  assert.deepEqual([...workspace.files], before);
+  assert.equal(host.control.writes.length, writes);
+  assert.ok((await s.restoreOriginal()).ok);
+  await time.advance(710);
+  const external = `${themesDir}/outside.json`, outsideId = 'external-light';
+  const samePaint = JSON.parse(workspace.files.get(a.light.path).content);
+  const { themeStudio, ...native } = samePaint;
+  host.control.editFile(external, JSON.stringify({ ...native, metadata: { ...native.metadata, id: outsideId } }));
+  await time.advance(550);
+  await s.recheck();
+  host.control.select(outsideId);
+  const files = [...workspace.files];
+  assert.equal(s.getState().host.active.light.reason, 'unverified-files');
+  s.loadPreset('tidemark');
+  await time.advance(710);
+  assert.deepEqual([...workspace.files], files, 'no file is written to probe an external selection with matching colors');
+});
+
+test('named preview and Restore fail closed on a changed file or an invalid original', async (t) => {
+  const f = fixture(t), { studio: s, host, time, workspace } = f;
+  await s.start();
+  const work = (await savedPair(f, 'Concurrent work', 'blue-etch')).light;
+  host.control.select(work.id);
+  s.loadPreset('tidemark');
+  await time.advance(710);
+  const painted = JSON.parse(workspace.files.get(work.path).content);
+  const invalid = JSON.stringify({ ...painted, themeStudio: { ...painted.themeStudio,
+    origin: { writer: painted.themeStudio.writer, raw: painted.themeStudio.origin.raw.replace(work.id, 'theme-studio-another-light') } } });
+  host.control.editFile(work.path, invalid);
+  const count = host.control.writes.length;
+  const result = await s.restoreOriginal();
+  assert.equal(result.ok, false);
+  assert.equal(result.code, 'PREVIEW_BACKUP_MISSING');
+  assert.equal(workspace.files.get(work.path).content, invalid);
+  assert.equal(host.control.writes.length, count);
+});
+
+test('0.3.1 list removal follows original bytes through named preview, remount and a new mtime', async (t) => {
+  const f = fixture(t), { studio: s, host, time, workspace } = f;
+  await s.start();
+  const work = (await savedPair(f, 'A hidden edition', 'blue-etch')).light;
+  const original = workspace.files.get(work.path), { project, writer, rev } = JSON.parse(original.content).themeStudio;
+  const stem = work.id.replace(/-light$/u, ''), key = `studio:removed:${stem}`;
+  const { mtime, size } = await host.stat(work.path);
+  await host.storage.set(key, { light: JSON.stringify([project.id, writer, rev, mtime, size]) });
+  await s.recheck();
+  assert.deepEqual(Object.keys(s.getState().library.removed[0].variants), ['light']);
+  host.control.select(work.id);
+  s.loadPreset('tidemark');
+  await time.advance(710);
+  const marker = await host.storage.get(key);
+  assert.equal(JSON.parse(marker.light).at(-1), 'content');
+  assert.equal(JSON.parse(workspace.files.get(work.path).content).themeStudio.origin.raw, original.content);
+  assert.deepEqual(Object.keys(s.getState().library.removed[0].variants), ['light']);
+  s.dispose();
+  const b = fixture(t, { workspace, time, selected: { light: work.id } });
+  await b.studio.start();
+  assert.deepEqual(Object.keys(b.studio.getState().library.removed[0].variants), ['light']);
+  assert.ok((await b.studio.restoreOriginal()).ok);
+  await time.advance(710);
+  assert.ok(workspace.files.get(work.path).mtime > mtime);
+  await b.studio.recheck();
+  assert.deepEqual(await host.storage.get(key), marker);
+  assert.deepEqual(Object.keys(b.studio.getState().library.removed[0].variants), ['light']);
+  assert.ok((await b.studio.undoRemoveSaved(stem)).ok);
+  assert.equal(b.studio.getState().library.removed.length, 0);
+});
+
+test('named preflight detects a same-color edit after listing, and recheck does not replay a write', async (t) => {
+  const f = fixture(t), { studio: s, host, time, workspace } = f;
+  await s.start();
+  const work = (await savedPair(f, 'Modified by another editor', 'blue-etch')).light;
+  host.control.select(work.id);
+  const modified = `${workspace.files.get(work.path).content}\n`, writes = host.control.writes.length;
+  host.control.editFile(work.path, modified);
+  s.loadPreset('tidemark');
+  await time.advance(710);
+  assert.equal(lane(s).connection, 'saved-error');
+  assert.equal(workspace.files.get(work.path).content, modified);
+  assert.ok((await s.recheck()).ok);
+  await time.advance(710);
+  assert.equal(host.control.writes.length, writes);
+  s.loadPreset('tidemark');
+  await time.advance(710);
+  assert.equal(JSON.parse(workspace.files.get(work.path).content).themeStudio.origin.raw, modified);
+});
+
 for (const v of ['light', 'dark']) {
   test(`post-restore: ${v} stock theme can preview and restore three times, including after remount`, async (t) => {
     let f = fixture(t, { system: v });
@@ -154,7 +407,7 @@ test('post-restore: a natively selected fresh placeholder is writable; exact bac
   assert.deepEqual(named.paths.map((name) => f.workspace.files.get(name)), namedBefore);
 });
 
-test('post-restore: a saved twin of a built-in gets one fingerprint probe, not a silent refusal at the first edit', async (t) => {
+test('post-restore: a saved twin of a built-in pauses without writing either ID, including after remount', async (t) => {
   const f = fixture(t, { selected: { light: 'flexoki-light' } });
   await f.studio.start();
   const s = f.studio;
@@ -166,12 +419,12 @@ test('post-restore: a saved twin of a built-in gets one fingerprint probe, not a
   s.setVariant('dark');
   s.loadPreset('tidemark');
   await f.time.advance(160);
-  assert.equal(decodeOwned(raw(f), 'light').id, 'flexoki-light');
+  assert.equal(raw(f), undefined, 'no slot probe when the user may have selected a named work');
   const count = f.host.control.writes.length;
   s.setVariant('light'); // queued while the first proof is pending
   s.loadPreset('blue-etch');
   await f.time.advance(1900);
-  assert.equal(lane(s).selectionBlocked, true, 'visible reason for stopping after a single inconclusive probe');
+  assert.equal(lane(s).selectionBlocked, true, 'visible reason for stopping at the first edit');
   assert.equal(accent(f), color(factory('light', 'flexoki')));
   assert.equal(f.host.control.writes.length, count);
   s.loadPreset('kilnmark');
@@ -196,11 +449,15 @@ test('post-restore: a saved twin of a built-in gets one fingerprint probe, not a
   assert.deepEqual(f.workspace.files.get(saved.paths[0]), named);
 });
 
-test('post-restore: a successful built-in fingerprint probe drains the last queued pick even with saved twins', async (t) => {
+test('post-restore: an unambiguous built-in drains the last queued pick without touching an unrelated work', async (t) => {
   const f = fixture(t);
   const s = f.studio;
   await s.start();
-  const saved = await s.saveAs({ name: 'Exact OpenChamber', variants: ['light'] });
+  s.setLive(false);
+  s.loadPreset('hojicha');
+  const saved = await s.saveAs({ name: 'Unrelated work', variants: ['light'] });
+  await s.loadDefault();
+  s.setLive(true);
   await f.time.advance(700);
   const named = f.workspace.files.get(saved.paths[0]);
   s.loadPreset('tidemark');
@@ -210,7 +467,7 @@ test('post-restore: a successful built-in fingerprint probe drains the last queu
   await f.time.advance(1480);
   assert.equal(accent(f), field(s, 'dark'));
   assert.equal(lane(s).selectionBlocked, false);
-  assert.equal(f.host.control.writes.length, 3, 'one saved file, the initial probe and the latest edit');
+  assert.equal(f.host.control.writes.length, 3, 'one saved file and two slot paints');
   assert.ok((await s.restoreOriginal()).ok);
   await f.time.advance(720);
   s.loadPreset('kilnmark');
@@ -277,20 +534,25 @@ test('post-restore matrix: actual selection × disk state, then pick, switch tab
           } else f.host.control.select(target);
         } else assert.equal(f.host.control.writes.length, 0);
         const n = f.host.control.writes.length;
-        const writable = ['stock', 'builtin', 'slot'].includes(selection);
+        const namedSelected = selection === 'work' && !hasTwin;
+        const paused = hasTwin && ['stock', 'builtin', 'work'].includes(selection);
+        const slotSelected = !paused && ['stock', 'builtin', 'slot'].includes(selection);
+        const writable = namedSelected || slotSelected;
         f.studio.setVariant('dark');
         await f.time.advance(2000);
-        if (writable && ongoing) assert.equal(accent(f), field(f.studio, 'dark'), 'active preview follows tab');
+        if (slotSelected && ongoing) assert.equal(accent(f), field(f.studio, 'dark'), 'active preview follows tab');
         else assert.equal(f.host.control.writes.length, n, 'tab alone never starts a preview');
         f.studio.loadPreset('tidemark');
         await f.time.advance(2000); // Includes a bounded legacy identity fallback where needed.
         if (writable) {
           assert.equal(accent(f), field(f.studio, 'dark'), `${selection}/${disk} previews`);
-          assert.equal(decodeOwned(raw(f), 'light').id, target);
+          const painted = namedSelected ? f.workspace.files.get(namedPath).content : raw(f);
+          assert.equal(decodeOwned(painted, 'light').id, target);
+          if (namedSelected) assert.equal(JSON.parse(painted).themeStudio.origin.raw, originalNamed.content);
         } else {
-          assert.equal(themeKey(f.workspace.theme(target, 'light')), original, 'no edits to a natively selected named/unmanaged theme');
-          assert.equal(f.host.control.writes.length, n + (selection === 'work' && hasTwin ? 1 : 0));
-          assert.equal(lane(f.studio).selectionBlocked, selection === 'work' && hasTwin);
+          assert.equal(themeKey(f.workspace.theme(target, 'light')), original, 'ambiguous and unmanaged selections stay panel-only');
+          assert.equal(f.host.control.writes.length, n);
+          assert.equal(lane(f.studio).selectionBlocked, paused);
         }
         f.studio.setVariant('light');
         await f.time.advance(2000);
@@ -300,10 +562,13 @@ test('post-restore matrix: actual selection × disk state, then pick, switch tab
         await f.time.advance(700);
         assert.equal(themeKey(f.workspace.theme(target, 'light')), original, 'exact original native selection colors');
         if (originalRaw) assert.equal(raw(f), originalRaw, 'exact original slot bytes');
-        else if (writable || ongoing || hasTwin && selection === 'work') assert.match(decodeOwned(raw(f), 'light').writer, /^restored-/u);
+        else if (slotSelected || ongoing) assert.match(decodeOwned(raw(f), 'light').writer, /^restored-/u);
         else assert.equal(raw(f), undefined);
         assert.equal(raw(f, 'dark'), undefined, 'actual host was always Light');
-        assert.deepEqual(f.workspace.files.get(namedPath), originalNamed, 'named file contents and mtime are untouched');
+        if (namedSelected) {
+          assert.equal(f.workspace.files.get(namedPath).content, originalNamed.content);
+          assert.notEqual(f.workspace.files.get(namedPath).mtime, originalNamed.mtime);
+        } else assert.deepEqual(f.workspace.files.get(namedPath), originalNamed, 'unselected or ambiguous work never changes');
       });
     }
   }
@@ -814,7 +1079,11 @@ test('reinstall rehydrates both journals without repainting, then one Restore re
   a.host.control.editFile(slotPath('light'), original);
   await a.time.advance(550);
   await a.studio.start();
+  a.studio.setLive(false);
+  a.studio.loadPreset('blue-etch');
   const saved = await a.studio.saveAs({ name: 'Unchanged', variants: 'both' });
+  await a.studio.loadDefault();
+  a.studio.setLive(true);
   const savedFiles = saved.paths.map((path) => [path, a.workspace.files.get(path)]);
   a.studio.loadPreset('tidemark');
   await a.time.advance(700);
@@ -899,6 +1168,7 @@ for (const version of ['0.1', '0.3.0']) test(`a lost ${version} trial can reveal
   f.host.control.editFile(slotPath('dark'), legacy);
   await f.time.advance(550);
   await f.studio.start();
+  f.studio.setOverride(path, '#475e91');
   const saved = await f.studio.saveAs({ name: 'Legacy Refuge', variants: 'both' });
   const named = saved.paths.map((path) => f.workspace.files.get(path));
   assert.equal(lane(f.studio, 'dark').recovery, 'builtin');
@@ -1044,7 +1314,7 @@ test('all 62 built-ins carry unique full 24-token fingerprints; absence and ambi
 });
 
 for (const mode of ['borrow', 'slot']) {
-  test(`${mode}: saving an exact copy preserves live edits and reconnects after a panel remount`, async (t) => {
+  test(`${mode}: saving an exact copy pauses both indistinguishable selections, even after remount`, async (t) => {
     const a = fixture(t), { studio: s, host, workspace, time } = a;
     await s.start();
     colorful(s);
@@ -1052,74 +1322,31 @@ for (const mode of ['borrow', 'slot']) {
     else assert.equal((await s.prepareSlot(variant)).ok, true);
     await time.advance(550);
     const selected = mode === 'borrow' ? 'openchamber-light' : slotId(variant);
-    const connection = mode === 'borrow' ? 'tryon' : 'active';
     host.control.select(selected);
     const saved = await s.saveAs({ name: 'Identical colors', variants: [variant] });
     assert.ok(saved.ok);
-    assert.equal(lane(s).connection, connection);
-    if (mode === 'borrow') assert.equal(lane(s).borrowed.inUse, true);
+    assert.equal(lane(s).selectionBlocked, true);
     await time.advance(550);
-    const savedBytes = workspace.files.get(saved.paths[0]).content;
-    assert.equal(color(JSON.parse(savedBytes)), field(s));
+    const [work] = saved.files;
+    const original = [...workspace.files];
+    assert.equal(color(JSON.parse(workspace.files.get(work.path).content)), field(s));
     s.dispose();
     const b = fixture(t, { workspace, time, selected: { light: selected } });
     await b.studio.start();
-    await runMicrotasks();
     assert.equal(b.studio.getState().library.saved.length, 1);
-    assert.equal(lane(b.studio).connection, connection);
-    if (mode === 'borrow') assert.equal(lane(b.studio).borrowed.inUse, true);
-
-    b.studio.setOverride(path, '#864329');
-    await time.advance(160);
-    assert.equal(color(JSON.parse(raw(b))), '#864329');
-    assert.equal(lane(b.studio).sync, 'waiting');
-    b.studio.setOverride(path, '#86432a');
-    await time.advance(250);
-    assert.equal(color(JSON.parse(raw(b))), '#864329', 'queue only until the initial write is confirmed');
-    await time.advance(1150);
-    assert.equal(color(JSON.parse(raw(b))), '#86432a');
-    assert.equal(b.host.control.snapshot().theme.tokens.primary, '#86432a');
-    assert.equal(lane(b.studio).connection, connection);
-    assert.equal(lane(b.studio).sync, 'applied');
-    assert.equal(workspace.files.get(saved.paths[0]).content, savedBytes);
-  });
-
-  test(`${mode}: if the native picker selected the same-colored saved work, one missed probe stops further automatic writes`, async (t) => {
-    const f = fixture(t), { studio: s, host, time, workspace } = f;
-    await s.start();
-    colorful(s);
-    if (mode === 'borrow') await s.apply();
-    else await s.prepareSlot(variant);
-    await time.advance(550);
-    if (mode === 'slot') host.control.select(slotId(variant));
-    const report = await s.saveAs({ name: 'Selected saved work', variants: [variant] });
-    assert.ok(report.ok);
-    await time.advance(550);
-    const [saved] = report.files;
-    host.control.select(saved.id);
-    const originalColor = host.control.snapshot().theme.tokens.primary;
-    const count = host.control.writes.length;
-    s.setOverride(path, '#725378');
-    await time.advance(160);
-    assert.equal(host.control.writes.length, count + 1);
-    assert.equal(color(JSON.parse(raw(f))), '#725378');
-    assert.equal(lane(s).sync, 'waiting');
-    s.setOverride(path, '#626673');
-    await time.advance(1040);
-    assert.equal(host.control.snapshot().theme.tokens.primary, originalColor);
-    assert.equal(lane(s).sync, 'timeout');
-    assert.equal(s.getState().host.active.light.id, saved.id);
-    if (mode === 'borrow') assert.equal(lane(s).borrowed.inUse, false);
-    else assert.equal(lane(s).connection, 'idle');
-
-    s.setOverride(path, '#235779');
-    await time.advance(1200);
-    assert.equal(host.control.writes.length, count + 1);
-    assert.equal(color(JSON.parse(workspace.files.get(saved.path).content)), originalColor);
+    for (const [i, id] of [selected, work.id].entries()) {
+      b.host.control.select(id);
+      b.studio.setOverride(path, ['#725378', '#626673'][i]);
+      await time.advance(1500);
+      assert.equal(lane(b.studio).selectionBlocked, true);
+      assert.equal(b.studio.getState().host.active.light.reason, 'ambiguous');
+      assert.equal(b.host.control.writes.length, 0);
+      assert.deepEqual([...workspace.files], original, 'neither file nor its mtime changed');
+    }
   });
 }
 
-test('two saved names, export, import, load from my works and undo do not detach a matching borrowed slot', async (t) => {
+test('two saved names, export, import, load from my works and undo respect a matching borrowed slot without probing it', async (t) => {
   const { studio: s, host, workspace, time } = fixture(t);
   await s.start();
   colorful(s);
@@ -1130,7 +1357,7 @@ test('two saved names, export, import, load from my works and undo do not detach
   const second = await s.saveAs({ name: 'Second copy', variants: [variant] });
   assert.ok(first.ok && second.ok);
   assert.notEqual(first.paths[0], second.paths[0]);
-  assert.equal(lane(s).borrowed.inUse, true);
+  assert.equal(lane(s).selectionBlocked, true);
   await time.advance(550);
 
   const exported = await s.exportFiles({ variants: [variant] });
@@ -1138,23 +1365,23 @@ test('two saved names, export, import, load from my works and undo do not detach
   const text = workspace.files.get(exported.paths[0]).content;
   assert.ok(s.importText(text, 'export.json').ok);
   assert.equal(field(s), original);
-  assert.equal(lane(s).borrowed.inUse, true);
+  assert.equal(lane(s).selectionBlocked, true);
   assert.equal(await s.loadSaved(second.files[0].id), true);
   await time.advance(650);
-  assert.equal(lane(s).borrowed.inUse, true);
+  assert.equal(lane(s).selectionBlocked, true);
   s.undo();
   await time.advance(650);
   assert.equal(field(s), original);
-  assert.equal(lane(s).borrowed.inUse, true);
+  assert.equal(lane(s).selectionBlocked, true);
   s.setOverride(path, '#8c4760');
   await time.advance(650);
-  assert.equal(host.control.snapshot().theme.tokens.primary, '#8c4760');
-  assert.equal(lane(s).sync, 'applied');
+  assert.equal(field(s), '#8c4760', 'editor still changes');
+  assert.equal(host.control.snapshot().theme.tokens.primary, original);
   s.undo();
   await time.advance(650);
+  assert.equal(field(s), original);
   assert.equal(host.control.snapshot().theme.tokens.primary, original);
-  assert.equal(lane(s).borrowed.inUse, true);
-  assert.equal(lane(s).sync, 'applied');
+  assert.deepEqual(host.control.writes.map(({ path }) => path), [slotPath(variant), first.paths[0], second.paths[0], exported.paths[0]]);
 });
 
 test('a saved identical built-in never licenses borrowing; applying unchanged built-in colors cannot prove a visible update', async (t) => {
