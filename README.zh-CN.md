@@ -75,7 +75,7 @@
 
 需要 **OpenChamber 2.8.0 或更新版本**。已在 Linux 上的 2.8.0 桌面版（Electron）和网页版验证。
 
-1. 在 OpenChamber 打开 **设置 → 扩展**，把本仓库的 Git 地址粘贴到 **文件夹、ZIP 或 URL**：
+1. 在 OpenChamber 打开 **设置 → 扩展**，点 **添加扩展** 卡片，把本仓库的 Git 地址粘贴到 **文件夹、ZIP 或 URL**：
    ```text
    https://github.com/JMoCoder/openchamber-theme-studio
    ```

@@ -70,7 +70,7 @@ A style is not a theme. It is a recipe applied to the palette you picked, so the
 
 Requires **OpenChamber 2.8.0 or later**. It is verified on the 2.8.0 desktop app (Electron) and web app on Linux.
 
-1. In OpenChamber, open **Settings → Extensions** and paste this repository's Git URL into **Folder, ZIP, or URL**:
+1. In OpenChamber, open **Settings → Extensions**, click the **Add extension** card, and paste this repository's Git URL into **Folder, ZIP, or URL**:
    ```text
    https://github.com/JMoCoder/openchamber-theme-studio
    ```
