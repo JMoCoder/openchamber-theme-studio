@@ -1,0 +1,18 @@
+{
+  "name": "theme-studio-scoped-fs-probe",
+  "version": "0.1.0",
+  "private": true,
+  "openchamber": {
+    "apiVersion": 1,
+    "engines": { "openchamber": ">=2.8.0" },
+    "contributes": {
+      "panel": { "id": "theme-studio-scoped-fs-probe", "name": "Theme Studio Filesystem Probe", "icon": "palette", "entry": "index.html" },
+      "filesystem": [
+        "~/.config/openchamber/themes",
+        "~/.config/openchamber/themes/theme-studio-*.json",
+        "~/Downloads/openchamber-theme-studio-*.json",
+        "~/下载/openchamber-theme-studio-*.json"
+      ]
+    }
+  }
+}

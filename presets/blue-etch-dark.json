@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "theme-studio-blue-etch-dark",
+    "name": "蓝刻 · Blue Etch",
+    "variant": "dark",
+    "description": "淡蓝图纸用钴蓝刻线分区，冰青做注记；深版展开普鲁士蓝底。 Pale blueprint paper, cobalt seams, ice-cyan annotations, and Prussian blue after dark.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "blueprint",
+      "precision",
+      "night",
+      "dark"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#77d5eb",
+      "foreground": "#0a0f10",
+      "hover": "#83e1f7",
+      "active": "#91eaff",
+      "muted": "#77d5eb70"
+    },
+    "surface": {
+      "background": "#0b223a",
+      "foreground": "#f5faff",
+      "muted": "#0c223a",
+      "mutedForeground": "#a8c5e5",
+      "elevated": "#142e48",
+      "subtle": "#102a43"
+    },
+    "interactive": {
+      "border": "#3d6d9a",
+      "borderHover": "#557fa7",
+      "borderFocus": "#77d5eb",
+      "focus": "#77d5eb",
+      "focusRing": "#77d5ebdb",
+      "selection": "#023d4d",
+      "selectionForeground": "#f5faff",
+      "hover": "#f5faff1a",
+      "active": "#f5faff25"
+    },
+    "status": {
+      "error": "#ff8f8c",
+      "errorForeground": "#000000",
+      "errorBackground": "#ff8f8c20",
+      "errorBorder": "#ff8f8c4d",
+      "warning": "#fddf50",
+      "warningForeground": "#000000",
+      "warningBackground": "#fddf5020",
+      "warningBorder": "#fddf504d",
+      "success": "#7aec97",
+      "successForeground": "#000000",
+      "successBackground": "#7aec9720",
+      "successBorder": "#7aec974d",
+      "info": "#00c4ed",
+      "infoForeground": "#000000",
+      "infoBackground": "#00c4ed18",
+      "infoBorder": "#00c4ed4d"
+    },
+    "pr": {
+      "open": "#7aec97",
+      "draft": "#a8c5e5",
+      "blocked": "#fddf50",
+      "merged": "#4dc8b2",
+      "closed": "#ff8f8c"
+    },
+    "syntax": {
+      "base": {
+        "background": "#0a1f32",
+        "foreground": "#f5faff",
+        "comment": "#9bb7d7",
+        "keyword": "#93e4f7",
+        "string": "#69d6c4",
+        "number": "#fabf67",
+        "function": "#8cc7ff",
+        "variable": "#cbe3f1",
+        "type": "#a4d2ea",
+        "operator": "#9ec3e1"
+      },
+      "tokens": {
+        "punctuation": "#b6d3f3",
+        "variableProperty": "#a4d2ea",
+        "className": "#8cc7ff",
+        "stringEscape": "#f5faff"
+      },
+      "highlights": {
+        "diffAdded": "#81fab6",
+        "diffRemoved": "#ff7b77",
+        "diffModified": "#00c4ed",
+        "diffAddedBackground": "#81fab63c",
+        "diffRemovedBackground": "#ff7b771b",
+        "diffModifiedBackground": "#00c4ed1f",
+        "lineNumber": "#b6d3f3",
+        "lineNumberActive": "#f5faff"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#043a3d",
+      "divider": "#3d6d9a"
+    },
+    "markdown": {
+      "link": "#4dc8b2",
+      "linkHover": "#68e1ca",
+      "inlineCode": "#54ceb8",
+      "inlineCodeBackground": "#23494a",
+      "blockquote": "#a8c5e5",
+      "blockquoteBorder": "#4184a0",
+      "listMarker": "#4dc8b2",
+      "italic": "#f5faff"
+    },
+    "tools": {
+      "border": "#3d6d9a",
+      "icon": "#4dc8b2",
+      "title": "#f5faff",
+      "description": "#a8c5e5",
+      "edit": {
+        "addedBackground": "#81fab63c",
+        "removedBackground": "#ff7b771b",
+        "modifiedBackground": "#00c4ed1f",
+        "lineNumber": "#b6d3f3"
+      }
+    }
+  }
+}

@@ -1,0 +1,1521 @@
+[
+  {
+    "id": "aura",
+    "slug": "aura",
+    "name": "Aura",
+    "ids": [
+      "aura-dark",
+      "aura-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "aura-dark",
+        "name": "Aura",
+        "key": "[\"#1c1b21\",\"#e9e9ea\",\"#88878b\",\"#18171d\",\"#ffffff0c\",\"#ffffff0f\",\"#47454bb6\",\"#cdbefb\",\"#a277ff\",\"#e9e9ea\",\"#ffffff13\",\"#000000\",\"#61ffca\",\"#ffca85\",\"#ff6767\",\"#82e2ff\",\"#a277ff\",\"#61ffca\",\"#ff6767\",\"#82e2ff\",\"#61ffca\",\"#6d6a7e\",\"#fdfdfd\",\"#c9c8ca\"]",
+        "source": "aura-dark.json",
+        "swatches": {
+          "canvas": "#121117",
+          "primary": "#a277ff",
+          "elevated": "#1c1b21",
+          "sidebar": "#0c0b11",
+          "edge": "#ffffff0c",
+          "syntax": [
+            "#0e0d13",
+            "#6d6a7e",
+            "#a277ff",
+            "#61ffca"
+          ]
+        }
+      },
+      "light": {
+        "id": "aura-light",
+        "name": "Aura",
+        "key": "[\"#ede9f5\",\"#2e273b\",\"#605a71\",\"#f0edf8\",\"#00000013\",\"#0000000a\",\"#dfdce9\",\"#cdbefe\",\"#7557b7\",\"#2e273b\",\"#00000014\",\"#ffffff\",\"#087846\",\"#8b6113\",\"#ad0620\",\"#356ba6\",\"#7b5ae0\",\"#2b8a57\",\"#d94f4f\",\"#2f78b8\",\"#2b8a57\",\"#8d88a3\",\"#170e28\",\"#271f39\"]",
+        "source": "aura-light.json",
+        "swatches": {
+          "canvas": "#f6f3fe",
+          "primary": "#7557b7",
+          "elevated": "#ede9f5",
+          "sidebar": "#f1eef9",
+          "edge": "#00000013",
+          "syntax": [
+            "#fdfaff",
+            "#8d88a3",
+            "#7b5ae0",
+            "#2b8a57"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "aurora",
+    "slug": "aurora",
+    "name": "Aurora",
+    "ids": [
+      "aurora-dark",
+      "aurora-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "aurora-dark",
+        "name": "Aurora",
+        "key": "[\"#181b1b\",\"#e8ecec\",\"#848b8b\",\"#1c2323\",\"#2b32326e\",\"#f6f9f908\",\"#99a0a033\",\"#239d6a66\",\"#239d6a\",\"#e8ecec\",\"#252c2cb9\",\"#0c1313\",\"#6bce71\",\"#e2a85c\",\"#df746d\",\"#67abe5\",\"#5cc692\",\"#e5a788\",\"#76b1e3\",\"#dcc99a\",\"#82ccd7\",\"#6a7070\",\"#ced2d2\",\"#939a9a\"]",
+        "source": "aurora-dark.json",
+        "swatches": {
+          "canvas": "#131515",
+          "primary": "#239d6a",
+          "elevated": "#181b1b",
+          "sidebar": "#090f0f",
+          "edge": "#2b32326e",
+          "syntax": [
+            "#6a7070",
+            "#5cc692",
+            "#e5a788",
+            "#76b1e3"
+          ]
+        }
+      },
+      "light": {
+        "id": "aurora-light",
+        "name": "Aurora",
+        "key": "[\"#f0f3f1\",\"#342e29\",\"#6d6761\",\"#f5f3f2\",\"#e5e1debf\",\"#312d290a\",\"#a59b902b\",\"#063e2a55\",\"#063e2a\",\"#342e29\",\"#312d2914\",\"#ffffff\",\"#507308\",\"#975d04\",\"#b63b32\",\"#1b69ad\",\"#006e44\",\"#a94d1c\",\"#156ba6\",\"#786914\",\"#246e7e\",\"#918b85\",\"#48423d\",\"#67625f\"]",
+        "source": "aurora-light.json",
+        "swatches": {
+          "canvas": "#fdfcfa",
+          "primary": "#063e2a",
+          "elevated": "#f0f3f1",
+          "sidebar": "#f4f7f5",
+          "edge": "#e5e1debf",
+          "syntax": [
+            "#f5f7fa",
+            "#918b85",
+            "#006e44",
+            "#a94d1c"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "ayu",
+    "slug": "ayu",
+    "name": "Ayu",
+    "ids": [
+      "ayu-dark",
+      "ayu-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "ayu-dark",
+        "name": "Ayu",
+        "key": "[\"#151a1f\",\"#e7e7e9\",\"#81868b\",\"#11161b\",\"#ffffff0c\",\"#ffffff0f\",\"#3c4147c9\",\"#7dd6fc\",\"#3fb7e3\",\"#e7e7e9\",\"#ffffff14\",\"#000000\",\"#78d05c\",\"#e4a75c\",\"#f58572\",\"#66c6f1\",\"#ff8f40\",\"#aad94c\",\"#d2a6ff\",\"#ffb454\",\"#59c2ff\",\"#5a6673\",\"#fbfbfc\",\"#b3b7bc\"]",
+        "source": "ayu-dark.json",
+        "swatches": {
+          "canvas": "#0b1015",
+          "primary": "#3fb7e3",
+          "elevated": "#151a1f",
+          "sidebar": "#06090d",
+          "edge": "#ffffff0c",
+          "syntax": [
+            "#080d12",
+            "#5a6673",
+            "#ff8f40",
+            "#aad94c"
+          ]
+        }
+      },
+      "light": {
+        "id": "ayu-light",
+        "name": "Ayu",
+        "key": "[\"#f5f4ed\",\"#273038\",\"#5c6570\",\"#f7f5ef\",\"#00000013\",\"#0000000a\",\"#e8eae3\",\"#73d8fc\",\"#1b7793\",\"#273038\",\"#00000014\",\"#ffffff\",\"#157f3f\",\"#996219\",\"#c21f38\",\"#147794\",\"#c76a1a\",\"#6f8f00\",\"#a37acc\",\"#b87500\",\"#227fc0\",\"#6e7681\",\"#2b3540\",\"#3d4752\"]",
+        "source": "ayu-light.json",
+        "swatches": {
+          "canvas": "#fdfbf5",
+          "primary": "#1b7793",
+          "elevated": "#f5f4ed",
+          "sidebar": "#f8f6f1",
+          "edge": "#00000013",
+          "syntax": [
+            "#fefcf6",
+            "#6e7681",
+            "#c76a1a",
+            "#6f8f00"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "carbonfox",
+    "slug": "carbonfox",
+    "name": "Carbonfox",
+    "ids": [
+      "carbonfox-dark",
+      "carbonfox-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "carbonfox-dark",
+        "name": "Carbonfox",
+        "key": "[\"#2f2f2f\",\"#ffffff\",\"#999a9c\",\"#2e2e2e\",\"#ffffff0b\",\"#ffffff0d\",\"#5b5c5b97\",\"#adcafa\",\"#33b1ff\",\"#ffffff\",\"#ffffff12\",\"#000000\",\"#42be65\",\"#f1c21b\",\"#ff8389\",\"#78a9ff\",\"#be95ff\",\"#42be65\",\"#ff8389\",\"#33b1ff\",\"#f1c21b\",\"#6f6f6f\",\"#fefefe\",\"#ced0d3\"]",
+        "source": "carbonfox-dark.json",
+        "swatches": {
+          "canvas": "#292929",
+          "primary": "#33b1ff",
+          "elevated": "#2f2f2f",
+          "sidebar": "#252525",
+          "edge": "#ffffff0b",
+          "syntax": [
+            "#252525",
+            "#6f6f6f",
+            "#be95ff",
+            "#42be65"
+          ]
+        }
+      },
+      "light": {
+        "id": "carbonfox-light",
+        "name": "Carbonfox",
+        "key": "[\"#e4e4e4\",\"#262626\",\"#5a5a5a\",\"#e8e8e8\",\"#00000013\",\"#0000000a\",\"#d5d5d5\",\"#accaff\",\"#1159e3\",\"#262626\",\"#00000014\",\"#ffffff\",\"#105223\",\"#7a6211\",\"#980313\",\"#0c42a8\",\"#8a3ffc\",\"#198038\",\"#da1e28\",\"#0f62fe\",\"#8a5f00\",\"#6f6f6f\",\"#070707\",\"#151515\"]",
+        "source": "carbonfox-light.json",
+        "swatches": {
+          "canvas": "#eeeeee",
+          "primary": "#1159e3",
+          "elevated": "#e4e4e4",
+          "sidebar": "#e9e9e9",
+          "edge": "#00000013",
+          "syntax": [
+            "#f8f8f8",
+            "#6f6f6f",
+            "#8a3ffc",
+            "#198038"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "catppuccin",
+    "slug": "catppuccin",
+    "name": "Catppuccin",
+    "ids": [
+      "catppuccin-dark",
+      "catppuccin-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "catppuccin-dark",
+        "name": "Catppuccin",
+        "key": "[\"#181825\",\"#cdd6f4\",\"#a6adc8\",\"#181825\",\"#7f849c19\",\"#cdd6f412\",\"#313244\",\"#cba6f7\",\"#cba6f7\",\"#cdd6f4\",\"#cdd6f41f\",\"#11111b\",\"#a6e3a1\",\"#fab387\",\"#f38ba8\",\"#89b4fa\",\"#cba6f7\",\"#a6e3a1\",\"#fab387\",\"#89b4fa\",\"#f9e2af\",\"#9399b2\",\"#cdd6f4\",\"#94e2d5\"]",
+        "source": "catppuccin-dark.json",
+        "swatches": {
+          "canvas": "#1e1e2e",
+          "primary": "#cba6f7",
+          "elevated": "#181825",
+          "sidebar": "#181825",
+          "edge": "#7f849c19",
+          "syntax": [
+            "#1e1e2e",
+            "#9399b2",
+            "#cba6f7",
+            "#a6e3a1"
+          ]
+        }
+      },
+      "light": {
+        "id": "catppuccin-light",
+        "name": "Catppuccin",
+        "key": "[\"#e5e7eb\",\"#4c4f69\",\"#616274\",\"#e6e9ef\",\"#66677023\",\"#0000000a\",\"#ccd0da\",\"#8839ef\",\"#7130c7\",\"#4c4f69\",\"#00000014\",\"#ffffff\",\"#2f7520\",\"#af4508\",\"#cb0f37\",\"#1850c1\",\"#8839ef\",\"#40a02b\",\"#fe640b\",\"#1e66f5\",\"#df8e1d\",\"#7c7f93\",\"#4c4f69\",\"#179299\"]",
+        "source": "catppuccin-light.json",
+        "swatches": {
+          "canvas": "#eff1f5",
+          "primary": "#7130c7",
+          "elevated": "#e5e7eb",
+          "sidebar": "#e9ebef",
+          "edge": "#66677023",
+          "syntax": [
+            "#eceef2",
+            "#7c7f93",
+            "#8839ef",
+            "#40a02b"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "cursor",
+    "slug": "cursor",
+    "name": "Cursor",
+    "ids": [
+      "cursor-dark",
+      "cursor-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "cursor-dark",
+        "name": "Cursor Dark",
+        "key": "[\"#232323\",\"#f1f1f2\",\"#8e8e8e\",\"#141414\",\"#8484841a\",\"#ffffff0f\",\"#ffffff1d\",\"#4c9df399\",\"#4c9df3\",\"#f1f1f2\",\"#ffffff1a\",\"#191c22\",\"#a3be8c\",\"#ebcb8b\",\"#c6747b\",\"#81a1c1\",\"#83d6c5\",\"#e394dc\",\"#ebc88d\",\"#ebc88d\",\"#efb080\",\"#6d6d6d\",\"#94c1fa\",\"#d6d6dd\"]",
+        "source": "cursor-dark.json",
+        "swatches": {
+          "canvas": "#1a1a1a",
+          "primary": "#4c9df3",
+          "elevated": "#232323",
+          "sidebar": "#151515",
+          "edge": "#8484841a",
+          "syntax": [
+            "#181818",
+            "#6d6d6d",
+            "#83d6c5",
+            "#e394dc"
+          ]
+        }
+      },
+      "light": {
+        "id": "cursor-light",
+        "name": "Cursor Light",
+        "key": "[\"#f2f2f2\",\"#2b2f35\",\"#66696f\",\"#f6f6f6\",\"#5058601e\",\"#0000000a\",\"#e1e1e1\",\"#2567a8b3\",\"#2567a8\",\"#2b2f35\",\"#00000014\",\"#ffffff\",\"#467037\",\"#806015\",\"#a3424b\",\"#315d9b\",\"#126b63\",\"#894487\",\"#815c22\",\"#815c22\",\"#965528\",\"#656b70\",\"#265f9e\",\"#4a4e55\"]",
+        "source": "cursor-light.json",
+        "swatches": {
+          "canvas": "#FCFCFC",
+          "primary": "#2567A8",
+          "elevated": "#f2f2f2",
+          "sidebar": "#f6f6f6",
+          "edge": "#5058601e",
+          "syntax": [
+            "#f9f9f9",
+            "#656B70",
+            "#126B63",
+            "#894487"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "dracula",
+    "slug": "dracula",
+    "name": "Dracula",
+    "ids": [
+      "dracula-dark",
+      "dracula-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "dracula-dark",
+        "name": "Dracula",
+        "key": "[\"#1c2029\",\"#eeeef0\",\"#8a8b8a\",\"#1b1d26\",\"#ffffff0c\",\"#ffffff0e\",\"#4650559f\",\"#d3bcfa\",\"#bd93f9\",\"#eeeef0\",\"#ffffff13\",\"#000000\",\"#50fa7b\",\"#ffb86c\",\"#ff5555\",\"#8be9fd\",\"#ff79c6\",\"#f1fa8c\",\"#bd93f9\",\"#50fa7b\",\"#fed7b1\",\"#6272a4\",\"#fefefe\",\"#d4d4ce\"]",
+        "source": "dracula-dark.json",
+        "swatches": {
+          "canvas": "#151720",
+          "primary": "#bd93f9",
+          "elevated": "#1c2029",
+          "sidebar": "#12121b",
+          "edge": "#ffffff0c",
+          "syntax": [
+            "#11131c",
+            "#6272a4",
+            "#ff79c6",
+            "#f1fa8c"
+          ]
+        }
+      },
+      "light": {
+        "id": "dracula-light",
+        "name": "Dracula",
+        "key": "[\"#eeefe9\",\"#2c2c36\",\"#5f5f6a\",\"#f3f3ee\",\"#00000013\",\"#0000000a\",\"#dee1db\",\"#c2c2fd\",\"#6957d7\",\"#2c2c36\",\"#00000014\",\"#ffffff\",\"#167a46\",\"#9e5a04\",\"#ad1446\",\"#366da9\",\"#d16090\",\"#596600\",\"#7c6bf5\",\"#2f8f57\",\"#824a05\",\"#7d7f97\",\"#0c0b1a\",\"#1b1b2b\"]",
+        "source": "dracula-light.json",
+        "swatches": {
+          "canvas": "#f9f9f4",
+          "primary": "#6957d7",
+          "elevated": "#eeefe9",
+          "sidebar": "#f3f4ee",
+          "edge": "#00000013",
+          "syntax": [
+            "#fcfcf7",
+            "#7d7f97",
+            "#d16090",
+            "#596600"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "everforest",
+    "slug": "everforest",
+    "name": "Everforest",
+    "ids": [
+      "everforest-dark",
+      "everforest-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "everforest-dark",
+        "name": "Everforest",
+        "key": "[\"#222c32\",\"#fffefc\",\"#8f978e\",\"#222a30\",\"#ffffff0b\",\"#ffffff0d\",\"#3e5151c5\",\"#bad492\",\"#a7c080\",\"#fffefc\",\"#ffffff12\",\"#000000\",\"#a7c080\",\"#e69875\",\"#e67e80\",\"#83afe0\",\"#d699b6\",\"#a7c080\",\"#e69875\",\"#a7c080\",\"#dbbc7f\",\"#7a8478\",\"#e67e80\",\"#83c092\"]",
+        "source": "everforest-dark.json",
+        "swatches": {
+          "canvas": "#1c252b",
+          "primary": "#a7c080",
+          "elevated": "#222c32",
+          "sidebar": "#1a2127",
+          "edge": "#ffffff0b",
+          "syntax": [
+            "#192228",
+            "#7a8478",
+            "#d699b6",
+            "#a7c080"
+          ]
+        }
+      },
+      "light": {
+        "id": "everforest-light",
+        "name": "Everforest",
+        "key": "[\"#f5f2e2\",\"#232e35\",\"#656b62\",\"#f7f2e2\",\"#00000013\",\"#0000000a\",\"#e9e8d5\",\"#bfd747\",\"#65740b\",\"#232e35\",\"#00000014\",\"#ffffff\",\"#66731b\",\"#ad5410\",\"#c4222a\",\"#366eaa\",\"#df69ba\",\"#8da101\",\"#f57d26\",\"#8da101\",\"#dfa000\",\"#a6b0a0\",\"#f85552\",\"#35a77c\"]",
+        "source": "everforest-light.json",
+        "swatches": {
+          "canvas": "#fdf8e8",
+          "primary": "#65740b",
+          "elevated": "#f5f2e2",
+          "sidebar": "#f7f3e4",
+          "edge": "#00000013",
+          "syntax": [
+            "#fffcec",
+            "#a6b0a0",
+            "#df69ba",
+            "#8da101"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "fields-of-the-shire",
+    "slug": "fields-of-the-shire",
+    "name": "Fields of the Shire",
+    "ids": [
+      "fields-of-the-shire-dark",
+      "fields-of-the-shire-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "fields-of-the-shire-dark",
+        "name": "Fields of the Shire",
+        "key": "[\"#24211e\",\"#f9eedf\",\"#948b7c\",\"#282320\",\"#2e2b28d4\",\"#ffffff0f\",\"#f0e6d81f\",\"#8090624d\",\"#809062\",\"#f9eedf\",\"#ffffff1a\",\"#0c0a08\",\"#7f905e\",\"#c47a3a\",\"#c47466\",\"#798d99\",\"#5a6d7a\",\"#93a56b\",\"#c47a3a\",\"#c47a3a\",\"#7a8a5a\",\"#6a5e52\",\"#e9decf\",\"#a89888\"]",
+        "source": "fields-of-the-shire-dark.json",
+        "swatches": {
+          "canvas": "#1b1815",
+          "primary": "#809062",
+          "elevated": "#24211e",
+          "sidebar": "#161311",
+          "edge": "#2e2b28d4",
+          "syntax": [
+            "#191613",
+            "#6a5e52",
+            "#5a6d7a",
+            "#93a56b"
+          ]
+        }
+      },
+      "light": {
+        "id": "fields-of-the-shire-light",
+        "name": "Fields of the Shire",
+        "key": "[\"#efebe2\",\"#302a21\",\"#6c6459\",\"#f1ece1\",\"#1a161215\",\"#0000000a\",\"#1a16121a\",\"#4a603040\",\"#4a6030\",\"#302a21\",\"#00000014\",\"#faf8f5\",\"#4a6030\",\"#8c5520\",\"#a24d3f\",\"#3d4f5a\",\"#3d4f5a\",\"#5e773f\",\"#8c5520\",\"#8c5520\",\"#4a6030\",\"#8a7e72\",\"#514a40\",\"#5a5048\"]",
+        "source": "fields-of-the-shire-light.json",
+        "swatches": {
+          "canvas": "#f9f5eb",
+          "primary": "#4a6030",
+          "elevated": "#efebe2",
+          "sidebar": "#f3efe5",
+          "edge": "#1a161215",
+          "syntax": [
+            "#f6f2e8",
+            "#8a7e72",
+            "#3d4f5a",
+            "#5e773f"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "flexoki",
+    "slug": "flexoki",
+    "name": "Flexoki",
+    "ids": [
+      "flexoki-dark",
+      "flexoki-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "flexoki-dark",
+        "name": "Flexoki",
+        "key": "[\"#201e1e\",\"#eeece3\",\"#8b8a83\",\"#1e1d1c\",\"#2b2a28d4\",\"#ffffff0f\",\"#f4f4f41f\",\"#da702c50\",\"#da702c\",\"#eeece3\",\"#ffffff1a\",\"#171515\",\"#a0af54\",\"#da702c\",\"#d76459\",\"#4d8cc1\",\"#4385be\",\"#3aa99f\",\"#8b7ec8\",\"#da702c\",\"#d0a215\",\"#878580\",\"#dedcd3\",\"#d14d41\"]",
+        "source": "flexoki-dark.json",
+        "swatches": {
+          "canvas": "#171515",
+          "primary": "#DA702C",
+          "elevated": "#201e1e",
+          "sidebar": "#121111",
+          "edge": "#2b2a28d4",
+          "syntax": [
+            "#151313",
+            "#878580",
+            "#4385BE",
+            "#3AA99F"
+          ]
+        }
+      },
+      "light": {
+        "id": "flexoki-light",
+        "name": "Flexoki",
+        "key": "[\"#f5f3ea\",\"#32302a\",\"#6a6962\",\"#f7f4ec\",\"#e6e4db\",\"#0000000a\",\"#76736f30\",\"#b54f1440\",\"#b54f14\",\"#32302a\",\"#00000014\",\"#fffdf4\",\"#5e760a\",\"#b54f14\",\"#af3029\",\"#205ea6\",\"#205ea6\",\"#24837b\",\"#5e409d\",\"#bc5215\",\"#ad8301\",\"#6f6e69\",\"#494741\",\"#af3029\"]",
+        "source": "flexoki-light.json",
+        "swatches": {
+          "canvas": "#fffdf4",
+          "primary": "#b54f14",
+          "elevated": "#f5f3ea",
+          "sidebar": "#f9f7ee",
+          "edge": "#e6e4db",
+          "syntax": [
+            "#fcfaf1",
+            "#6F6E69",
+            "#205EA6",
+            "#24837B"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "github",
+    "slug": "github",
+    "name": "GitHub",
+    "ids": [
+      "github-dark",
+      "github-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "github-dark",
+        "name": "GitHub",
+        "key": "[\"#13171e\",\"#e5e6e8\",\"#7d848e\",\"#10141a\",\"#ffffff0d\",\"#ffffff0f\",\"#373d44d8\",\"#a3cdfe\",\"#58a6ff\",\"#e5e6e8\",\"#ffffff15\",\"#000000\",\"#3fb950\",\"#e3b341\",\"#f85149\",\"#83afe0\",\"#ff7b72\",\"#39c5cf\",\"#58a6ff\",\"#bc8cff\",\"#d29922\",\"#8b949e\",\"#d29922\",\"#ff7b72\"]",
+        "source": "github-dark.json",
+        "swatches": {
+          "canvas": "#0a0e14",
+          "primary": "#58a6ff",
+          "elevated": "#13171e",
+          "sidebar": "#05070c",
+          "edge": "#ffffff0d",
+          "syntax": [
+            "#070b11",
+            "#8b949e",
+            "#ff7b72",
+            "#39c5cf"
+          ]
+        }
+      },
+      "light": {
+        "id": "github-light",
+        "name": "GitHub",
+        "key": "[\"#f5f5f4\",\"#2e3135\",\"#5c646e\",\"#f9f9f9\",\"#00000013\",\"#0000000a\",\"#e7e7e6\",\"#a9cbfd\",\"#0f69d8\",\"#2e3135\",\"#00000014\",\"#ffffff\",\"#105122\",\"#664407\",\"#8f0617\",\"#09448f\",\"#cf222e\",\"#0969da\",\"#1b7c83\",\"#8250df\",\"#bc4c00\",\"#57606a\",\"#bc4c00\",\"#cf222e\"]",
+        "source": "github-light.json",
+        "swatches": {
+          "canvas": "#ffffff",
+          "primary": "#0f69d8",
+          "elevated": "#f5f5f4",
+          "sidebar": "#fafaf9",
+          "edge": "#00000013",
+          "syntax": [
+            "#fcfcfc",
+            "#57606a",
+            "#cf222e",
+            "#0969da"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "gruvbox",
+    "slug": "gruvbox",
+    "name": "Gruvbox",
+    "ids": [
+      "gruvbox-dark",
+      "gruvbox-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "gruvbox-dark",
+        "name": "Gruvbox",
+        "key": "[\"#272623\",\"#f8f7f3\",\"#9b9074\",\"#252423\",\"#ffffff0b\",\"#ffffff0e\",\"#514d43b4\",\"#aed2c4\",\"#83a598\",\"#f8f7f3\",\"#ffffff12\",\"#000000\",\"#b8bb26\",\"#fabd2f\",\"#fb533f\",\"#83afe0\",\"#fb4934\",\"#e6ea0d\",\"#d3869b\",\"#83a598\",\"#fdd995\",\"#928374\",\"#fdfbf7\",\"#c7b892\"]",
+        "source": "gruvbox-dark.json",
+        "swatches": {
+          "canvas": "#1f1e1d",
+          "primary": "#83a598",
+          "elevated": "#272623",
+          "sidebar": "#1a1a1a",
+          "edge": "#ffffff0b",
+          "syntax": [
+            "#1c1b1a",
+            "#928374",
+            "#fb4934",
+            "#e6ea0d"
+          ]
+        }
+      },
+      "light": {
+        "id": "gruvbox-light",
+        "name": "Gruvbox",
+        "key": "[\"#f4eccf\",\"#2e2a23\",\"#615d58\",\"#f6efd2\",\"#00000013\",\"#0000000a\",\"#e8dfc5\",\"#83d8ed\",\"#12697a\",\"#2e2a23\",\"#00000014\",\"#ffffff\",\"#4f4c0c\",\"#805104\",\"#650304\",\"#013d48\",\"#9d0006\",\"#605c10\",\"#8f3f71\",\"#076678\",\"#7a4f0e\",\"#928374\",\"#211d1b\",\"#322e2c\"]",
+        "source": "gruvbox-light.json",
+        "swatches": {
+          "canvas": "#fcf5d7",
+          "primary": "#12697a",
+          "elevated": "#f4eccf",
+          "sidebar": "#f8f0d3",
+          "edge": "#00000013",
+          "syntax": [
+            "#fffddf",
+            "#928374",
+            "#9d0006",
+            "#605c10"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "jetbrains",
+    "slug": "jetbrains",
+    "name": "JetBrains",
+    "ids": [
+      "jetbrains-dark",
+      "jetbrains-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "jetbrains-dark",
+        "name": "JetBrains",
+        "key": "[\"#27282b\",\"#f6f8fc\",\"#90939a\",\"#28292c\",\"#303238b8\",\"#ffffff0f\",\"#43454a\",\"#6796f550\",\"#6796f5\",\"#f6f8fc\",\"#ffffff1a\",\"#1e1f22\",\"#639d69\",\"#f2c55c\",\"#fa6675\",\"#4199c8\",\"#cf8e6d\",\"#6aab73\",\"#2aacb8\",\"#6aa2d7\",\"#a6bb77\",\"#7a7e85\",\"#e5e7eb\",\"#e5e7eb\"]",
+        "source": "jetbrains-dark.json",
+        "swatches": {
+          "canvas": "#1E1F22",
+          "primary": "#6796f5",
+          "elevated": "#27282b",
+          "sidebar": "#18191b",
+          "edge": "#303238b8",
+          "syntax": [
+            "#1b1c1f",
+            "#7A7E85",
+            "#CF8E6D",
+            "#6AAB73"
+          ]
+        }
+      },
+      "light": {
+        "id": "jetbrains-light",
+        "name": "JetBrains",
+        "key": "[\"#f5f5f5\",\"#2f3134\",\"#696a6f\",\"#f5f8fd\",\"#dde0eadc\",\"#0000000a\",\"#dfe1e5\",\"#0055ff40\",\"#195ce3\",\"#2f3134\",\"#00000014\",\"#ffffff\",\"#077d18\",\"#9d620a\",\"#ce0606\",\"#29769f\",\"#0033b3\",\"#067d17\",\"#1750eb\",\"#00627a\",\"#a04908\",\"#8c8c8c\",\"#45474b\",\"#45474b\"]",
+        "source": "jetbrains-light.json",
+        "swatches": {
+          "canvas": "#FFF",
+          "primary": "#195ce3",
+          "elevated": "#f5f5f5",
+          "sidebar": "#f9f9f9",
+          "edge": "#dde0eadc",
+          "syntax": [
+            "#fcfcfc",
+            "#8C8C8C",
+            "#0033B3",
+            "#067D17"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "kanagawa",
+    "slug": "kanagawa",
+    "name": "Kanagawa",
+    "ids": [
+      "kanagawa-dark",
+      "kanagawa-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "kanagawa-dark",
+        "name": "Kanagawa",
+        "key": "[\"#221e28\",\"#efeeed\",\"#8a8a83\",\"#1d1c24\",\"#ffffff0c\",\"#ffffff0e\",\"#4f414ac7\",\"#afc9fd\",\"#7e9cd8\",\"#efeeed\",\"#ffffff13\",\"#000000\",\"#98bb6c\",\"#d7a657\",\"#ed5252\",\"#83afe0\",\"#957fb8\",\"#98bb6c\",\"#d7a657\",\"#7e9cd8\",\"#c38d9d\",\"#727169\",\"#dcd7ba\",\"#d27e99\"]",
+        "source": "kanagawa-dark.json",
+        "swatches": {
+          "canvas": "#17161e",
+          "primary": "#7E9CD8",
+          "elevated": "#221e28",
+          "sidebar": "#111119",
+          "edge": "#ffffff0c",
+          "syntax": [
+            "#14131b",
+            "#727169",
+            "#957FB8",
+            "#98BB6C"
+          ]
+        }
+      },
+      "light": {
+        "id": "kanagawa-light",
+        "name": "Kanagawa",
+        "key": "[\"#ede5db\",\"#31231a\",\"#64635e\",\"#eee7dd\",\"#00000013\",\"#0000000a\",\"#e2dad0\",\"#a6cfed\",\"#326384\",\"#31231a\",\"#00000014\",\"#ffffff\",\"#456114\",\"#8e4e14\",\"#a40d11\",\"#073652\",\"#624c83\",\"#6f894e\",\"#cc6d00\",\"#2d4f67\",\"#b35b79\",\"#8a8980\",\"#54433a\",\"#735896\"]",
+        "source": "kanagawa-light.json",
+        "swatches": {
+          "canvas": "#f4ede3",
+          "primary": "#326384",
+          "elevated": "#ede5db",
+          "sidebar": "#efe8df",
+          "edge": "#00000013",
+          "syntax": [
+            "#fdf8ee",
+            "#8a8980",
+            "#624c83",
+            "#6f894e"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "material",
+    "slug": "material",
+    "name": "Material",
+    "ids": [
+      "material-dark",
+      "material-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "material-dark",
+        "name": "Material",
+        "key": "[\"#212c31\",\"#fcfeff\",\"#85989f\",\"#202a2f\",\"#ffffff0b\",\"#ffffff0d\",\"#4e5b6094\",\"#80d6f9\",\"#82aaff\",\"#fcfeff\",\"#ffffff12\",\"#000000\",\"#c3e88d\",\"#ffcb6b\",\"#f07178\",\"#83afe0\",\"#c792ea\",\"#c3e88d\",\"#ffcb6b\",\"#82aaff\",\"#ffcb6b\",\"#546e7a\",\"#eeffff\",\"#89ddff\"]",
+        "source": "material-dark.json",
+        "swatches": {
+          "canvas": "#1a252a",
+          "primary": "#82aaff",
+          "elevated": "#212c31",
+          "sidebar": "#162126",
+          "edge": "#ffffff0b",
+          "syntax": [
+            "#162126",
+            "#546e7a",
+            "#c792ea",
+            "#c3e88d"
+          ]
+        }
+      },
+      "light": {
+        "id": "material-light",
+        "name": "Material",
+        "key": "[\"#f1f1f0\",\"#263033\",\"#5f6c72\",\"#f4f4f4\",\"#00000013\",\"#0000000a\",\"#e3e3e2\",\"#65dee7\",\"#19787f\",\"#263033\",\"#00000014\",\"#ffffff\",\"#537702\",\"#8f6510\",\"#aa0d15\",\"#12787f\",\"#7c4dff\",\"#91b859\",\"#f4511e\",\"#6182b8\",\"#ffb300\",\"#90a4ae\",\"#263238\",\"#39adb5\"]",
+        "source": "material-light.json",
+        "swatches": {
+          "canvas": "#fafafa",
+          "primary": "#19787f",
+          "elevated": "#f1f1f0",
+          "sidebar": "#f5f5f5",
+          "edge": "#00000013",
+          "syntax": [
+            "#fcfcfc",
+            "#90a4ae",
+            "#7c4dff",
+            "#91b859"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "mono",
+    "slug": "mono",
+    "name": "Mono",
+    "ids": [
+      "mono-dark",
+      "mono-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "mono-dark",
+        "name": "Mono",
+        "key": "[\"#141414\",\"#dddddd\",\"#828282\",\"#1a1a1a\",\"#232323c6\",\"#ffffff0f\",\"#ffffff1f\",\"#ffffff50\",\"#ffffff\",\"#dddddd\",\"#ffffff1a\",\"#000000\",\"#e5e5e5\",\"#999999\",\"#666666\",\"#a6a6a6\",\"#ffffff\",\"#b3b3b3\",\"#999999\",\"#d0d0d0\",\"#d9d9d9\",\"#666666\",\"#cccccc\",\"#808080\"]",
+        "source": "mono-dark.json",
+        "swatches": {
+          "canvas": "#000000",
+          "primary": "#FFFFFF",
+          "elevated": "#141414",
+          "sidebar": "#0A0A0A",
+          "edge": "#232323c6",
+          "syntax": [
+            "#050505",
+            "#666666",
+            "#FFFFFF",
+            "#B3B3B3"
+          ]
+        }
+      },
+      "light": {
+        "id": "mono-light",
+        "name": "Mono",
+        "key": "[\"#f5f5f5\",\"#313131\",\"#656565\",\"#f0f0f0\",\"#e3e3e3f2\",\"#0000000a\",\"#00000015\",\"#00000040\",\"#000000\",\"#313131\",\"#00000014\",\"#ffffff\",\"#1a1a1a\",\"#666666\",\"#999999\",\"#595959\",\"#000000\",\"#4d4d4d\",\"#666666\",\"#454545\",\"#262626\",\"#999999\",\"#333333\",\"#808080\"]",
+        "source": "mono-light.json",
+        "swatches": {
+          "canvas": "#FFFFFF",
+          "primary": "#000000",
+          "elevated": "#f5f5f5",
+          "sidebar": "#f9f9f9",
+          "edge": "#e3e3e3f2",
+          "syntax": [
+            "#fcfcfc",
+            "#999999",
+            "#000000",
+            "#4D4D4D"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "mono-plus",
+    "slug": "mono-plus",
+    "name": "Mono Plus",
+    "ids": [
+      "mono-plus-dark",
+      "mono-plus-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "mono-plus-dark",
+        "name": "Mono Plus",
+        "key": "[\"#141414\",\"#dddddd\",\"#828282\",\"#1a1a1a\",\"#232323c6\",\"#ffffff0f\",\"#ffffff1f\",\"#ffffff50\",\"#a2bee8\",\"#dddddd\",\"#ffffff1a\",\"#000000\",\"#6a8e6a\",\"#9e8a6a\",\"#a47373\",\"#6d80a0\",\"#dccdbeff\",\"#b6d8e6ff\",\"#e3bdadff\",\"#a2bee8\",\"#edcbb8ff\",\"#8c8c8c\",\"#cecece\",\"#dccdbeff\"]",
+        "source": "mono-plus-dark.json",
+        "swatches": {
+          "canvas": "#000000",
+          "primary": "#a2bee8",
+          "elevated": "#141414",
+          "sidebar": "#0A0A0A",
+          "edge": "#232323c6",
+          "syntax": [
+            "#050505",
+            "#8c8c8c",
+            "#dccdbeff",
+            "#b6d8e6ff"
+          ]
+        }
+      },
+      "light": {
+        "id": "mono-plus-light",
+        "name": "Mono Plus",
+        "key": "[\"#f5f5f5\",\"#313131\",\"#6a6a6a\",\"#f0f0f0\",\"#e3e3e3f2\",\"#0000000a\",\"#00000015\",\"#00000040\",\"#4a6a9e\",\"#313131\",\"#00000014\",\"#ffffff\",\"#577757\",\"#7c6d51\",\"#8a5a5a\",\"#5a6a8a\",\"#6a5a4a\",\"#4a6a7a\",\"#7a5a4a\",\"#4a6a9e\",\"#6a5040\",\"#8c8c8c\",\"#454545\",\"#6a5a4a\"]",
+        "source": "mono-plus-light.json",
+        "swatches": {
+          "canvas": "#FFFFFF",
+          "primary": "#4a6a9e",
+          "elevated": "#f5f5f5",
+          "sidebar": "#f9f9f9",
+          "edge": "#e3e3e3f2",
+          "syntax": [
+            "#fcfcfc",
+            "#8c8c8c",
+            "#6a5a4a",
+            "#4a6a7a"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "monokai",
+    "slug": "monokai",
+    "name": "Monokai",
+    "ids": [
+      "monokai-dark",
+      "monokai-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "monokai-dark",
+        "name": "Monokai",
+        "key": "[\"#252620\",\"#f6f6f6\",\"#90918b\",\"#23241f\",\"#ffffff0b\",\"#ffffff0e\",\"#53544e9a\",\"#d0bdfc\",\"#ae81ff\",\"#f6f6f6\",\"#ffffff12\",\"#000000\",\"#a6e22e\",\"#fd971f\",\"#fa4888\",\"#66d9ef\",\"#f92672\",\"#e6db74\",\"#ae81ff\",\"#a6e22e\",\"#fcd7b7\",\"#75715e\",\"#fefefe\",\"#d4d4ce\"]",
+        "source": "monokai-dark.json",
+        "swatches": {
+          "canvas": "#1d1e19",
+          "primary": "#ae81ff",
+          "elevated": "#252620",
+          "sidebar": "#191a15",
+          "edge": "#ffffff0b",
+          "syntax": [
+            "#191a15",
+            "#75715e",
+            "#f92672",
+            "#e6db74"
+          ]
+        }
+      },
+      "light": {
+        "id": "monokai-light",
+        "name": "Monokai",
+        "key": "[\"#f3efe5\",\"#312d23\",\"#656056\",\"#f7f3e9\",\"#00000013\",\"#0000000a\",\"#e5e0d6\",\"#d9b9fd\",\"#8556b0\",\"#312d23\",\"#00000014\",\"#ffffff\",\"#1b7c1b\",\"#936115\",\"#b21523\",\"#366eaa\",\"#d9487c\",\"#8a6500\",\"#9b5fe0\",\"#3c8d2f\",\"#795011\",\"#8a816f\",\"#140e04\",\"#241e13\"]",
+        "source": "monokai-light.json",
+        "swatches": {
+          "canvas": "#fdf9ef",
+          "primary": "#8556b0",
+          "elevated": "#f3efe5",
+          "sidebar": "#f8f4ea",
+          "edge": "#00000013",
+          "syntax": [
+            "#fffcf2",
+            "#8a816f",
+            "#d9487c",
+            "#8a6500"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "nightowl",
+    "slug": "nightowl",
+    "name": "Night Owl",
+    "ids": [
+      "nightowl-dark",
+      "nightowl-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "nightowl-dark",
+        "name": "Night Owl",
+        "key": "[\"#0d1a26\",\"#e5e7ea\",\"#7e8692\",\"#0a1622\",\"#ffffff0d\",\"#ffffff0f\",\"#36424fc6\",\"#afc9fd\",\"#82aaff\",\"#e5e7ea\",\"#ffffff14\",\"#000000\",\"#c5e478\",\"#ecc48d\",\"#ef5350\",\"#82aaff\",\"#c792ea\",\"#ecc48d\",\"#f78c6c\",\"#82aaff\",\"#fcce8f\",\"#637777\",\"#fbfcfd\",\"#b4bac7\"]",
+        "source": "nightowl-dark.json",
+        "swatches": {
+          "canvas": "#04101c",
+          "primary": "#82aaff",
+          "elevated": "#0d1a26",
+          "sidebar": "#010a12",
+          "edge": "#ffffff0d",
+          "syntax": [
+            "#020d19",
+            "#637777",
+            "#c792ea",
+            "#ecc48d"
+          ]
+        }
+      },
+      "light": {
+        "id": "nightowl-light",
+        "name": "Night Owl",
+        "key": "[\"#e9e9e8\",\"#282734\",\"#5a5a6b\",\"#ebebeb\",\"#00000013\",\"#0000000a\",\"#dfdddb\",\"#aec9fe\",\"#2c60d4\",\"#282734\",\"#00000014\",\"#ffffff\",\"#327443\",\"#856215\",\"#a4151c\",\"#0941c4\",\"#994cc3\",\"#136761\",\"#c96765\",\"#4876d6\",\"#a61627\",\"#7a8181\",\"#232234\",\"#343346\"]",
+        "source": "nightowl-light.json",
+        "swatches": {
+          "canvas": "#f1f1f1",
+          "primary": "#2c60d4",
+          "elevated": "#e9e9e8",
+          "sidebar": "#ececeb",
+          "edge": "#00000013",
+          "syntax": [
+            "#fbfbfb",
+            "#7a8181",
+            "#994cc3",
+            "#136761"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "nord",
+    "slug": "nord",
+    "name": "Nord",
+    "ids": [
+      "nord-dark",
+      "nord-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "nord-dark",
+        "name": "Nord",
+        "key": "[\"#262c37\",\"#feffff\",\"#93979f\",\"#252a35\",\"#ffffff0b\",\"#ffffff0d\",\"#505661a3\",\"#9ad4e4\",\"#88c0d0\",\"#feffff\",\"#ffffff12\",\"#000000\",\"#a3be8c\",\"#d08770\",\"#cb7f86\",\"#81a1c1\",\"#81a1c1\",\"#b9f481\",\"#b48ead\",\"#88c0d0\",\"#ffd4c6\",\"#616e88\",\"#fcfdfe\",\"#c2c5cb\"]",
+        "source": "nord-dark.json",
+        "swatches": {
+          "canvas": "#1f2530",
+          "primary": "#88c0d0",
+          "elevated": "#262c37",
+          "sidebar": "#1c212c",
+          "edge": "#ffffff0b",
+          "syntax": [
+            "#1b212c",
+            "#616e88",
+            "#81a1c1",
+            "#b9f481"
+          ]
+        }
+      },
+      "light": {
+        "id": "nord-light",
+        "name": "Nord",
+        "key": "[\"#e5e8ed\",\"#222831\",\"#565c67\",\"#e8ebef\",\"#00000013\",\"#0000000a\",\"#d8dce1\",\"#a4ccfe\",\"#426999\",\"#222831\",\"#00000014\",\"#ffffff\",\"#327443\",\"#a54d31\",\"#a0203b\",\"#29588f\",\"#5e81ac\",\"#6f8758\",\"#8d6886\",\"#5e81ac\",\"#953716\",\"#6b7282\",\"#141a26\",\"#252b37\"]",
+        "source": "nord-light.json",
+        "swatches": {
+          "canvas": "#eef1f5",
+          "primary": "#426999",
+          "elevated": "#e5e8ed",
+          "sidebar": "#e9ecf1",
+          "edge": "#00000013",
+          "syntax": [
+            "#f8fbff",
+            "#6b7282",
+            "#5e81ac",
+            "#6f8758"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "onedarkpro",
+    "slug": "onedarkpro",
+    "name": "One Dark Pro",
+    "ids": [
+      "onedarkpro-dark",
+      "onedarkpro-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "onedarkpro-dark",
+        "name": "One Dark Pro",
+        "key": "[\"#272b33\",\"#f5fcff\",\"#8d97a2\",\"#272c37\",\"#3138489b\",\"#ffffff0f\",\"#a8aec533\",\"#61afef40\",\"#61afef\",\"#f5fcff\",\"#ffffff1a\",\"#1e222a\",\"#98c379\",\"#e5c07b\",\"#e17179\",\"#61afef\",\"#61afef\",\"#98c379\",\"#e06c75\",\"#61afef\",\"#e5c07b\",\"#818899\",\"#e4ebf8\",\"#e06c75\"]",
+        "source": "onedarkpro-dark.json",
+        "swatches": {
+          "canvas": "#1E222A",
+          "primary": "#61AFEF",
+          "elevated": "#272b33",
+          "sidebar": "#181b22",
+          "edge": "#3138489b",
+          "syntax": [
+            "#1b1f26",
+            "#818899",
+            "#61AFEF",
+            "#98C379"
+          ]
+        }
+      },
+      "light": {
+        "id": "onedarkpro-light",
+        "name": "One Dark Pro",
+        "key": "[\"#ebecee\",\"#252c37\",\"#616770\",\"#edeff5\",\"#d5d8dedb\",\"#0000000a\",\"#d8dde6\",\"#3c67bc40\",\"#3c67bc\",\"#252c37\",\"#00000014\",\"#f5f6f8\",\"#38754d\",\"#866241\",\"#a54f56\",\"#336da3\",\"#528bff\",\"#4fa66d\",\"#d85462\",\"#528bff\",\"#d19a66\",\"#6b717f\",\"#454c58\",\"#d85462\"]",
+        "source": "onedarkpro-light.json",
+        "swatches": {
+          "canvas": "#F5F6F8",
+          "primary": "#3c67bc",
+          "elevated": "#ebecee",
+          "sidebar": "#eff0f2",
+          "edge": "#d5d8dedb",
+          "syntax": [
+            "#f2f3f5",
+            "#6B717F",
+            "#528BFF",
+            "#4FA66D"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "openchamber",
+    "slug": "openchamber",
+    "name": "OpenChamber",
+    "ids": [
+      "openchamber-dark",
+      "openchamber-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "openchamber-dark",
+        "name": "OpenChamber",
+        "key": "[\"#1b1918\",\"#ebe7dc\",\"#9a978d\",\"#171616\",\"#242323bf\",\"#ffffff0f\",\"#c8c6c52b\",\"#da7c4755\",\"#da7c47\",\"#ebe7dc\",\"#ffffff1a\",\"#000000\",\"#76ad4f\",\"#c67f13\",\"#da5b4a\",\"#479fe6\",\"#34983a\",\"#d58373\",\"#279e93\",\"#78a952\",\"#479cb1\",\"#7d917d\",\"#c69457\",\"#da6b6d\"]",
+        "source": "openchamber-dark.json",
+        "swatches": {
+          "canvas": "#120f0e",
+          "primary": "#da7c47",
+          "elevated": "#1b1918",
+          "sidebar": "#0e0c0b",
+          "edge": "#242323bf",
+          "syntax": [
+            "#100e0d",
+            "#7d917d",
+            "#34983a",
+            "#d58373"
+          ]
+        }
+      },
+      "light": {
+        "id": "openchamber-light",
+        "name": "OpenChamber",
+        "key": "[\"#f3f2f0\",\"#262521\",\"#696960\",\"#f7f6f4\",\"#e5e1debf\",\"#0000000a\",\"#26252120\",\"#b3501755\",\"#b35017\",\"#262521\",\"#00000014\",\"#ffffff\",\"#517734\",\"#886914\",\"#b7493f\",\"#2c6ebd\",\"#15764e\",\"#c25f4b\",\"#177b8f\",\"#4e8b18\",\"#0e8294\",\"#6c826c\",\"#bb782a\",\"#b94d50\"]",
+        "source": "openchamber-light.json",
+        "swatches": {
+          "canvas": "#fdfcfa",
+          "primary": "#b35017",
+          "elevated": "#f3f2f0",
+          "sidebar": "#f7f6f4",
+          "edge": "#e5e1debf",
+          "syntax": [
+            "#faf9f7",
+            "#6c826c",
+            "#15764e",
+            "#c25f4b"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "opencode",
+    "slug": "opencode",
+    "name": "OpenCode",
+    "ids": [
+      "opencode-dark",
+      "opencode-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "opencode-dark",
+        "name": "OpenCode",
+        "key": "[\"#1f1f1f\",\"#ededed\",\"#8a8a8a\",\"#1c1c1c\",\"#ffffff0c\",\"#ffffff0e\",\"#3a3a3af6\",\"#7698fdff\",\"#637ef8\",\"#ededed\",\"#ffffff13\",\"#000000\",\"#6bd586ff\",\"#f2cf76ff\",\"#f17471ff\",\"#7698fdff\",\"#f799c6ff\",\"#96e3a6ff\",\"#93e9f6\",\"#f799c6ff\",\"#9e99f7ff\",\"#aeaeaeff\",\"#ededed\",\"#707070\"]",
+        "source": "opencode-dark.json",
+        "swatches": {
+          "canvas": "#161616",
+          "primary": "#637ef8",
+          "elevated": "#1f1f1f",
+          "sidebar": "#0a0a0a",
+          "edge": "#ffffff0c",
+          "syntax": [
+            "#151515",
+            "#aeaeaeff",
+            "#f799c6ff",
+            "#96e3a6ff"
+          ]
+        }
+      },
+      "light": {
+        "id": "opencode-light",
+        "name": "OpenCode",
+        "key": "[\"#fafafa\",\"#313131\",\"#646464\",\"#f9f9f9\",\"#00000013\",\"#0000000a\",\"#eeeeeeff\",\"#7698fdff\",\"#3b5cf6ff\",\"#313131\",\"#00000014\",\"#ffffff\",\"#18833f\",\"#8c6e24\",\"#b82d35ff\",\"#3250dfff\",\"#c83d8bff\",\"#198b43ff\",\"#007b80\",\"#c83d8bff\",\"#5230c2ff\",\"#5c5c5cff\",\"#171717\",\"#6f6f6f\"]",
+        "source": "opencode-light.json",
+        "swatches": {
+          "canvas": "#ffffff",
+          "primary": "#3b5cf6ff",
+          "elevated": "#fafafa",
+          "sidebar": "#fafafa",
+          "edge": "#00000013",
+          "syntax": [
+            "#fcfcfc",
+            "#5c5c5cff",
+            "#c83d8bff",
+            "#198b43ff"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "osaka-jade-refined",
+    "slug": "osaka-jade-refined",
+    "name": "Osaka Jade",
+    "ids": [
+      "osaka-jade-refined",
+      "osaka-jade-refined-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "osaka-jade-refined",
+        "name": "Osaka Jade Dark",
+        "key": "[\"#121f18\",\"#e9ebe6\",\"#7b8c81\",\"#101c17\",\"#ffffff0c\",\"#ffffff0f\",\"#324235e1\",\"#90d9d1\",\"#2dd5b7\",\"#e9ebe6\",\"#ffffff14\",\"#000000\",\"#63b07a\",\"#e7c831\",\"#ff5345\",\"#82aecb\",\"#2dd5b7\",\"#63b07a\",\"#d2689c\",\"#509475\",\"#549e6a\",\"#53685b\",\"#c1c497\",\"#459451\"]",
+        "source": "osaka-jade-refined-dark.json",
+        "swatches": {
+          "canvas": "#0a1611",
+          "primary": "#2dd5b7",
+          "elevated": "#121f18",
+          "sidebar": "#07100c",
+          "edge": "#ffffff0c",
+          "syntax": [
+            "#08130e",
+            "#53685B",
+            "#2DD5B7",
+            "#63b07a"
+          ]
+        }
+      },
+      "light": {
+        "id": "osaka-jade-refined-light",
+        "name": "Osaka Jade Light",
+        "key": "[\"#e7e4de\",\"#222820\",\"#53685b\",\"#ebe8e3\",\"#00000013\",\"#0000000a\",\"#d8d5d0\",\"#5ce4c6\",\"#197160\",\"#222820\",\"#00000014\",\"#ffffff\",\"#02532a\",\"#73650e\",\"#8f110b\",\"#33679f\",\"#1faa90\",\"#3d7a52\",\"#a8527a\",\"#3d7560\",\"#3d7a52\",\"#53685b\",\"#111c18\",\"#b5a020\"]",
+        "source": "osaka-jade-refined-light.json",
+        "swatches": {
+          "canvas": "#f1eee8",
+          "primary": "#197160",
+          "elevated": "#e7e4de",
+          "sidebar": "#ebe9e3",
+          "edge": "#00000013",
+          "syntax": [
+            "#ebe8e3",
+            "#53685B",
+            "#1faa90",
+            "#3d7a52"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "patina",
+    "slug": "patina",
+    "name": "Patina",
+    "ids": [
+      "patina-dark",
+      "patina-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "patina-dark",
+        "name": "Patina",
+        "key": "[\"#191919\",\"#eeebe3\",\"#8c8a85\",\"#1d1d1d\",\"#2b2b2b99\",\"#ffffff08\",\"#d6d3cc24\",\"#ca957a66\",\"#ca957a\",\"#eeebe3\",\"#ffffff12\",\"#141414\",\"#91af7e\",\"#be966a\",\"#cc8479\",\"#7ca8cf\",\"#72a371\",\"#c7998f\",\"#72a69f\",\"#92ad7f\",\"#7ba5b1\",\"#6d6b67\",\"#bda282\",\"#cb8c8b\"]",
+        "source": "patina-dark.json",
+        "swatches": {
+          "canvas": "#141414",
+          "primary": "#ca957a",
+          "elevated": "#191919",
+          "sidebar": "#0c0c0c",
+          "edge": "#2b2b2b99",
+          "syntax": [
+            "#0f0f0f",
+            "#6d6b67",
+            "#72a371",
+            "#c7998f"
+          ]
+        }
+      },
+      "light": {
+        "id": "patina-light",
+        "name": "Patina",
+        "key": "[\"#f0eee9\",\"#2a2926\",\"#6c6963\",\"#efede8\",\"#d6d3cbb3\",\"#00000008\",\"#2a29261c\",\"#9d593966\",\"#9d5939\",\"#2a2926\",\"#0000000f\",\"#fbfaf7\",\"#587246\",\"#7e6938\",\"#a0554c\",\"#436da3\",\"#3c7357\",\"#a05d4f\",\"#3d7582\",\"#517936\",\"#397682\",\"#8f8b84\",\"#926537\",\"#a15757\"]",
+        "source": "patina-light.json",
+        "swatches": {
+          "canvas": "#faf9f6",
+          "primary": "#9d5939",
+          "elevated": "#f0eee9",
+          "sidebar": "#f3f1ed",
+          "edge": "#d6d3cbb3",
+          "syntax": [
+            "#f2f0ec",
+            "#8f8b84",
+            "#3c7357",
+            "#a05d4f"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "rosepine",
+    "slug": "rosepine",
+    "name": "Rose Pine",
+    "ids": [
+      "rosepine-dark",
+      "rosepine-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "rosepine-dark",
+        "name": "Rose Pine",
+        "key": "[\"#1c1a28\",\"#e9e8ed\",\"#87849b\",\"#181623\",\"#ffffff0c\",\"#ffffff0f\",\"#444252c0\",\"#9fd3dd\",\"#9ccfd8\",\"#e9e8ed\",\"#ffffff14\",\"#000000\",\"#80b888\",\"#f6c177\",\"#eb6f92\",\"#9ccfd8\",\"#31748f\",\"#f6c177\",\"#c4a7e7\",\"#ebbcba\",\"#9ccfd8\",\"#6e6a86\",\"#e0def4\",\"#908caa\"]",
+        "source": "rosepine-dark.json",
+        "swatches": {
+          "canvas": "#12101d",
+          "primary": "#9ccfd8",
+          "elevated": "#1c1a28",
+          "sidebar": "#0c0b15",
+          "edge": "#ffffff0c",
+          "syntax": [
+            "#0f0d1a",
+            "#6e6a86",
+            "#31748f",
+            "#f6c177"
+          ]
+        }
+      },
+      "light": {
+        "id": "rosepine-light",
+        "name": "Rose Pine",
+        "key": "[\"#f5ede7\",\"#2d2746\",\"#6a6673\",\"#f5efe9\",\"#00000013\",\"#0000000a\",\"#ece2db\",\"#8cd4f4\",\"#177394\",\"#2d2746\",\"#00000014\",\"#ffffff\",\"#347846\",\"#965f0b\",\"#942a50\",\"#0c4b62\",\"#286983\",\"#ea9d34\",\"#907aa9\",\"#d7827e\",\"#56949f\",\"#9893a5\",\"#575279\",\"#797593\"]",
+        "source": "rosepine-light.json",
+        "swatches": {
+          "canvas": "#fbf5ef",
+          "primary": "#177394",
+          "elevated": "#f5ede7",
+          "sidebar": "#f7f0eb",
+          "edge": "#00000013",
+          "syntax": [
+            "#fffbf5",
+            "#9893a5",
+            "#286983",
+            "#ea9d34"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "solarized",
+    "slug": "solarized",
+    "name": "Solarized",
+    "ids": [
+      "solarized-dark",
+      "solarized-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "solarized-dark",
+        "name": "Solarized",
+        "key": "[\"#0c242b\",\"#eef2f3\",\"#818e8f\",\"#0a2329\",\"#ffffff0c\",\"#ffffff0e\",\"#293f44\",\"#bec4fa\",\"#7e83cb\",\"#eef2f3\",\"#ffffff13\",\"#000000\",\"#859900\",\"#b58900\",\"#e35e5b\",\"#2aa198\",\"#859900\",\"#2aa198\",\"#d33682\",\"#268bd2\",\"#ffda87\",\"#586e75\",\"#f6f8f8\",\"#889595\"]",
+        "source": "solarized-dark.json",
+        "swatches": {
+          "canvas": "#041d24",
+          "primary": "#7e83cb",
+          "elevated": "#0c242b",
+          "sidebar": "#021820",
+          "edge": "#ffffff0c",
+          "syntax": [
+            "#021a21",
+            "#586e75",
+            "#859900",
+            "#2aa198"
+          ]
+        }
+      },
+      "light": {
+        "id": "solarized-light",
+        "name": "Solarized",
+        "key": "[\"#f5f2e2\",\"#1b3036\",\"#596c73\",\"#f7f2e2\",\"#00000013\",\"#0000000a\",\"#e6e8da\",\"#98d0ff\",\"#0a72b1\",\"#1b3036\",\"#00000014\",\"#ffffff\",\"#5f6c17\",\"#806318\",\"#9b1a1a\",\"#136196\",\"#728600\",\"#1f8f88\",\"#d33682\",\"#268bd2\",\"#70560f\",\"#657b83\",\"#2e444b\",\"#41575e\"]",
+        "source": "solarized-light.json",
+        "swatches": {
+          "canvas": "#fdf8e8",
+          "primary": "#0a72b1",
+          "elevated": "#f5f2e2",
+          "sidebar": "#f7f3e4",
+          "edge": "#00000013",
+          "syntax": [
+            "#fffcec",
+            "#657b83",
+            "#728600",
+            "#1f8f88"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "tokyonight",
+    "slug": "tokyonight",
+    "name": "Tokyonight",
+    "ids": [
+      "tokyonight-dark",
+      "tokyonight-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "tokyonight-dark",
+        "name": "Tokyonight",
+        "key": "[\"#1b1d28\",\"#eaebf2\",\"#8187a8\",\"#191a24\",\"#ffffff0c\",\"#ffffff0f\",\"#3d4053d5\",\"#afc9fe\",\"#7aa2f7\",\"#eaebf2\",\"#ffffff13\",\"#000000\",\"#9ece6a\",\"#e0af68\",\"#f7768e\",\"#7dcfff\",\"#bb9af7\",\"#a8fc1c\",\"#ff9e64\",\"#7aa2f7\",\"#fdd8a5\",\"#565f89\",\"#f9faff\",\"#a3abd2\"]",
+        "source": "tokyonight-dark.json",
+        "swatches": {
+          "canvas": "#13141e",
+          "primary": "#7aa2f7",
+          "elevated": "#1b1d28",
+          "sidebar": "#0f0f18",
+          "edge": "#ffffff0c",
+          "syntax": [
+            "#10111b",
+            "#565f89",
+            "#bb9af7",
+            "#a8fc1c"
+          ]
+        }
+      },
+      "light": {
+        "id": "tokyonight-light",
+        "name": "Tokyonight",
+        "key": "[\"#dcdee3\",\"#1a1e38\",\"#4b5472\",\"#dfe0e4\",\"#00000013\",\"#0000000a\",\"#d0d2da\",\"#abcbfa\",\"#195fba\",\"#1a1e38\",\"#00000014\",\"#ffffff\",\"#314e04\",\"#65440a\",\"#97073a\",\"#0a54ae\",\"#9854f1\",\"#436612\",\"#b15c00\",\"#1f6fd4\",\"#77510a\",\"#6b6f7a\",\"#0f1638\",\"#1f284a\"]",
+        "source": "tokyonight-light.json",
+        "swatches": {
+          "canvas": "#e5e6ea",
+          "primary": "#195fba",
+          "elevated": "#dcdee3",
+          "sidebar": "#e0e2e6",
+          "edge": "#00000013",
+          "syntax": [
+            "#eff0f4",
+            "#6b6f7a",
+            "#9854f1",
+            "#436612"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "vercel",
+    "slug": "vercel",
+    "name": "Vercel",
+    "ids": [
+      "vercel-dark",
+      "vercel-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "vercel-dark",
+        "name": "Vercel",
+        "key": "[\"#070707\",\"#dddddd\",\"#7b7b7b\",\"#060606\",\"#ffffff12\",\"#ffffff0f\",\"#2c2c2c\",\"#a1cdfe\",\"#0674f3\",\"#dddddd\",\"#ffffff1a\",\"#000000\",\"#46a758\",\"#ffb224\",\"#e5484d\",\"#52a8ff\",\"#f75590\",\"#63c46d\",\"#f2a700\",\"#bf7af0\",\"#0ac7ac\",\"#878787\",\"#52a8ff\",\"#f75590\"]",
+        "source": "vercel-dark.json",
+        "swatches": {
+          "canvas": "#000000",
+          "primary": "#0674f3",
+          "elevated": "#070707",
+          "sidebar": "#000000",
+          "edge": "#ffffff12",
+          "syntax": [
+            "#878787",
+            "#F75590",
+            "#63C46D",
+            "#F2A700"
+          ]
+        }
+      },
+      "light": {
+        "id": "vercel-light",
+        "name": "Vercel",
+        "key": "[\"#f4f4f4\",\"#313131\",\"#666666\",\"#f9f9f9\",\"#00000013\",\"#0000000a\",\"#e4e4e4\",\"#a9cbfd\",\"#0769e1\",\"#313131\",\"#00000014\",\"#ffffff\",\"#14621b\",\"#a35d02\",\"#a10725\",\"#0a4ca2\",\"#e93d82\",\"#46a758\",\"#ffb224\",\"#8e4ec6\",\"#12a594\",\"#888888\",\"#0070f3\",\"#e93d82\"]",
+        "source": "vercel-light.json",
+        "swatches": {
+          "canvas": "#ffffff",
+          "primary": "#0769e1",
+          "elevated": "#f4f4f4",
+          "sidebar": "#f9f9f9",
+          "edge": "#00000013",
+          "syntax": [
+            "#fcfcfc",
+            "#888888",
+            "#E93D82",
+            "#46A758"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "vesper",
+    "slug": "vesper",
+    "name": "Vesper",
+    "ids": [
+      "vesper-dark",
+      "vesper-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "vesper-dark",
+        "name": "Vesper",
+        "key": "[\"#191919\",\"#e7e7e7\",\"#858585\",\"#151515\",\"#ffffff0c\",\"#ffffff0f\",\"#484848a8\",\"#f4bc8d\",\"#ffc799\",\"#e7e7e7\",\"#ffffff14\",\"#000000\",\"#80b888\",\"#ffc799\",\"#ff8080\",\"#83afe0\",\"#a0a0a0\",\"#99ffe4\",\"#ffc799\",\"#ffc799\",\"#ffc799\",\"#8b8b8b\",\"#ffffff\",\"#dbdbdb\"]",
+        "source": "vesper-dark.json",
+        "swatches": {
+          "canvas": "#0f0f0f",
+          "primary": "#FFC799",
+          "elevated": "#191919",
+          "sidebar": "#080808",
+          "edge": "#ffffff0c",
+          "syntax": [
+            "#0b0b0b",
+            "#8b8b8b",
+            "#a0a0a0",
+            "#99ffe4"
+          ]
+        }
+      },
+      "light": {
+        "id": "vesper-light",
+        "name": "Vesper",
+        "key": "[\"#e7e7e7\",\"#282828\",\"#5c5c5c\",\"#ebebeb\",\"#00000013\",\"#0000000a\",\"#d7d7d7\",\"#f6bb8a\",\"#8a5c35\",\"#282828\",\"#00000014\",\"#ffffff\",\"#327343\",\"#955817\",\"#c91b35\",\"#3469a2\",\"#6e6e6e\",\"#117e69\",\"#8d541c\",\"#8d541c\",\"#8d541c\",\"#7a7a7a\",\"#040404\",\"#101010\"]",
+        "source": "vesper-light.json",
+        "swatches": {
+          "canvas": "#f1f1f1",
+          "primary": "#8a5c35",
+          "elevated": "#e7e7e7",
+          "sidebar": "#ebebeb",
+          "edge": "#00000013",
+          "syntax": [
+            "#fbfbfb",
+            "#7a7a7a",
+            "#6e6e6e",
+            "#117e69"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "vitesse",
+    "slug": "vitesse",
+    "name": "Vitesse",
+    "ids": [
+      "vitesse-dark-dark",
+      "vitesse-light-light"
+    ],
+    "variants": {
+      "dark": {
+        "id": "vitesse-dark-dark",
+        "name": "Vitesse Dark",
+        "key": "[\"#1b1b1b\",\"#ede9dd\",\"#878781\",\"#1e1e1e\",\"#292929cd\",\"#ffffff0f\",\"#eeeeee18\",\"#00000050\",\"#4d9375\",\"#ede9dd\",\"#ffffff1a\",\"#121212\",\"#4d9375\",\"#d4976c\",\"#cb7676\",\"#6394bf\",\"#4d9375\",\"#c98a7d\",\"#4c9a91\",\"#80a665\",\"#5d99a9\",\"#758575dd\",\"#bd976a\",\"#cb7676\"]",
+        "source": "vitesse-dark-dark.json",
+        "swatches": {
+          "canvas": "#121212",
+          "primary": "#4d9375",
+          "elevated": "#1b1b1b",
+          "sidebar": "#0e0e0e",
+          "edge": "#292929cd",
+          "syntax": [
+            "#101010",
+            "#758575dd",
+            "#4d9375",
+            "#c98a7d"
+          ]
+        }
+      },
+      "light": {
+        "id": "vitesse-light-light",
+        "name": "Vitesse Light",
+        "key": "[\"#f5f5f5\",\"#31312c\",\"#6b6b64\",\"#f6f3f3\",\"#e6e2e2f1\",\"#0000000a\",\"#22222218\",\"#00000050\",\"#1c6b48\",\"#31312c\",\"#00000014\",\"#ffffff\",\"#1e754f\",\"#a45d2b\",\"#a85757\",\"#296aa3\",\"#1e754f\",\"#b56959\",\"#2f798a\",\"#59873a\",\"#2e808f\",\"#a0ada0\",\"#b07d48\",\"#ab5959\"]",
+        "source": "vitesse-light-light.json",
+        "swatches": {
+          "canvas": "#ffffff",
+          "primary": "#1c6b48",
+          "elevated": "#f5f5f5",
+          "sidebar": "#f9f9f9",
+          "edge": "#e6e2e2f1",
+          "syntax": [
+            "#fcfcfc",
+            "#a0ada0",
+            "#1e754f",
+            "#b56959"
+          ]
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "theme-studio-wheat-vellum-dark",
+    "name": "麦笺 · Wheat Vellum",
+    "variant": "dark",
+    "description": "奶白纸、靛墨与朱批；深版是台灯照着暖炭。 Cream paper with indigo ink and red annotations; warm graphite at night.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "editorial",
+      "paper",
+      "warm",
+      "dark"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#99b5ff",
+      "foreground": "#0c0e12",
+      "hover": "#a9c1ff",
+      "active": "#b7cbff",
+      "muted": "#99b5ff70"
+    },
+    "surface": {
+      "background": "#201d1a",
+      "foreground": "#f8f5f0",
+      "muted": "#161411",
+      "mutedForeground": "#bebbb6",
+      "elevated": "#2a2722",
+      "subtle": "#26231e"
+    },
+    "interactive": {
+      "border": "#3c3731",
+      "borderHover": "#54504a",
+      "borderFocus": "#99b5ff",
+      "focus": "#99b5ff",
+      "focusRing": "#99b5ffdb",
+      "selection": "#262f52",
+      "selectionForeground": "#f8f5f0",
+      "hover": "#f8f5f01a",
+      "active": "#f8f5f025"
+    },
+    "status": {
+      "error": "#f39c9d",
+      "errorForeground": "#000000",
+      "errorBackground": "#f39c9d20",
+      "errorBorder": "#f39c9d4d",
+      "warning": "#ffd6b5",
+      "warningForeground": "#000000",
+      "warningBackground": "#ffd6b520",
+      "warningBorder": "#ffd6b54d",
+      "success": "#33ee77",
+      "successForeground": "#000000",
+      "successBackground": "#33ee7720",
+      "successBorder": "#33ee774d",
+      "info": "#4cbede",
+      "infoForeground": "#000000",
+      "infoBackground": "#4cbede20",
+      "infoBorder": "#4cbede4d"
+    },
+    "pr": {
+      "open": "#33ee77",
+      "draft": "#bebbb6",
+      "blocked": "#ffd6b5",
+      "merged": "#b097fc",
+      "closed": "#fd7a75"
+    },
+    "syntax": {
+      "base": {
+        "background": "#211f1d",
+        "foreground": "#f8f5f0",
+        "comment": "#b5b2ad",
+        "keyword": "#a4bbff",
+        "string": "#ffa68f",
+        "number": "#ffa596",
+        "function": "#a1bcff",
+        "variable": "#e2d9ce",
+        "type": "#a4c6e2",
+        "operator": "#c6bbaa"
+      },
+      "tokens": {
+        "punctuation": "#c9c6c2",
+        "variableProperty": "#a4c6e2",
+        "className": "#a1bcff",
+        "stringEscape": "#f8f5f0"
+      },
+      "highlights": {
+        "diffAdded": "#81fab6",
+        "diffRemoved": "#ff7b77",
+        "diffModified": "#4cbede",
+        "diffAddedBackground": "#81fab639",
+        "diffRemovedBackground": "#ff7b771b",
+        "diffModifiedBackground": "#4cbede1f",
+        "lineNumber": "#c9c6c2",
+        "lineNumberActive": "#f8f5f0"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#2a3043",
+      "divider": "#3c3731"
+    },
+    "markdown": {
+      "link": "#fd7a75",
+      "linkHover": "#ffa39c",
+      "inlineCode": "#ff968f",
+      "inlineCodeBackground": "#3a404e",
+      "blockquote": "#bebbb6",
+      "blockquoteBorder": "#6c4842",
+      "listMarker": "#fd7a75",
+      "italic": "#f8f5f0"
+    },
+    "tools": {
+      "border": "#3c3731",
+      "icon": "#fd7a75",
+      "title": "#f8f5f0",
+      "description": "#bebbb6",
+      "edit": {
+        "addedBackground": "#81fab639",
+        "removedBackground": "#ff7b771b",
+        "modifiedBackground": "#4cbede1f",
+        "lineNumber": "#c9c6c2"
+      }
+    }
+  }
+}

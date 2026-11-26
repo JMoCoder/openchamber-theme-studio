@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "theme-studio-hojicha-light",
+    "name": "焙茶 · Hojicha",
+    "variant": "light",
+    "description": "奶油画布、烘茶侧栏和奶泡气泡，青瓷标出选中与链接；入夜换成浓咖啡，气泡留一勺焦糖。 Cream, a roasted-tea rail and milk foam, with celadon selection and links; espresso after dark, with caramel in the message.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "roasted-tea",
+      "caramel",
+      "celadon",
+      "light"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#804100",
+      "foreground": "#fcfcfc",
+      "hover": "#743a00",
+      "active": "#6a3400",
+      "muted": "#80410070"
+    },
+    "surface": {
+      "background": "#faf1e0",
+      "foreground": "#32251a",
+      "muted": "#e2c499",
+      "mutedForeground": "#5a4b3f",
+      "elevated": "#fffbf1",
+      "subtle": "#fffefb"
+    },
+    "interactive": {
+      "border": "#ccb697",
+      "borderHover": "#b8a387",
+      "borderFocus": "#804100",
+      "focus": "#804100",
+      "focusRing": "#804100e3",
+      "selection": "#cadbda",
+      "selectionForeground": "#32251a",
+      "hover": "#32251a12",
+      "active": "#32251a1d"
+    },
+    "status": {
+      "error": "#4e0200",
+      "errorForeground": "#ffffff",
+      "errorBackground": "#4e02001a",
+      "errorBorder": "#4e02004d",
+      "warning": "#59460a",
+      "warningForeground": "#ffffff",
+      "warningBackground": "#59460a1a",
+      "warningBorder": "#59460a4d",
+      "success": "#004034",
+      "successForeground": "#ffffff",
+      "successBackground": "#0040341a",
+      "successBorder": "#0040344d",
+      "info": "#144793",
+      "infoForeground": "#ffffff",
+      "infoBackground": "#1447931a",
+      "infoBorder": "#1447934d"
+    },
+    "pr": {
+      "open": "#004034",
+      "draft": "#005757",
+      "blocked": "#59460a",
+      "merged": "#5c3f9c",
+      "closed": "#4e0200"
+    },
+    "syntax": {
+      "base": {
+        "background": "#f7efe0",
+        "foreground": "#32251a",
+        "comment": "#65564a",
+        "keyword": "#793432",
+        "string": "#764300",
+        "number": "#434382",
+        "function": "#005b60",
+        "variable": "#48372a",
+        "type": "#2b5b36",
+        "operator": "#644d36"
+      },
+      "tokens": {
+        "punctuation": "#5d4e42",
+        "variableProperty": "#2b5b36",
+        "className": "#005b60",
+        "stringEscape": "#32251a"
+      },
+      "highlights": {
+        "diffAdded": "#003b18",
+        "diffRemoved": "#a43837",
+        "diffModified": "#144793",
+        "diffAddedBackground": "#006b3941",
+        "diffRemovedBackground": "#a4383714",
+        "diffModifiedBackground": "#14479314",
+        "lineNumber": "#5d4e42",
+        "lineNumberActive": "#32251a"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#fffcf7",
+      "divider": "#ccb697"
+    },
+    "markdown": {
+      "link": "#005757",
+      "linkHover": "#004848",
+      "inlineCode": "#005757",
+      "inlineCodeBackground": "#d0ebe9",
+      "blockquote": "#5a4b3f",
+      "blockquoteBorder": "#999e87",
+      "listMarker": "#005757",
+      "italic": "#32251a"
+    },
+    "tools": {
+      "border": "#ccb697",
+      "icon": "#005757",
+      "title": "#32251a",
+      "description": "#5a4b3f",
+      "edit": {
+        "addedBackground": "#006b3941",
+        "removedBackground": "#a4383714",
+        "modifiedBackground": "#14479314",
+        "lineNumber": "#5d4e42"
+      }
+    }
+  }
+}

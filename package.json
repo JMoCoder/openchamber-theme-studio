@@ -1,0 +1,36 @@
+{
+  "name": "theme-studio",
+  "version": "0.3.1",
+  "description": "Edit and preview native themes from OpenChamber's right sidebar",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JMoCoder/openchamber-theme-studio.git"
+  },
+  "homepage": "https://github.com/JMoCoder/openchamber-theme-studio",
+  "files": ["panel/", "LICENSE", "NOTICE.md"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@openchamber/sdk": "2.8.0"
+  },
+  "openchamber": {
+    "apiVersion": 1,
+    "engines": { "openchamber": ">=2.8.0" },
+    "contributes": {
+      "panel": { "id": "theme-studio", "name": "Theme Studio", "icon": "palette", "entry": "panel/index.html" },
+      "filesystem": [
+        "~/.config/openchamber/themes",
+        "~/.config/openchamber/themes/theme-studio-*.json",
+        "~/Downloads",
+        "~/Downloads/openchamber-theme-studio-*.json",
+        "~/下载",
+        "~/下载/openchamber-theme-studio-*.json"
+      ]
+    }
+  }
+}

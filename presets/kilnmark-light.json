@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "theme-studio-kilnmark-light",
+    "name": "朱窑 · Kilnmark",
+    "variant": "light",
+    "description": "白瓷、暖窑灰和朱砂印，青釉只作点染；夜间是中性窑黑。 White porcelain, warm kiln ash, and a vermilion stamp with a drop of celadon; neutral kiln-black at night.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "porcelain",
+      "red",
+      "celadon",
+      "light"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#b91e00",
+      "foreground": "#fcfcfc",
+      "hover": "#ab1b00",
+      "active": "#9e1800",
+      "muted": "#b91e0070"
+    },
+    "surface": {
+      "background": "#faf9f6",
+      "foreground": "#2c2c2c",
+      "muted": "#f0e9df",
+      "mutedForeground": "#5e5e5e",
+      "elevated": "#ffffff",
+      "subtle": "#ffffff"
+    },
+    "interactive": {
+      "border": "#cbc4b9",
+      "borderHover": "#b6b0a7",
+      "borderFocus": "#b91e00",
+      "focus": "#b91e00",
+      "focusRing": "#b91e00e3",
+      "selection": "#faddc7",
+      "selectionForeground": "#2c2c2c",
+      "hover": "#2c2c2c12",
+      "active": "#2c2c2c1d"
+    },
+    "status": {
+      "error": "#740007",
+      "errorForeground": "#ffffff",
+      "errorBackground": "#7400071a",
+      "errorBorder": "#7400074d",
+      "warning": "#6f4900",
+      "warningForeground": "#ffffff",
+      "warningBackground": "#6f49001a",
+      "warningBorder": "#6f49004d",
+      "success": "#004b3c",
+      "successForeground": "#ffffff",
+      "successBackground": "#004b3c1a",
+      "successBorder": "#004b3c4d",
+      "info": "#005882",
+      "infoForeground": "#ffffff",
+      "infoBackground": "#0058821a",
+      "infoBorder": "#0058824d"
+    },
+    "pr": {
+      "open": "#135f3c",
+      "draft": "#5e5e5e",
+      "blocked": "#6f4900",
+      "merged": "#684caa",
+      "closed": "#740007"
+    },
+    "syntax": {
+      "base": {
+        "background": "#f9f6f2",
+        "foreground": "#2c2c2c",
+        "comment": "#5c5c5c",
+        "keyword": "#a42413",
+        "string": "#31475d",
+        "number": "#933900",
+        "function": "#006154",
+        "variable": "#31424e",
+        "type": "#225f49",
+        "operator": "#2d527a"
+      },
+      "tokens": {
+        "punctuation": "#545454",
+        "variableProperty": "#225f49",
+        "className": "#006154",
+        "stringEscape": "#2c2c2c"
+      },
+      "highlights": {
+        "diffAdded": "#003b18",
+        "diffRemoved": "#a43837",
+        "diffModified": "#005882",
+        "diffAddedBackground": "#006b3941",
+        "diffRemovedBackground": "#a4383714",
+        "diffModifiedBackground": "#00588214",
+        "lineNumber": "#545454",
+        "lineNumberActive": "#2c2c2c"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#e2f2e7",
+      "divider": "#cbc4b9"
+    },
+    "markdown": {
+      "link": "#135f3c",
+      "linkHover": "#004a2c",
+      "inlineCode": "#095937",
+      "inlineCodeBackground": "#dae9de",
+      "blockquote": "#5e5e5e",
+      "blockquoteBorder": "#9dab9a",
+      "listMarker": "#135f3c",
+      "italic": "#2c2c2c"
+    },
+    "tools": {
+      "border": "#cbc4b9",
+      "icon": "#135f3c",
+      "title": "#2c2c2c",
+      "description": "#5e5e5e",
+      "edit": {
+        "addedBackground": "#006b3941",
+        "removedBackground": "#a4383714",
+        "modifiedBackground": "#00588214",
+        "lineNumber": "#545454"
+      }
+    }
+  }
+}

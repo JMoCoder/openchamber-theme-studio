@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "theme-studio-tidemark-light",
+    "name": "澄潮 · Tidemark",
+    "variant": "light",
+    "description": "海玻璃侧栏和近白留白，杏色标注把冷色界面点暖。 A sea-glass rail and near-white space, warmed by apricot annotations.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "fresh",
+      "sea-glass",
+      "soft",
+      "light"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#006579",
+      "foreground": "#fcfcfc",
+      "hover": "#005c6f",
+      "active": "#005466",
+      "muted": "#00657970"
+    },
+    "surface": {
+      "background": "#f8fdff",
+      "foreground": "#2b2f31",
+      "muted": "#ebfaf5",
+      "mutedForeground": "#5a5f61",
+      "elevated": "#f2fbfa",
+      "subtle": "#f5fefe"
+    },
+    "interactive": {
+      "border": "#d1dfdf",
+      "borderHover": "#bbc8c8",
+      "borderFocus": "#006579",
+      "focus": "#006579",
+      "focusRing": "#006579e3",
+      "selection": "#caf6ef",
+      "selectionForeground": "#2b2f31",
+      "hover": "#2b2f3112",
+      "active": "#2b2f311d"
+    },
+    "status": {
+      "error": "#740007",
+      "errorForeground": "#ffffff",
+      "errorBackground": "#7400071a",
+      "errorBorder": "#7400074d",
+      "warning": "#774900",
+      "warningForeground": "#ffffff",
+      "warningBackground": "#7749001a",
+      "warningBorder": "#7749004d",
+      "success": "#004e3e",
+      "successForeground": "#ffffff",
+      "successBackground": "#004e3e1a",
+      "successBorder": "#004e3e4d",
+      "info": "#0054a2",
+      "infoForeground": "#ffffff",
+      "infoBackground": "#0054a21a",
+      "infoBorder": "#0054a24d"
+    },
+    "pr": {
+      "open": "#004e3e",
+      "draft": "#5a5f61",
+      "blocked": "#92430a",
+      "merged": "#684caa",
+      "closed": "#740007"
+    },
+    "syntax": {
+      "base": {
+        "background": "#f0fcfc",
+        "foreground": "#2b2f31",
+        "comment": "#5a5f60",
+        "keyword": "#005768",
+        "string": "#8f4000",
+        "number": "#794c28",
+        "function": "#005e7e",
+        "variable": "#2c3b3f",
+        "type": "#1d6155",
+        "operator": "#415b62"
+      },
+      "tokens": {
+        "punctuation": "#515658",
+        "variableProperty": "#1d6155",
+        "className": "#005e7e",
+        "stringEscape": "#2b2f31"
+      },
+      "highlights": {
+        "diffAdded": "#003b18",
+        "diffRemoved": "#a43837",
+        "diffModified": "#0054a2",
+        "diffAddedBackground": "#006b3941",
+        "diffRemovedBackground": "#a4383714",
+        "diffModifiedBackground": "#0054a214",
+        "lineNumber": "#515658",
+        "lineNumberActive": "#2b2f31"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#fff0e6",
+      "divider": "#d1dfdf"
+    },
+    "markdown": {
+      "link": "#92430a",
+      "linkHover": "#763300",
+      "inlineCode": "#8b3d00",
+      "inlineCodeBackground": "#f3e3d9",
+      "blockquote": "#5a5f61",
+      "blockquoteBorder": "#c1b8aa",
+      "listMarker": "#92430a",
+      "italic": "#2b2f31"
+    },
+    "tools": {
+      "border": "#d1dfdf",
+      "icon": "#92430a",
+      "title": "#2b2f31",
+      "description": "#5a5f61",
+      "edit": {
+        "addedBackground": "#006b3941",
+        "removedBackground": "#a4383714",
+        "modifiedBackground": "#0054a214",
+        "lineNumber": "#515658"
+      }
+    }
+  }
+}

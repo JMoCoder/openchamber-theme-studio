@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>主题工坊 · 本地模拟</title>
+  <link rel="stylesheet" href="../panel/style.css">
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; }
+    #dev-controls { display: flex; flex-wrap: wrap; gap: .5rem; padding: .5rem; }
+    #app { height: calc(100dvh - 48px); max-width: 720px; margin: auto; }
+  </style>
+</head>
+<body>
+  <aside id="dev-controls" aria-label="模拟场景">
+    <button data-fixture="scheme">切换系统明暗</button>
+    <button data-fixture="builtin">选择原生主题</button>
+    <button data-fixture="slot">选用工坊槽位</button>
+    <button data-fixture="custom">选择其他自定义主题</button>
+    <button data-fixture="fail">下一次写入失败</button>
+    <button data-fixture="hold">暂停 / 回放快照</button>
+    <button data-fixture="conflict">模拟其他面板修改</button>
+    <a href="?scenario=no-grant">无授权</a><a href="?scenario=old">旧宿主</a><a href="?scenario=normal">正常</a>
+  </aside>
+  <main id="app"></main>
+  <script type="module" src="./main.mjs"></script>
+</body>
+</html>

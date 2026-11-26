@@ -1,0 +1,15 @@
+# Local agent workspaces (never committed)
+.agent/
+.agents/
+
+node_modules/
+.DS_Store
+*.log
+*.tmp
+
+# Isolated test hosts and packaged builds
+.dev-host/
+artifacts/
+
+# Local verification evidence written by scripts/ui-verify.mjs and the isolated-host checks
+docs/research/

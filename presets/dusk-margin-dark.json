@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "id": "theme-studio-dusk-margin-dark",
+    "name": "暮汀 · Dusk Margin",
+    "variant": "dark",
+    "description": "雾灰紫与紫炭的大面，银蓝色只落在气泡与注记。 A muted violet-gray ground by day and violet charcoal after dark, with silver-blue annotations.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "periwinkle",
+      "twilight",
+      "quiet",
+      "dark"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#9baefd",
+      "foreground": "#0d0e12",
+      "hover": "#aabbff",
+      "active": "#b6c5ff",
+      "muted": "#9baefd70"
+    },
+    "surface": {
+      "background": "#1b1922",
+      "foreground": "#f2f0fc",
+      "muted": "#201f24",
+      "mutedForeground": "#bfbcc8",
+      "elevated": "#2b2932",
+      "subtle": "#27252e",
+      "overlay": "#01000499"
+    },
+    "interactive": {
+      "border": "#3e3b48",
+      "borderHover": "#55535d",
+      "borderFocus": "#9baefd",
+      "focus": "#9baefd",
+      "focusRing": "#9baefddb",
+      "selection": "#342e48",
+      "selectionForeground": "#f2f0fc",
+      "hover": "#f2f0fc1a",
+      "active": "#f2f0fc25"
+    },
+    "status": {
+      "error": "#ff8f89",
+      "errorForeground": "#000000",
+      "errorBackground": "#ff8f8920",
+      "errorBorder": "#ff8f894d",
+      "warning": "#ffd074",
+      "warningForeground": "#000000",
+      "warningBackground": "#ffd07420",
+      "warningBorder": "#ffd0744d",
+      "success": "#72e7b2",
+      "successForeground": "#000000",
+      "successBackground": "#72e7b220",
+      "successBorder": "#72e7b24d",
+      "info": "#54bcff",
+      "infoForeground": "#000000",
+      "infoBackground": "#54bcff20",
+      "infoBorder": "#54bcff4d"
+    },
+    "pr": {
+      "open": "#72e7b2",
+      "draft": "#bfbcc8",
+      "blocked": "#ffd074",
+      "merged": "#9bceed",
+      "closed": "#ff8f89"
+    },
+    "syntax": {
+      "base": {
+        "background": "#1d1b24",
+        "foreground": "#f2f0fc",
+        "comment": "#b0adb9",
+        "keyword": "#cabbfb",
+        "string": "#e6ad88",
+        "number": "#8ac9e6",
+        "function": "#b0c6fd",
+        "variable": "#cce4f5",
+        "type": "#ceabf2",
+        "operator": "#a9bad4"
+      },
+      "tokens": {
+        "punctuation": "#cbc9d4",
+        "variableProperty": "#ceabf2",
+        "className": "#b0c6fd",
+        "stringEscape": "#f2f0fc"
+      },
+      "highlights": {
+        "diffAdded": "#81fab6",
+        "diffRemoved": "#ff7b77",
+        "diffModified": "#54bcff",
+        "diffAddedBackground": "#81fab639",
+        "diffRemovedBackground": "#ff7b771b",
+        "diffModifiedBackground": "#54bcff1f",
+        "lineNumber": "#cbc9d4",
+        "lineNumberActive": "#f2f0fc"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#102c3a",
+      "divider": "#3e3b48"
+    },
+    "markdown": {
+      "link": "#9bceed",
+      "linkHover": "#bbe5ff",
+      "inlineCode": "#a1d4f3",
+      "inlineCodeBackground": "#253a46",
+      "blockquote": "#bfbcc8",
+      "blockquoteBorder": "#605c6e",
+      "listMarker": "#9bceed",
+      "italic": "#f2f0fc"
+    },
+    "tools": {
+      "border": "#3e3b48",
+      "icon": "#9bceed",
+      "title": "#f2f0fc",
+      "description": "#bfbcc8",
+      "edit": {
+        "addedBackground": "#81fab639",
+        "removedBackground": "#ff7b771b",
+        "modifiedBackground": "#54bcff1f",
+        "lineNumber": "#cbc9d4"
+      }
+    }
+  }
+}

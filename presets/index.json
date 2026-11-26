@@ -1,0 +1,1320 @@
+{
+  "schemaVersion": 1,
+  "presets": [
+    {
+      "slug": "tidemark",
+      "name": {
+        "zh": "澄潮",
+        "en": "Tidemark"
+      },
+      "description": {
+        "zh": "海玻璃侧栏和近白留白，杏色标注把冷色界面点暖。",
+        "en": "A sea-glass rail and near-white space, warmed by apricot annotations."
+      },
+      "signature": {
+        "zh": "海玻璃边上贴一张杏色便签。",
+        "en": "An apricot note clipped to sea glass."
+      },
+      "syntaxStrategy": {
+        "zh": "冷墨主线，杏橘只强调字面量。",
+        "en": "Cool ink for structure; apricot only on literal values."
+      },
+      "tags": [
+        "fresh",
+        "sea-glass",
+        "soft"
+      ],
+      "family": "tidal",
+      "rank": 1,
+      "style": {
+        "direction": "watercolor-utility",
+        "label": "海玻璃",
+        "keywords": [
+          "留白",
+          "清澈",
+          "轻快"
+        ],
+        "fonts": {
+          "sans": [
+            "Inter",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "IBM Plex Mono",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 14,
+          "codePx": 12,
+          "bodyWeight": 400,
+          "headingWeight": 600,
+          "lineHeight": 1.62
+        },
+        "spacing": {
+          "rhythmPx": 8,
+          "density": "open"
+        },
+        "motion": {
+          "tempo": "light",
+          "fastMs": 115,
+          "normalMs": 175,
+          "slowMs": 230
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-tidemark-light",
+          "file": "tidemark-light.json",
+          "layout": "soft",
+          "secondaryPr": "blocked",
+          "secondaryMode": "ink",
+          "swatches": {
+            "canvas": "#f8fdff",
+            "sidebar": "#ebfaf5",
+            "elevated": "#f2fbfa",
+            "primary": "#006579",
+            "secondary": "#92430a",
+            "bubble": "#fff0e6",
+            "selection": "#caf6ef",
+            "edge": "#d1dfdf",
+            "code": "#f0fcfc",
+            "syntax": [
+              "#005768",
+              "#8f4000",
+              "#794c28",
+              "#005e7e"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-tidemark-dark",
+          "file": "tidemark-dark.json",
+          "layout": "rail-lift",
+          "secondaryPr": "blocked",
+          "secondaryMode": "annotation",
+          "swatches": {
+            "canvas": "#0b191a",
+            "sidebar": "#15241f",
+            "elevated": "#1d2728",
+            "primary": "#4ac0e0",
+            "secondary": "#ec9c76",
+            "bubble": "#1c2f39",
+            "selection": "#043433",
+            "edge": "#253837",
+            "code": "#131d1d",
+            "syntax": [
+              "#6acee8",
+              "#f7b389",
+              "#f9a46a",
+              "#85c0e3"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slug": "wheat-vellum",
+      "name": {
+        "zh": "麦笺",
+        "en": "Wheat Vellum"
+      },
+      "description": {
+        "zh": "奶白纸、靛墨与朱批；深版是台灯照着暖炭。",
+        "en": "Cream paper with indigo ink and red annotations; warm graphite at night."
+      },
+      "signature": {
+        "zh": "靛青写正文，朱红只批注。",
+        "en": "Indigo writes the copy; seal red marks the notes."
+      },
+      "syntaxStrategy": {
+        "zh": "靛、暖墨和朱批，关键词与函数共用主墨。",
+        "en": "Indigo keywords and functions, warm ink, and a proofreader’s red."
+      },
+      "tags": [
+        "editorial",
+        "paper",
+        "warm"
+      ],
+      "family": "vellum",
+      "rank": 2,
+      "style": {
+        "direction": "editorial-paper",
+        "label": "暖纸编辑部",
+        "keywords": [
+          "纸感",
+          "靛墨",
+          "从容"
+        ],
+        "fonts": {
+          "sans": [
+            "Source Sans 3",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "Source Code Pro",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 15,
+          "codePx": 13,
+          "bodyWeight": 400,
+          "headingWeight": 650,
+          "lineHeight": 1.7
+        },
+        "spacing": {
+          "rhythmPx": 9,
+          "density": "open"
+        },
+        "motion": {
+          "tempo": "calm",
+          "fastMs": 160,
+          "normalMs": 240,
+          "slowMs": 340
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-wheat-vellum-light",
+          "file": "wheat-vellum-light.json",
+          "layout": "paper",
+          "secondaryPr": "closed",
+          "secondaryMode": "annotation",
+          "swatches": {
+            "canvas": "#fefbf1",
+            "sidebar": "#f4f0e5",
+            "elevated": "#fbf6ea",
+            "primary": "#294099",
+            "secondary": "#8c2b2d",
+            "bubble": "#e7ecfd",
+            "selection": "#dce5ff",
+            "edge": "#d8d2c9",
+            "code": "#f7f4ee",
+            "syntax": [
+              "#24419a",
+              "#923622",
+              "#8a391e",
+              "#2a4999"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-wheat-vellum-dark",
+          "file": "wheat-vellum-dark.json",
+          "layout": "paper",
+          "secondaryPr": "closed",
+          "secondaryMode": "annotation",
+          "swatches": {
+            "canvas": "#201d1a",
+            "sidebar": "#161411",
+            "elevated": "#2a2722",
+            "primary": "#99b5ff",
+            "secondary": "#fd7a75",
+            "bubble": "#2a3043",
+            "selection": "#262f52",
+            "edge": "#3c3731",
+            "code": "#211f1d",
+            "syntax": [
+              "#a4bbff",
+              "#ffa68f",
+              "#ffa596",
+              "#a1bcff"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slug": "quiet-graphite",
+      "name": {
+        "zh": "静砚",
+        "en": "Quiet Graphite"
+      },
+      "description": {
+        "zh": "纯白纸与银灰侧栏；只用钢蓝点出调用和注记。",
+        "en": "White paper and silver-gray; a single steel-blue cue for calls and annotations."
+      },
+      "signature": {
+        "zh": "石墨校样上，一支钢蓝笔圈出调用。",
+        "en": "One steel-blue pen marks calls on a graphite proof."
+      },
+      "syntaxStrategy": {
+        "zh": "灰阶为主，只有函数／调用是钢蓝。",
+        "en": "Grayscale except for a single steel-blue function/call cue."
+      },
+      "tags": [
+        "neutral",
+        "grayscale",
+        "focus"
+      ],
+      "family": "neutral",
+      "rank": 3,
+      "style": {
+        "direction": "eink-minimal",
+        "label": "墨水屏极简",
+        "keywords": [
+          "银灰",
+          "低噪",
+          "专注"
+        ],
+        "fonts": {
+          "sans": [
+            "IBM Plex Sans",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "IBM Plex Mono",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 14,
+          "codePx": 12,
+          "bodyWeight": 400,
+          "headingWeight": 600,
+          "lineHeight": 1.6
+        },
+        "spacing": {
+          "rhythmPx": 8,
+          "density": "balanced"
+        },
+        "motion": {
+          "tempo": "restrained",
+          "fastMs": 70,
+          "normalMs": 110,
+          "slowMs": 160
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-quiet-graphite-light",
+          "file": "quiet-graphite-light.json",
+          "layout": "bright-card",
+          "secondaryPr": "draft",
+          "secondaryMode": "point",
+          "swatches": {
+            "canvas": "#fdfdfd",
+            "sidebar": "#eeeeee",
+            "elevated": "#ffffff",
+            "primary": "#181818",
+            "secondary": "#16588b",
+            "bubble": "#f6f6f6",
+            "selection": "#dedede",
+            "edge": "#cbcbcb",
+            "code": "#f7f7f7",
+            "syntax": [
+              "#212121",
+              "#555555",
+              "#464646",
+              "#16588b"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-quiet-graphite-dark",
+          "file": "quiet-graphite-dark.json",
+          "layout": "charcoal",
+          "secondaryPr": "draft",
+          "secondaryMode": "point",
+          "swatches": {
+            "canvas": "#202020",
+            "sidebar": "#141414",
+            "elevated": "#2d2d2d",
+            "primary": "#e0e0e0",
+            "secondary": "#86bfee",
+            "bubble": "#2f2f2f",
+            "selection": "#3a3a3a",
+            "edge": "#434343",
+            "code": "#232323",
+            "syntax": [
+              "#e1e1e1",
+              "#c1c1c1",
+              "#c7c7c7",
+              "#8ec7f6"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slug": "blue-etch",
+      "name": {
+        "zh": "蓝刻",
+        "en": "Blue Etch"
+      },
+      "description": {
+        "zh": "淡蓝图纸用钴蓝刻线分区，冰青做注记；深版展开普鲁士蓝底。",
+        "en": "Pale blueprint paper, cobalt seams, ice-cyan annotations, and Prussian blue after dark."
+      },
+      "signature": {
+        "zh": "淡蓝底片上一道清楚的钴蓝制图线。",
+        "en": "A precise cobalt seam on pale blueprint paper."
+      },
+      "syntaxStrategy": {
+        "zh": "淡蓝／深蓝制图底配冷色线稿，赤铜只充当尺寸标。",
+        "en": "Cool technical linework; copper is reserved for dimension marks."
+      },
+      "tags": [
+        "blueprint",
+        "precision",
+        "night"
+      ],
+      "family": "blueprint",
+      "rank": 4,
+      "style": {
+        "direction": "blueprint-night",
+        "label": "普鲁士蓝图",
+        "keywords": [
+          "刻线",
+          "粉笔",
+          "夜航"
+        ],
+        "fonts": {
+          "sans": [
+            "Inter",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "JetBrains Mono",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 14,
+          "codePx": 12,
+          "bodyWeight": 450,
+          "headingWeight": 650,
+          "lineHeight": 1.55
+        },
+        "spacing": {
+          "rhythmPx": 7,
+          "density": "compact"
+        },
+        "motion": {
+          "tempo": "precise",
+          "fastMs": 100,
+          "normalMs": 155,
+          "slowMs": 220
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-blue-etch-light",
+          "file": "blue-etch-light.json",
+          "layout": "seam",
+          "secondaryPr": "merged",
+          "secondaryMode": "ink",
+          "surfaceException": "blueprint-paper",
+          "swatches": {
+            "canvas": "#e0f5ff",
+            "sidebar": "#e0f5ff",
+            "elevated": "#ebf8ff",
+            "primary": "#254bd5",
+            "secondary": "#005d61",
+            "bubble": "#b9efed",
+            "selection": "#cadfff",
+            "edge": "#92b1d1",
+            "code": "#e6f5ff",
+            "syntax": [
+              "#1246a1",
+              "#005c62",
+              "#8e3712",
+              "#0051a1"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-blue-etch-dark",
+          "file": "blue-etch-dark.json",
+          "layout": "seam",
+          "secondaryPr": "merged",
+          "secondaryMode": "ink",
+          "surfaceException": "prussian-blueprint",
+          "swatches": {
+            "canvas": "#0b223a",
+            "sidebar": "#0c223a",
+            "elevated": "#142e48",
+            "primary": "#77d5eb",
+            "secondary": "#4dc8b2",
+            "bubble": "#043a3d",
+            "selection": "#023d4d",
+            "edge": "#3d6d9a",
+            "code": "#0a1f32",
+            "syntax": [
+              "#93e4f7",
+              "#69d6c4",
+              "#fabf67",
+              "#8cc7ff"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slug": "kilnmark",
+      "name": {
+        "zh": "朱窑",
+        "en": "Kilnmark"
+      },
+      "description": {
+        "zh": "白瓷、暖窑灰和朱砂印，青釉只作点染；夜间是中性窑黑。",
+        "en": "White porcelain, warm kiln ash, and a vermilion stamp with a drop of celadon; neutral kiln-black at night."
+      },
+      "signature": {
+        "zh": "白瓷落在窑灰上，朱砂盖印，只用一点青釉。",
+        "en": "A stamped porcelain tile on kiln ash with one drop of celadon."
+      },
+      "syntaxStrategy": {
+        "zh": "朱砂是控制流，青釉是函数和类型；其余沉到石墨。",
+        "en": "Vermilion for control flow, celadon for functions and types, graphite elsewhere."
+      },
+      "tags": [
+        "porcelain",
+        "red",
+        "celadon"
+      ],
+      "family": "porcelain",
+      "rank": 5,
+      "style": {
+        "direction": "kiln-editorial",
+        "label": "白瓷朱印",
+        "keywords": [
+          "白瓷",
+          "朱砂",
+          "青釉"
+        ],
+        "fonts": {
+          "sans": [
+            "Source Sans 3",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "Fira Code",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 15,
+          "codePx": 12,
+          "bodyWeight": 450,
+          "headingWeight": 650,
+          "lineHeight": 1.62
+        },
+        "spacing": {
+          "rhythmPx": 8,
+          "density": "balanced"
+        },
+        "motion": {
+          "tempo": "measured",
+          "fastMs": 130,
+          "normalMs": 200,
+          "slowMs": 280
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-kilnmark-light",
+          "file": "kilnmark-light.json",
+          "layout": "bright-card",
+          "secondaryPr": "open",
+          "secondaryMode": "ink",
+          "swatches": {
+            "canvas": "#faf9f6",
+            "sidebar": "#f0e9df",
+            "elevated": "#ffffff",
+            "primary": "#b91e00",
+            "secondary": "#135f3c",
+            "bubble": "#e2f2e7",
+            "selection": "#faddc7",
+            "edge": "#cbc4b9",
+            "code": "#f9f6f2",
+            "syntax": [
+              "#a42413",
+              "#31475d",
+              "#933900",
+              "#006154"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-kilnmark-dark",
+          "file": "kilnmark-dark.json",
+          "layout": "rail-lift",
+          "secondaryPr": "open",
+          "secondaryMode": "ink",
+          "swatches": {
+            "canvas": "#151515",
+            "sidebar": "#1f2224",
+            "elevated": "#26292c",
+            "primary": "#ff8458",
+            "secondary": "#76cd9c",
+            "bubble": "#19291e",
+            "selection": "#202f3b",
+            "edge": "#383f46",
+            "code": "#1a1a1a",
+            "syntax": [
+              "#ff9e79",
+              "#a6c5e0",
+              "#ffb468",
+              "#75dec1"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slug": "reed-shade",
+      "name": {
+        "zh": "芦影",
+        "en": "Reed Shade"
+      },
+      "description": {
+        "zh": "燕麦纸与苔绿按钮，用芦苇金标注，不再铺一整屏薄荷。",
+        "en": "Oat-toned ground and moss actions, annotated in reed gold rather than a field of mint."
+      },
+      "signature": {
+        "zh": "芦苇金像压在燕麦纸上的干叶。",
+        "en": "Reed gold lies like a pressed leaf on oat paper."
+      },
+      "syntaxStrategy": {
+        "zh": "苔绿和芦苇金双色调，变量与标点退成石灰。",
+        "en": "Moss and reed-gold duotone, with limestone variables and punctuation."
+      },
+      "tags": [
+        "botanical",
+        "oat",
+        "gentle"
+      ],
+      "family": "reed",
+      "rank": 6,
+      "style": {
+        "direction": "botanical-quiet",
+        "label": "干叶标本",
+        "keywords": [
+          "燕麦",
+          "苔色",
+          "柔边"
+        ],
+        "fonts": {
+          "sans": [
+            "Atkinson Hyperlegible",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "Cascadia Mono",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 15,
+          "codePx": 13,
+          "bodyWeight": 400,
+          "headingWeight": 700,
+          "lineHeight": 1.66
+        },
+        "spacing": {
+          "rhythmPx": 9,
+          "density": "open"
+        },
+        "motion": {
+          "tempo": "calm",
+          "fastMs": 155,
+          "normalMs": 235,
+          "slowMs": 330
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-reed-shade-light",
+          "file": "reed-shade-light.json",
+          "layout": "soft",
+          "secondaryPr": "draft",
+          "secondaryMode": "wash",
+          "swatches": {
+            "canvas": "#fbf9f4",
+            "sidebar": "#ebeee3",
+            "elevated": "#f5f7f1",
+            "primary": "#006849",
+            "secondary": "#233238",
+            "bubble": "#ede1b9",
+            "selection": "#c9e8ca",
+            "edge": "#dae2da",
+            "code": "#f7f7f0",
+            "syntax": [
+              "#00573a",
+              "#743d17",
+              "#3f5960",
+              "#005841"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-reed-shade-dark",
+          "file": "reed-shade-dark.json",
+          "layout": "soft",
+          "secondaryPr": "blocked",
+          "secondaryMode": "annotation",
+          "swatches": {
+            "canvas": "#111b14",
+            "sidebar": "#09120b",
+            "elevated": "#1f2620",
+            "primary": "#6ec794",
+            "secondary": "#e3c06a",
+            "bubble": "#213129",
+            "selection": "#213423",
+            "edge": "#28322a",
+            "code": "#171d18",
+            "syntax": [
+              "#81cb97",
+              "#ebbe54",
+              "#e9af55",
+              "#9dd4a9"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slug": "hard-edge",
+      "name": {
+        "zh": "硬边",
+        "en": "Hard Edge"
+      },
+      "description": {
+        "zh": "纸白／近黑和纯色硬线，电青、橘红、钴蓝与铬绿只在小块出现。",
+        "en": "Paper white and near-black: electric cyan, tangerine, cobalt and chrome green in small, solid blocks."
+      },
+      "signature": {
+        "zh": "像丝网海报：黑白面干净，饱和色只印在小块。",
+        "en": "Like a screen print: clean black and white, full color only in small blocks."
+      },
+      "syntaxStrategy": {
+        "zh": "中性文件底，冷青字面结构加少量暖橘墨，硬色留在选区和变更。",
+        "en": "Neutral file canvas; cyan structure and tangerine ink, with color blocks in selection and edits."
+      },
+      "tags": [
+        "neo-brutalism",
+        "fauvist",
+        "solid"
+      ],
+      "family": "hard-edge",
+      "rank": 7,
+      "style": {
+        "direction": "neo-brutalism",
+        "label": "新粗野主义",
+        "keywords": [
+          "硬边",
+          "撞色",
+          "海报感"
+        ],
+        "fonts": {
+          "sans": [
+            "Space Grotesk",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "Space Mono",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 15,
+          "codePx": 13,
+          "bodyWeight": 500,
+          "headingWeight": 700,
+          "lineHeight": 1.52
+        },
+        "spacing": {
+          "rhythmPx": 8,
+          "density": "compact"
+        },
+        "motion": {
+          "tempo": "snappy",
+          "fastMs": 65,
+          "normalMs": 105,
+          "slowMs": 150
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-hard-edge-light",
+          "file": "hard-edge-light.json",
+          "layout": "hard",
+          "secondaryPr": "blocked",
+          "secondaryMode": "ink",
+          "swatches": {
+            "canvas": "#f7f7f7",
+            "sidebar": "#ffffff",
+            "elevated": "#f5f3ec",
+            "primary": "#006775",
+            "secondary": "#6c2f00",
+            "bubble": "#ffac68",
+            "selection": "#34fff6",
+            "edge": "#000000",
+            "code": "#fdfdfd",
+            "syntax": [
+              "#003b80",
+              "#8d3000",
+              "#005c63",
+              "#005763"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-hard-edge-dark",
+          "file": "hard-edge-dark.json",
+          "layout": "hard",
+          "secondaryPr": "open",
+          "secondaryMode": "ink",
+          "swatches": {
+            "canvas": "#0a0a0a",
+            "sidebar": "#101010",
+            "elevated": "#1a1d21",
+            "primary": "#00a2b6",
+            "secondary": "#53e2b0",
+            "bubble": "#00544b",
+            "selection": "#003b7f",
+            "edge": "#ffffff",
+            "code": "#101010",
+            "syntax": [
+              "#50f4ef",
+              "#ffa95e",
+              "#52e7f6",
+              "#9accff"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slug": "dusk-margin",
+      "name": {
+        "zh": "暮汀",
+        "en": "Dusk Margin"
+      },
+      "description": {
+        "zh": "雾灰紫与紫炭的大面，银蓝色只落在气泡与注记。",
+        "en": "A muted violet-gray ground by day and violet charcoal after dark, with silver-blue annotations."
+      },
+      "signature": {
+        "zh": "侧栏像晚天，银蓝气泡是倒映的第一片灯光。",
+        "en": "A twilight rail, with the first light reflected in a silver-blue bubble."
+      },
+      "syntaxStrategy": {
+        "zh": "低彩光谱：暮紫结构、灰蓝参数，暖棕字符串只作远灯。",
+        "en": "A muted spectrum: dusk-violet structure, slate parameters, and umber strings like distant lamps."
+      },
+      "tags": [
+        "periwinkle",
+        "twilight",
+        "quiet"
+      ],
+      "family": "dusk",
+      "rank": 8,
+      "style": {
+        "direction": "blue-hour",
+        "label": "雾面蓝暮",
+        "keywords": [
+          "暮色",
+          "银蓝",
+          "沉静"
+        ],
+        "fonts": {
+          "sans": [
+            "IBM Plex Sans",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "Source Code Pro",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 15,
+          "codePx": 12,
+          "bodyWeight": 400,
+          "headingWeight": 650,
+          "lineHeight": 1.68
+        },
+        "spacing": {
+          "rhythmPx": 9,
+          "density": "open"
+        },
+        "motion": {
+          "tempo": "measured",
+          "fastMs": 140,
+          "normalMs": 210,
+          "slowMs": 290
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-dusk-margin-light",
+          "file": "dusk-margin-light.json",
+          "layout": "rail-lift",
+          "secondaryPr": "merged",
+          "secondaryMode": "ink",
+          "swatches": {
+            "canvas": "#f0eef6",
+            "sidebar": "#f9f8fc",
+            "elevated": "#f8f7fb",
+            "primary": "#44529f",
+            "secondary": "#1a597b",
+            "bubble": "#d7eaf7",
+            "selection": "#e2daf7",
+            "edge": "#d1ceda",
+            "code": "#f0edf8",
+            "syntax": [
+              "#504986",
+              "#76452f",
+              "#12567e",
+              "#474c86"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-dusk-margin-dark",
+          "file": "dusk-margin-dark.json",
+          "layout": "bright-card",
+          "secondaryPr": "merged",
+          "secondaryMode": "ink",
+          "swatches": {
+            "canvas": "#1b1922",
+            "sidebar": "#201f24",
+            "elevated": "#2b2932",
+            "primary": "#9baefd",
+            "secondary": "#9bceed",
+            "bubble": "#102c3a",
+            "selection": "#342e48",
+            "edge": "#3e3b48",
+            "code": "#1d1b24",
+            "syntax": [
+              "#cabbfb",
+              "#e6ad88",
+              "#8ac9e6",
+              "#b0c6fd"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slug": "zero-hour",
+      "name": {
+        "zh": "零时",
+        "en": "Zero Hour"
+      },
+      "description": {
+        "zh": "白昼用酸柠当荧光笔；深夜给酸柠信号和纯黑画布留足空间。",
+        "en": "Acid citron as a marker by day and a signal against a truly black canvas at night."
+      },
+      "signature": {
+        "zh": "一条荧光刻度划过白屏，入夜画布熄成全黑。",
+        "en": "A highlighter mark on white; after midnight, the canvas goes black."
+      },
+      "syntaxStrategy": {
+        "zh": "信号梯度：近单色底稿，类型与数字作荧光读数。",
+        "en": "Signal levels: near-monochrome copy, with highlighted type and number readouts."
+      },
+      "tags": [
+        "citron",
+        "terminal",
+        "oled"
+      ],
+      "family": "terminal",
+      "rank": 9,
+      "style": {
+        "direction": "retro-terminal",
+        "label": "白昼／午夜终端",
+        "keywords": [
+          "电讯",
+          "黑场",
+          "荧光笔"
+        ],
+        "fonts": {
+          "sans": [
+            "IBM Plex Sans",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "JetBrains Mono",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 14,
+          "codePx": 13,
+          "bodyWeight": 450,
+          "headingWeight": 650,
+          "lineHeight": 1.54
+        },
+        "spacing": {
+          "rhythmPx": 7,
+          "density": "compact"
+        },
+        "motion": {
+          "tempo": "restrained",
+          "fastMs": 70,
+          "normalMs": 115,
+          "slowMs": 165
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-zero-hour-light",
+          "file": "zero-hour-light.json",
+          "layout": "signal",
+          "secondaryPr": "draft",
+          "secondaryMode": "wash",
+          "swatches": {
+            "canvas": "#ffffff",
+            "sidebar": "#f7f7f7",
+            "elevated": "#efefef",
+            "primary": "#16364e",
+            "secondary": "#444e57",
+            "bubble": "#f7f8b0",
+            "selection": "#eff4a0",
+            "edge": "#d3dae3",
+            "code": "#f8f8f8",
+            "syntax": [
+              "#203c52",
+              "#4e545b",
+              "#115266",
+              "#2d5374"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-zero-hour-dark",
+          "file": "zero-hour-dark.json",
+          "layout": "signal",
+          "secondaryPr": "draft",
+          "secondaryMode": "neutral",
+          "swatches": {
+            "canvas": "#000000",
+            "sidebar": "#0a0f13",
+            "elevated": "#171d23",
+            "primary": "#e2e600",
+            "secondary": "#afbcc5",
+            "bubble": "#161a1d",
+            "selection": "#2d2e00",
+            "edge": "#242f39",
+            "code": "#080c10",
+            "syntax": [
+              "#ced481",
+              "#98b4c8",
+              "#e6e84a",
+              "#81c7f4"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slug": "afterglow",
+      "name": {
+        "zh": "晚照",
+        "en": "Afterglow"
+      },
+      "description": {
+        "zh": "杏白画布挨着长春花蓝，杏橙气泡、珊瑚按钮；入夜是靛蓝、铜橙与一点薄金。",
+        "en": "An apricot-white page beside a periwinkle rail, with apricot messages and coral actions; after dusk, indigo holds copper and a trace of gold."
+      },
+      "signature": {
+        "zh": "长春花蓝的影子挨着窗边，纸上还留着一块珊瑚晚照。",
+        "en": "A periwinkle shadow at the window, a patch of coral light still on the page."
+      },
+      "syntaxStrategy": {
+        "zh": "靛蓝辨结构，珊瑚标字面量；入夜让薄金接手数字。",
+        "en": "Indigo defines structure, coral marks literals, and pale gold picks out numbers after dark."
+      },
+      "tags": [
+        "indigo",
+        "coral",
+        "sunset"
+      ],
+      "family": "sunset",
+      "rank": 10,
+      "style": {
+        "direction": "sunset-print",
+        "label": "窗边晚照",
+        "keywords": [
+          "长春花蓝",
+          "杏白",
+          "珊瑚"
+        ],
+        "fonts": {
+          "sans": [
+            "Manrope",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "JetBrains Mono",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 14,
+          "codePx": 13,
+          "bodyWeight": 450,
+          "headingWeight": 650,
+          "lineHeight": 1.6
+        },
+        "spacing": {
+          "rhythmPx": 8,
+          "density": "balanced"
+        },
+        "motion": {
+          "tempo": "steady",
+          "fastMs": 120,
+          "normalMs": 185,
+          "slowMs": 260
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-afterglow-light",
+          "file": "afterglow-light.json",
+          "layout": "bright-card",
+          "secondaryPr": "merged",
+          "secondaryMode": "point",
+          "surfaceException": "periwinkle-rail",
+          "swatches": {
+            "canvas": "#fdf7ed",
+            "sidebar": "#ccd1f7",
+            "elevated": "#fffcf7",
+            "primary": "#9b2a03",
+            "secondary": "#424096",
+            "bubble": "#ffd3ac",
+            "selection": "#ffe2c5",
+            "edge": "#b3b8d6",
+            "code": "#fbf4e9",
+            "syntax": [
+              "#3c4193",
+              "#7f2a17",
+              "#864100",
+              "#065599"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-afterglow-dark",
+          "file": "afterglow-dark.json",
+          "layout": "rail-lift",
+          "secondaryPr": "blocked",
+          "secondaryMode": "point",
+          "surfaceException": "indigo-night",
+          "swatches": {
+            "canvas": "#191c3f",
+            "sidebar": "#272d58",
+            "elevated": "#262b4c",
+            "primary": "#ffa581",
+            "secondary": "#ebc982",
+            "bubble": "#4e2a18",
+            "selection": "#5f371b",
+            "edge": "#3f476e",
+            "code": "#181d39",
+            "syntax": [
+              "#b9bfff",
+              "#f7a889",
+              "#f3cf7f",
+              "#96c5fa"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "slug": "hojicha",
+      "name": {
+        "zh": "焙茶",
+        "en": "Hojicha"
+      },
+      "description": {
+        "zh": "奶油画布、烘茶侧栏和奶泡气泡，青瓷标出选中与链接；入夜换成浓咖啡，气泡留一勺焦糖。",
+        "en": "Cream, a roasted-tea rail and milk foam, with celadon selection and links; espresso after dark, with caramel in the message."
+      },
+      "signature": {
+        "zh": "茶汤、奶泡与一点青瓷，热气散了，仍能看到焦糖色的杯沿。",
+        "en": "Roasted tea, milk foam and a little celadon; when the steam clears, a caramel rim remains."
+      },
+      "syntaxStrategy": {
+        "zh": "可可墨沿着结构走，焦糖写字符串，蓝绿只标函数。",
+        "en": "Cacao ink follows the structure, caramel marks strings, and blue-green picks out functions."
+      },
+      "tags": [
+        "roasted-tea",
+        "caramel",
+        "celadon"
+      ],
+      "family": "roasted-tea",
+      "rank": 11,
+      "style": {
+        "direction": "tea-house",
+        "label": "手焙茶器",
+        "keywords": [
+          "焦糖",
+          "奶泡",
+          "青瓷"
+        ],
+        "fonts": {
+          "sans": [
+            "Aptos",
+            "Noto Sans CJK SC",
+            "PingFang SC",
+            "Microsoft YaHei",
+            "system-ui",
+            "sans-serif"
+          ],
+          "mono": [
+            "Cascadia Mono",
+            "SFMono-Regular",
+            "Consolas",
+            "Liberation Mono",
+            "monospace"
+          ]
+        },
+        "typography": {
+          "bodyPx": 15,
+          "codePx": 12,
+          "bodyWeight": 400,
+          "headingWeight": 650,
+          "lineHeight": 1.66
+        },
+        "spacing": {
+          "rhythmPx": 9,
+          "density": "open"
+        },
+        "motion": {
+          "tempo": "calm",
+          "fastMs": 150,
+          "normalMs": 225,
+          "slowMs": 315
+        }
+      },
+      "variants": {
+        "light": {
+          "id": "theme-studio-hojicha-light",
+          "file": "hojicha-light.json",
+          "layout": "paper",
+          "secondaryPr": "draft",
+          "secondaryMode": "point",
+          "surfaceException": "tea-cream",
+          "swatches": {
+            "canvas": "#faf1e0",
+            "sidebar": "#e2c499",
+            "elevated": "#fffbf1",
+            "primary": "#804100",
+            "secondary": "#005757",
+            "bubble": "#fffcf7",
+            "selection": "#cadbda",
+            "edge": "#ccb697",
+            "code": "#f7efe0",
+            "syntax": [
+              "#793432",
+              "#764300",
+              "#434382",
+              "#005b60"
+            ]
+          }
+        },
+        "dark": {
+          "id": "theme-studio-hojicha-dark",
+          "file": "hojicha-dark.json",
+          "layout": "charcoal",
+          "secondaryPr": "draft",
+          "secondaryMode": "point",
+          "surfaceException": "espresso-night",
+          "swatches": {
+            "canvas": "#2e1e12",
+            "sidebar": "#20140c",
+            "elevated": "#372a1e",
+            "primary": "#f0ae6f",
+            "secondary": "#73d0cf",
+            "bubble": "#47301a",
+            "selection": "#1d3f3d",
+            "edge": "#5e401c",
+            "code": "#261f1a",
+            "syntax": [
+              "#fdb3a8",
+              "#ecb57e",
+              "#b7b7fa",
+              "#78dfe1"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

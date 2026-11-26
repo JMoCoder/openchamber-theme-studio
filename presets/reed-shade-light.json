@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "theme-studio-reed-shade-light",
+    "name": "芦影 · Reed Shade",
+    "variant": "light",
+    "description": "燕麦纸与苔绿按钮，用芦苇金标注，不再铺一整屏薄荷。 Oat-toned ground and moss actions, annotated in reed gold rather than a field of mint.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "botanical",
+      "oat",
+      "gentle",
+      "light"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#006849",
+      "foreground": "#fcfcfc",
+      "hover": "#005f42",
+      "active": "#00563b",
+      "muted": "#00684970"
+    },
+    "surface": {
+      "background": "#fbf9f4",
+      "foreground": "#2e2c29",
+      "muted": "#ebeee3",
+      "mutedForeground": "#5e5c58",
+      "elevated": "#f5f7f1",
+      "subtle": "#f8faf4"
+    },
+    "interactive": {
+      "border": "#dae2da",
+      "borderHover": "#c4cac3",
+      "borderFocus": "#006849",
+      "focus": "#006849",
+      "focusRing": "#006849e3",
+      "selection": "#c9e8ca",
+      "selectionForeground": "#2e2c29",
+      "hover": "#2e2c2912",
+      "active": "#2e2c291d"
+    },
+    "status": {
+      "error": "#740007",
+      "errorForeground": "#ffffff",
+      "errorBackground": "#7400071a",
+      "errorBorder": "#7400074d",
+      "warning": "#6f4900",
+      "warningForeground": "#ffffff",
+      "warningBackground": "#6f49001a",
+      "warningBorder": "#6f49004d",
+      "success": "#004b3c",
+      "successForeground": "#ffffff",
+      "successBackground": "#004b3c1a",
+      "successBorder": "#004b3c4d",
+      "info": "#005386",
+      "infoForeground": "#ffffff",
+      "infoBackground": "#0053861a",
+      "infoBorder": "#0053864d"
+    },
+    "pr": {
+      "open": "#004b3c",
+      "draft": "#233238",
+      "blocked": "#6f4900",
+      "merged": "#684caa",
+      "closed": "#740007"
+    },
+    "syntax": {
+      "base": {
+        "background": "#f7f7f0",
+        "foreground": "#2e2c29",
+        "comment": "#5e5c58",
+        "keyword": "#00573a",
+        "string": "#743d17",
+        "number": "#3f5960",
+        "function": "#005841",
+        "variable": "#1c3f41",
+        "type": "#3d5b4f",
+        "operator": "#45585c"
+      },
+      "tokens": {
+        "punctuation": "#565450",
+        "variableProperty": "#3d5b4f",
+        "className": "#005841",
+        "stringEscape": "#2e2c29"
+      },
+      "highlights": {
+        "diffAdded": "#003b18",
+        "diffRemoved": "#a43837",
+        "diffModified": "#005386",
+        "diffAddedBackground": "#006b3941",
+        "diffRemovedBackground": "#a4383714",
+        "diffModifiedBackground": "#00538614",
+        "lineNumber": "#565450",
+        "lineNumberActive": "#2e2c29"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#ede1b9",
+      "divider": "#dae2da"
+    },
+    "markdown": {
+      "link": "#233238",
+      "linkHover": "#132126",
+      "inlineCode": "#1e2d32",
+      "inlineCodeBackground": "#ded5b4",
+      "blockquote": "#5e5c58",
+      "blockquoteBorder": "#acb6b2",
+      "listMarker": "#233238",
+      "italic": "#2e2c29"
+    },
+    "tools": {
+      "border": "#dae2da",
+      "icon": "#233238",
+      "title": "#2e2c29",
+      "description": "#5e5c58",
+      "edit": {
+        "addedBackground": "#006b3941",
+        "removedBackground": "#a4383714",
+        "modifiedBackground": "#00538614",
+        "lineNumber": "#565450"
+      }
+    }
+  }
+}

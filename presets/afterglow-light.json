@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "theme-studio-afterglow-light",
+    "name": "晚照 · Afterglow",
+    "variant": "light",
+    "description": "杏白画布挨着长春花蓝，杏橙气泡、珊瑚按钮；入夜是靛蓝、铜橙与一点薄金。 An apricot-white page beside a periwinkle rail, with apricot messages and coral actions; after dusk, indigo holds copper and a trace of gold.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "indigo",
+      "coral",
+      "sunset",
+      "light"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#9b2a03",
+      "foreground": "#fcfcfc",
+      "hover": "#8f2400",
+      "active": "#822000",
+      "muted": "#9b2a0370"
+    },
+    "surface": {
+      "background": "#fdf7ed",
+      "foreground": "#262b3a",
+      "muted": "#ccd1f7",
+      "mutedForeground": "#4f5565",
+      "elevated": "#fffcf7",
+      "subtle": "#ffffff"
+    },
+    "interactive": {
+      "border": "#b3b8d6",
+      "borderHover": "#a1a6c2",
+      "borderFocus": "#9b2a03",
+      "focus": "#9b2a03",
+      "focusRing": "#9b2a03e3",
+      "selection": "#ffe2c5",
+      "selectionForeground": "#262b3a",
+      "hover": "#262b3a12",
+      "active": "#262b3a1d"
+    },
+    "status": {
+      "error": "#77000b",
+      "errorForeground": "#ffffff",
+      "errorBackground": "#77000b1a",
+      "errorBorder": "#77000b4d",
+      "warning": "#734700",
+      "warningForeground": "#ffffff",
+      "warningBackground": "#7347001a",
+      "warningBorder": "#7347004d",
+      "success": "#00483b",
+      "successForeground": "#ffffff",
+      "successBackground": "#00483b1a",
+      "successBorder": "#00483b4d",
+      "info": "#00509f",
+      "infoForeground": "#ffffff",
+      "infoBackground": "#00509f1a",
+      "infoBorder": "#00509f4d"
+    },
+    "pr": {
+      "open": "#00483b",
+      "draft": "#4f5565",
+      "blocked": "#734700",
+      "merged": "#424096",
+      "closed": "#77000b"
+    },
+    "syntax": {
+      "base": {
+        "background": "#fbf4e9",
+        "foreground": "#262b3a",
+        "comment": "#555b6c",
+        "keyword": "#3c4193",
+        "string": "#7f2a17",
+        "number": "#864100",
+        "function": "#065599",
+        "variable": "#373e4f",
+        "type": "#5c4280",
+        "operator": "#4d5370"
+      },
+      "tokens": {
+        "punctuation": "#4e5364",
+        "variableProperty": "#5c4280",
+        "className": "#065599",
+        "stringEscape": "#262b3a"
+      },
+      "highlights": {
+        "diffAdded": "#003b18",
+        "diffRemoved": "#a43837",
+        "diffModified": "#00509f",
+        "diffAddedBackground": "#006b3941",
+        "diffRemovedBackground": "#a4383714",
+        "diffModifiedBackground": "#00509f14",
+        "lineNumber": "#4e5364",
+        "lineNumberActive": "#262b3a"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#ffd3ac",
+      "divider": "#b3b8d6"
+    },
+    "markdown": {
+      "link": "#424096",
+      "linkHover": "#312b80",
+      "inlineCode": "#3d3a8f",
+      "inlineCodeBackground": "#f5e8d2",
+      "blockquote": "#4f5565",
+      "blockquoteBorder": "#979ac6",
+      "listMarker": "#424096",
+      "italic": "#262b3a"
+    },
+    "tools": {
+      "border": "#b3b8d6",
+      "icon": "#424096",
+      "title": "#262b3a",
+      "description": "#4f5565",
+      "edit": {
+        "addedBackground": "#006b3941",
+        "removedBackground": "#a4383714",
+        "modifiedBackground": "#00509f14",
+        "lineNumber": "#4e5364"
+      }
+    }
+  }
+}

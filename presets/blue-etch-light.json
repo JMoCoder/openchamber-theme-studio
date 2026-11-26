@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "theme-studio-blue-etch-light",
+    "name": "蓝刻 · Blue Etch",
+    "variant": "light",
+    "description": "淡蓝图纸用钴蓝刻线分区，冰青做注记；深版展开普鲁士蓝底。 Pale blueprint paper, cobalt seams, ice-cyan annotations, and Prussian blue after dark.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "blueprint",
+      "precision",
+      "night",
+      "light"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#254bd5",
+      "foreground": "#fcfcfc",
+      "hover": "#1e41cb",
+      "active": "#1837c1",
+      "muted": "#254bd570"
+    },
+    "surface": {
+      "background": "#e0f5ff",
+      "foreground": "#192a31",
+      "muted": "#e0f5ff",
+      "mutedForeground": "#4c5e66",
+      "elevated": "#ebf8ff",
+      "subtle": "#f2faff"
+    },
+    "interactive": {
+      "border": "#92b1d1",
+      "borderHover": "#829fbc",
+      "borderFocus": "#254bd5",
+      "focus": "#254bd5",
+      "focusRing": "#254bd5e3",
+      "selection": "#cadfff",
+      "selectionForeground": "#192a31",
+      "hover": "#192a3112",
+      "active": "#192a311d"
+    },
+    "status": {
+      "error": "#740007",
+      "errorForeground": "#ffffff",
+      "errorBackground": "#7400071a",
+      "errorBorder": "#7400074d",
+      "warning": "#774900",
+      "warningForeground": "#ffffff",
+      "warningBackground": "#7749001a",
+      "warningBorder": "#7749004d",
+      "success": "#004e3e",
+      "successForeground": "#ffffff",
+      "successBackground": "#004e3e1a",
+      "successBorder": "#004e3e4d",
+      "info": "#005882",
+      "infoForeground": "#ffffff",
+      "infoBackground": "#0058821a",
+      "infoBorder": "#0058824d"
+    },
+    "pr": {
+      "open": "#004e3e",
+      "draft": "#4c5e66",
+      "blocked": "#774900",
+      "merged": "#005d61",
+      "closed": "#740007"
+    },
+    "syntax": {
+      "base": {
+        "background": "#e6f5ff",
+        "foreground": "#192a31",
+        "comment": "#4a5c64",
+        "keyword": "#1246a1",
+        "string": "#005c62",
+        "number": "#8e3712",
+        "function": "#0051a1",
+        "variable": "#2a3b4b",
+        "type": "#0a5876",
+        "operator": "#385476"
+      },
+      "tokens": {
+        "punctuation": "#41535b",
+        "variableProperty": "#0a5876",
+        "className": "#0051a1",
+        "stringEscape": "#192a31"
+      },
+      "highlights": {
+        "diffAdded": "#003b18",
+        "diffRemoved": "#a43837",
+        "diffModified": "#005882",
+        "diffAddedBackground": "#006b3944",
+        "diffRemovedBackground": "#a4383714",
+        "diffModifiedBackground": "#00588214",
+        "lineNumber": "#41535b",
+        "lineNumberActive": "#192a31"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#b9efed",
+      "divider": "#92b1d1"
+    },
+    "markdown": {
+      "link": "#005d61",
+      "linkHover": "#00484b",
+      "inlineCode": "#00575b",
+      "inlineCodeBackground": "#b4e0de",
+      "blockquote": "#4c5e66",
+      "blockquoteBorder": "#6e9cb5",
+      "listMarker": "#005d61",
+      "italic": "#192a31"
+    },
+    "tools": {
+      "border": "#92b1d1",
+      "icon": "#005d61",
+      "title": "#192a31",
+      "description": "#4c5e66",
+      "edit": {
+        "addedBackground": "#006b3944",
+        "removedBackground": "#a4383714",
+        "modifiedBackground": "#00588214",
+        "lineNumber": "#41535b"
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "theme-studio-zero-hour-light",
+    "name": "零时 · Zero Hour",
+    "variant": "light",
+    "description": "白昼用酸柠当荧光笔；深夜给酸柠信号和纯黑画布留足空间。 Acid citron as a marker by day and a signal against a truly black canvas at night.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "citron",
+      "terminal",
+      "oled",
+      "light"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#16364e",
+      "foreground": "#fcfcfc",
+      "hover": "#0e2e46",
+      "active": "#06273e",
+      "muted": "#16364e70"
+    },
+    "surface": {
+      "background": "#ffffff",
+      "foreground": "#303030",
+      "muted": "#f7f7f7",
+      "mutedForeground": "#595959",
+      "elevated": "#efefef",
+      "subtle": "#efefef"
+    },
+    "interactive": {
+      "border": "#d3dae3",
+      "borderHover": "#bec4cc",
+      "borderFocus": "#16364e",
+      "focus": "#16364e",
+      "focusRing": "#16364ee3",
+      "selection": "#eff4a0",
+      "selectionForeground": "#303030",
+      "hover": "#30303012",
+      "active": "#3030301d"
+    },
+    "status": {
+      "error": "#740007",
+      "errorForeground": "#ffffff",
+      "errorBackground": "#7400071a",
+      "errorBorder": "#7400074d",
+      "warning": "#804800",
+      "warningForeground": "#ffffff",
+      "warningBackground": "#8048001a",
+      "warningBorder": "#8048004d",
+      "success": "#004e3e",
+      "successForeground": "#ffffff",
+      "successBackground": "#004e3e1a",
+      "successBorder": "#004e3e4d",
+      "info": "#005a8e",
+      "infoForeground": "#ffffff",
+      "infoBackground": "#005a8e1a",
+      "infoBorder": "#005a8e4d"
+    },
+    "pr": {
+      "open": "#004e3e",
+      "draft": "#444e57",
+      "blocked": "#804800",
+      "merged": "#684caa",
+      "closed": "#740007"
+    },
+    "syntax": {
+      "base": {
+        "background": "#f8f8f8",
+        "foreground": "#303030",
+        "comment": "#5a5a5a",
+        "keyword": "#203c52",
+        "string": "#4e545b",
+        "number": "#115266",
+        "function": "#2d5374",
+        "variable": "#31404e",
+        "type": "#335869",
+        "operator": "#3f5165"
+      },
+      "tokens": {
+        "punctuation": "#4e4e4e",
+        "variableProperty": "#335869",
+        "className": "#2d5374",
+        "stringEscape": "#303030"
+      },
+      "highlights": {
+        "diffAdded": "#003b18",
+        "diffRemoved": "#a43837",
+        "diffModified": "#005a8e",
+        "diffAddedBackground": "#006b3947",
+        "diffRemovedBackground": "#a4383714",
+        "diffModifiedBackground": "#005a8e14",
+        "lineNumber": "#4e4e4e",
+        "lineNumberActive": "#303030"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#f7f8b0",
+      "divider": "#d3dae3"
+    },
+    "markdown": {
+      "link": "#444e57",
+      "linkHover": "#323b44",
+      "inlineCode": "#3e4851",
+      "inlineCodeBackground": "#ebeb9a",
+      "blockquote": "#595959",
+      "blockquoteBorder": "#afb7c0",
+      "listMarker": "#444e57",
+      "italic": "#303030"
+    },
+    "tools": {
+      "border": "#d3dae3",
+      "icon": "#444e57",
+      "title": "#303030",
+      "description": "#595959",
+      "edit": {
+        "addedBackground": "#006b3947",
+        "removedBackground": "#a4383714",
+        "modifiedBackground": "#005a8e14",
+        "lineNumber": "#4e4e4e"
+      }
+    }
+  }
+}

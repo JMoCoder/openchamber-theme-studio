@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "id": "theme-studio-tidemark-dark",
+    "name": "澄潮 · Tidemark",
+    "variant": "dark",
+    "description": "海玻璃侧栏和近白留白，杏色标注把冷色界面点暖。 A sea-glass rail and near-white space, warmed by apricot annotations.",
+    "version": "1.0.0",
+    "author": "Theme Studio",
+    "tags": [
+      "fresh",
+      "sea-glass",
+      "soft",
+      "dark"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "base": "#4ac0e0",
+      "foreground": "#0a0f11",
+      "hover": "#57ccec",
+      "active": "#62d5f5",
+      "muted": "#4ac0e070"
+    },
+    "surface": {
+      "background": "#0b191a",
+      "foreground": "#def1f2",
+      "muted": "#15241f",
+      "mutedForeground": "#a8babb",
+      "elevated": "#1d2728",
+      "subtle": "#192324"
+    },
+    "interactive": {
+      "border": "#253837",
+      "borderHover": "#3d504f",
+      "borderFocus": "#4ac0e0",
+      "focus": "#4ac0e0",
+      "focusRing": "#4ac0e0db",
+      "selection": "#043433",
+      "selectionForeground": "#def1f2",
+      "hover": "#def1f21a",
+      "active": "#def1f225"
+    },
+    "status": {
+      "error": "#ff958f",
+      "errorForeground": "#000000",
+      "errorBackground": "#ff958f20",
+      "errorBorder": "#ff958f4d",
+      "warning": "#ffdda8",
+      "warningForeground": "#000000",
+      "warningBackground": "#ffdda820",
+      "warningBorder": "#ffdda84d",
+      "success": "#5deb63",
+      "successForeground": "#000000",
+      "successBackground": "#5deb6320",
+      "successBorder": "#5deb634d",
+      "info": "#84bdff",
+      "infoForeground": "#000000",
+      "infoBackground": "#84bdff20",
+      "infoBorder": "#84bdff4d"
+    },
+    "pr": {
+      "open": "#5deb63",
+      "draft": "#a8babb",
+      "blocked": "#ec9c76",
+      "merged": "#b097fc",
+      "closed": "#ff958f"
+    },
+    "syntax": {
+      "base": {
+        "background": "#131d1d",
+        "foreground": "#def1f2",
+        "comment": "#a0b2b3",
+        "keyword": "#6acee8",
+        "string": "#f7b389",
+        "number": "#f9a46a",
+        "function": "#85c0e3",
+        "variable": "#c9dbe1",
+        "type": "#86c4b3",
+        "operator": "#a4bcc1"
+      },
+      "tokens": {
+        "punctuation": "#b5c8c9",
+        "variableProperty": "#86c4b3",
+        "className": "#85c0e3",
+        "stringEscape": "#def1f2"
+      },
+      "highlights": {
+        "diffAdded": "#81fab6",
+        "diffRemoved": "#ff7b77",
+        "diffModified": "#84bdff",
+        "diffAddedBackground": "#81fab639",
+        "diffRemovedBackground": "#ff7b771b",
+        "diffModifiedBackground": "#84bdff1f",
+        "lineNumber": "#b5c8c9",
+        "lineNumberActive": "#def1f2"
+      }
+    },
+    "chat": {
+      "userMessageBackground": "#1c2f39",
+      "divider": "#253837"
+    },
+    "markdown": {
+      "link": "#ec9c76",
+      "linkHover": "#ffb795",
+      "inlineCode": "#f2a27c",
+      "inlineCodeBackground": "#303e45",
+      "blockquote": "#a8babb",
+      "blockquoteBorder": "#575147",
+      "listMarker": "#ec9c76",
+      "italic": "#def1f2"
+    },
+    "tools": {
+      "border": "#253837",
+      "icon": "#ec9c76",
+      "title": "#def1f2",
+      "description": "#a8babb",
+      "edit": {
+        "addedBackground": "#81fab639",
+        "removedBackground": "#ff7b771b",
+        "modifiedBackground": "#84bdff1f",
+        "lineNumber": "#b5c8c9"
+      }
+    }
+  }
+}
